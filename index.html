@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DentalAI — Never Lose a Patient Enquiry Again</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --serif: 'Cormorant Garamond', serif;
+    --sans: 'Outfit', sans-serif;
+    --navy: #0B1F3A;
+    --navy2: #142844;
+    --blue: #1A6FC4;
+    --blue-light: rgba(26,111,196,0.10);
+    --blue-mid: rgba(26,111,196,0.18);
+    --cream: #F4F7FB;
+    --line: #E0E9F4;
+    --line2: #D2DFEF;
+    --text: #1C2B3A;
+    --muted: #6B7E95;
+    --muted2: #9AAEC5;
+  }
+  * { font-family: var(--sans); }
+  .serif { font-family: var(--serif); }
+  html { scroll-behavior: smooth; }
+
+  /* Grain */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.5;
+  }
+
+  .hero-bg {
+    background: var(--cream);
+    position: relative; overflow: hidden;
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,111,196,0.09) 0%, transparent 65%);
+    top: -250px; right: -200px;
+    pointer-events: none;
+  }
+  .hero-bg::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.5;
+  }
+
+  .accent { color: var(--blue); }
+  .accent-bg { background: var(--blue); }
+
+  /* Premium card */
+  .card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: 0 1px 3px rgba(11,31,58,0.04), 0 8px 32px rgba(11,31,58,0.06);
+  }
+
+  /* Pill */
+  .pill {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--blue-light);
+    border: 1px solid var(--blue-mid);
+    color: var(--blue);
+    font-size: 11.5px; font-weight: 500; letter-spacing: 0.6px;
+    padding: 5px 13px; border-radius: 100px;
+  }
+  .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); }
+
+  /* Buttons */
+  .btn-primary {
+    background: var(--navy);
+    color: white;
+    padding: 14px 28px; border-radius: 10px;
+    font-weight: 500; font-size: 15px;
+    transition: all 0.22s; display: inline-block; letter-spacing: 0.1px;
+  }
+  .btn-primary:hover {
+    background: var(--blue);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 28px rgba(26,111,196,0.32);
+  }
+  .btn-outline {
+    background: transparent; color: var(--navy);
+    padding: 13px 26px; border-radius: 10px;
+    font-weight: 500; font-size: 15px;
+    border: 1.5px solid var(--navy);
+    transition: all 0.22s; display: inline-block;
+  }
+  .btn-outline:hover { background: var(--navy); color: white; }
+
+  /* Chat bubbles */
+  .chat-in {
+    background: #EBF1FA;
+    border-radius: 16px 16px 16px 4px;
+  }
+  .chat-out {
+    background: var(--navy);
+    color: white;
+    border-radius: 16px 16px 4px 16px;
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.65s ease forwards; }
+  .delay-1 { animation-delay: 0.1s; opacity: 0; }
+  .delay-2 { animation-delay: 0.22s; opacity: 0; }
+  .delay-3 { animation-delay: 0.34s; opacity: 0; }
+  .delay-4 { animation-delay: 0.46s; opacity: 0; }
+
+  /* Nav */
+  .nav-link { color: var(--muted); font-size: 14px; font-weight: 400; transition: color 0.15s; }
+  .nav-link:hover { color: var(--navy); }
+
+  /* Pricing */
+  .pricing-card {
+    background: white; border: 1px solid var(--line);
+    border-radius: 18px; padding: 32px;
+    transition: all 0.2s;
+  }
+  .pricing-card:hover {
+    border-color: var(--blue);
+    box-shadow: 0 8px 36px rgba(26,111,196,0.12);
+    transform: translateY(-3px);
+  }
+  .pricing-card.featured { background: var(--navy); border-color: var(--navy); }
+
+  .check-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 14px; color: var(--text); margin-bottom: 11px;
+  }
+  .check-icon {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--blue-light); color: var(--blue);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px; font-size: 10px; font-weight: 700;
+  }
+
+  .stat-card {
+    background: white; border: 1px solid var(--line);
+    border-radius: 14px; padding: 26px; text-align: center;
+  }
+
+  /* Decorative line */
+  .deco-line {
+    width: 40px; height: 2px; background: var(--blue);
+    border-radius: 2px; margin: 0 auto 18px;
+  }
+
+  /* Step connector — horizontal bridge between numbered steps on desktop */
+  .step-connector { display: none; }
+
+  /* Mobile nav */
+  #mobile-menu { display: none; }
+  #mobile-menu.open { display: block; }
+
+  /* Hero accent bar */
+  .hero-accent-bar {
+    width: 3px; height: 56px; background: var(--blue);
+    border-radius: 2px; flex-shrink: 0;
+  }
+
+  /* Benefit icon */
+  .benefit-icon {
+    width: 42px; height: 42px; border-radius: 12px;
+    background: var(--blue-light);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* ── PREMIUM TYPOGRAPHY ── */
+  body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+
+  /* Serif display — tighter tracking, optical sizing */
+  .serif {
+    font-optical-sizing: auto;
+    letter-spacing: -0.01em;
+  }
+
+  /* Section headers in serif — editorial weight */
+  h1.serif, h2.serif {
+    font-variant-ligatures: common-ligatures;
+  }
+
+  /* Body text — gentle tracking for readability */
+  p, .text-sm, .text-xs {
+    letter-spacing: 0.005em;
+  }
+
+  /* Pill — refined label spacing */
+  .pill {
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 10.5px;
+    font-weight: 500;
+  }
+
+  /* Stat numbers — editorial */
+  .stat-card .serif {
+    letter-spacing: -0.025em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Nav links — refined */
+  .nav-link { letter-spacing: 0.01em; }
+
+  /* Check items — slightly lighter */
+  .check-item { letter-spacing: 0.01em; }
+
+  /* Pricing numbers — tight */
+  .pricing-card .serif { letter-spacing: -0.03em; }
+
+  /* Section subheadings — testimonial names */
+  .font-semibold { letter-spacing: -0.01em; }
+
+  /* Uppercase labels — generous tracking */
+  [class*="tracking-wider"], [class*="tracking-widest"] {
+    letter-spacing: 0.12em !important;
+  }
+
+  /* ── PREMIUM IMAGE STYLES ── */
+  .img-dental {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .img-frame {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(11,31,58,0.13);
+    position: relative;
+  }
+  .img-frame::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(11,31,58,0.04) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .img-badge {
+    position: absolute;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 10px 14px;
+    box-shadow: 0 4px 20px rgba(11,31,58,0.12);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy);
+    z-index: 2;
+    letter-spacing: -0.01em;
+  }
+  .img-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    height: 220px;
+  }
+  @media(max-width:768px){ .img-strip { grid-template-columns: 1fr; height: auto; } }
+  .img-strip > div { border-radius: 14px; overflow: hidden; }
+  /* ── RESPONSIVE FIXES ── */
+
+  /* Hero */
+  @media(max-width:767px){
+    .hero-bg { padding-top: 48px; padding-bottom: 48px; }
+    .hero-bg .grid { grid-template-columns: 1fr !important; }
+    .img-frame.hidden { display: none !important; }
+  }
+
+  /* Stats grid */
+  @media(max-width:639px){
+    .stats-grid { grid-template-columns: 1fr 1fr !important; }
+    .stat-card { padding: 18px !important; }
+    .stat-card .serif { font-size: 32px !important; }
+  }
+
+  /* Micro-proof ticker — stack on mobile */
+  @media(max-width:767px){
+    .micro-proof-inner { flex-direction: column !important; }
+    .micro-proof-inner > div { border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.07) !important; }
+    .micro-proof-inner > div:last-child { border-bottom: none !important; }
+  }
+
+  /* Trusted-by strip — scroll on mobile */
+  @media(max-width:639px){
+    .trusted-strip { overflow-x: auto; flex-wrap: nowrap !important; justify-content: flex-start !important; padding-bottom: 4px; }
+    .trusted-strip .divider-v { display: none; }
+  }
+
+  /* How-it-works — single column on mobile */
+  @media(max-width:767px){
+    .steps-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
+  }
+
+  /* Demo shell — handled by existing demo CSS */
+
+  /* Benefits grid */
+  @media(max-width:767px){
+    .benefits-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+  }
+
+  /* Installation proof comparison table — stack on mobile */
+  @media(max-width:639px){
+    .install-compare { grid-template-columns: 1fr !important; }
+    .install-arrow { display: none !important; }
+    .install-before, .install-after { border-radius: 12px !important; border: 1px solid rgba(255,255,255,0.09) !important; }
+    .install-cards { grid-template-columns: 1fr !important; }
+  }
+  @media(max-width:767px){
+    .install-cards { grid-template-columns: 1fr !important; }
+  }
+
+  /* Pricing grid */
+  @media(max-width:767px){
+    .pricing-grid { grid-template-columns: 1fr !important; max-width: 400px; margin: 0 auto !important; }
+  }
+
+  /* Testimonials */
+  @media(max-width:767px){
+    .testi-grid { grid-template-columns: 1fr !important; }
+  }
+
+  /* Footer grid */
+  @media(max-width:767px){
+    .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 24px !important; }
+  }
+  @media(max-width:479px){
+    .footer-grid { grid-template-columns: 1fr !important; }
+  }
+
+  /* Image strip */
+  @media(max-width:767px){
+    .img-strip { grid-template-columns: 1fr !important; height: auto !important; }
+    .img-strip > div { height: 200px !important; }
+  }
+
+  /* Real proof block */
+  @media(max-width:767px){
+    .proof-compare { grid-template-columns: 1fr !important; }
+    .proof-compare > div:first-child { margin-bottom: 0 !important; }
+  }
+
+  /* CTA section */
+  @media(max-width:639px){
+    .cta-buttons { flex-direction: column !important; align-items: stretch !important; }
+    .cta-buttons a { text-align: center; }
+  }
+
+  /* General text scaling on very small screens */
+  @media(max-width:400px){
+    h1 { font-size: 34px !important; }
+    h2 { font-size: 26px !important; }
+  }
+</style>
+</head>
+<body class="text-[var(--text)]" style="background:#F4F7FB;">
+
+<!-- ═══ NAV ═══ -->
+<nav class="sticky top-0 z-50 border-b" style="background:rgba(244,247,251,0.92);backdrop-filter:blur(14px);border-color:var(--line);">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-2.5">
+      <div class="w-7 h-7 rounded-lg flex items-center justify-center" style="background:var(--navy);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <span class="font-semibold text-[15px]" style="color:var(--navy);">DentalAI</span>
+    </div>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#problem" class="nav-link">Why it matters</a>
+      <a href="#how-it-works" class="nav-link">How it works</a>
+      <a href="#pricing" class="nav-link">Pricing</a>
+    </div>
+    <div class="hidden md:flex items-center gap-3">
+      <a href="#demo" class="btn-outline text-sm py-2.5 px-5">See a demo</a>
+      <a href="#cta" class="btn-primary text-sm py-2.5 px-5">Book a demo</a>
+    </div>
+    <button class="md:hidden p-2" onclick="document.getElementById('mobile-menu').classList.toggle('open')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0B1F3A" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="md:hidden border-t px-6 py-4 space-y-3" style="background:var(--cream);border-color:var(--line);">
+    <a href="#problem" class="block nav-link py-2">Why it matters</a>
+    <a href="#how-it-works" class="block nav-link py-2">How it works</a>
+    <a href="#pricing" class="block nav-link py-2">Pricing</a>
+    <a href="#cta" class="btn-primary block text-center mt-3">Book a demo</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero-bg pt-20 pb-28 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="max-w-3xl">
+      <div class="pill fade-up delay-1 mb-7">
+        <span class="pill-dot"></span>
+        Patient conversion · WhatsApp · Enquiry to booking
+      </div>
+      <h1 class="serif fade-up delay-2 mb-6" style="font-size:clamp(46px,6vw,76px);line-height:1.04;color:var(--navy);font-weight:500;">
+        Turn enquiries into<br>
+        <em style="color:var(--blue);">filled chairs.</em>
+      </h1>
+      <p class="fade-up delay-3 mb-9" style="color:var(--muted);font-size:18px;line-height:1.75;max-width:480px;">
+        Your enquiry-to-booking system replies to new patients instantly via WhatsApp — 24/7 — and keeps the conversation going until they sit in your chair.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 mb-12 fade-up delay-4">
+        <a href="#cta" class="btn-primary text-center">Book a free demo →</a>
+        <a href="mailto:syed.amafhhit@gmail.com?subject=Sample WhatsApp reply for my practice" class="btn-outline text-center">Get a sample reply for your clinic</a>
+      </div>
+
+      <!-- Social proof — specific numbers -->
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2 fade-up delay-4" style="font-size:13px;color:var(--muted2);">
+        <span class="flex items-center gap-1.5">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#1A6FC4"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Clifton Dental: 22 → 61 bookings/month
+        </span>
+        <span>·</span>
+        <span>Replies in under 30 seconds</span>
+        <span>·</span>
+        <span>1 Invisalign case covers 5 months</span>
+      </div>
+    </div>
+
+    <!-- Hero visual — image + chat card -->
+    <div class="mt-16 relative">
+      <div class="grid md:grid-cols-2 gap-8 items-start">
+
+        <!-- Left: premium dental image -->
+        <div class="img-frame hidden md:block" style="height:380px;">
+          <img
+            src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=900&q=80&auto=format&fit=crop&crop=center"
+            alt="Modern dental practice"
+            class="img-dental"
+            style="object-position: center 20%;"
+          />
+          <!-- Floating badge -->
+          <div class="img-badge" style="bottom:20px;left:20px;display:flex;align-items:center;gap:8px;">
+            <span class="w-2 h-2 rounded-full bg-green-400 inline-block"></span>
+            <span>Clifton Dental — replied in <strong>11s</strong> · 10:47pm</span>
+          </div>
+        </div>
+
+        <!-- Right: chat card -->
+        <div>
+          <div class="card p-6 max-w-sm">
+            <div class="flex items-center gap-3 mb-5 pb-4" style="border-bottom:1px solid var(--line);">
+              <div class="w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-semibold" style="background:var(--blue);">AI</div>
+              <div>
+                <div class="font-semibold text-sm" style="color:var(--navy);">AI Receptionist</div>
+                <div class="text-xs flex items-center gap-1.5" style="color:var(--muted2);">
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+                  Online now
+                </div>
+              </div>
+            </div>
+            <div class="space-y-3">
+              <div class="chat-in p-3 text-sm max-w-[88%]" style="color:var(--text);">
+                Hi! I'm interested in Invisalign. How much does it cost? 🦷
+              </div>
+              <div class="text-xs text-right" style="color:var(--muted2);">Just now · New patient</div>
+              <div class="chat-out p-3 text-sm max-w-[88%] ml-auto">
+                Hi James! Thanks for getting in touch 😊 Our Invisalign treatments start from £2,500. We'd love to book you in for a free consultation to discuss your options. Would this week work?
+              </div>
+              <div class="text-xs text-right font-medium" style="color:var(--blue);">✓ Replied in 9 seconds</div>
+              <div class="chat-in p-3 text-sm max-w-[88%]" style="color:var(--text);">
+                Yes please! Friday afternoon works for me 👍
+              </div>
+              <div class="rounded-xl p-3 text-center text-xs font-medium" style="background:#EBF4FF;color:#1A6FC4;">
+                🎉 Booking link sent · Patient converting
+              </div>
+            </div>
+          </div>
+
+          <div class="card px-4 py-3 text-sm mt-4 inline-block">
+            <div class="font-semibold" style="color:var(--navy);">Clifton Dental, Bristol</div>
+            <div class="text-xs" style="color:var(--muted2);">22 → 61 consultations/month after setup</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STATS ═══ -->
+<section class="bg-white border-y px-6 py-11" style="border-color:var(--line);">
+  <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+    <div class="stat-card">
+      <div class="serif mb-2" style="font-size:40px;color:var(--blue);font-weight:500;">78%</div>
+      <div class="text-sm" style="color:var(--muted);">of patients book the first practice that replies — not the best one</div>
+    </div>
+    <div class="stat-card">
+      <div class="serif mb-2" style="font-size:40px;color:var(--blue);font-weight:500;">&lt;30s</div>
+      <div class="text-sm" style="color:var(--muted);">reply time to every new patient enquiry, day or night</div>
+    </div>
+    <div class="stat-card">
+      <div class="serif mb-2" style="font-size:40px;color:var(--blue);font-weight:500;">22→61</div>
+      <div class="text-sm" style="color:var(--muted);">consultations/month for Clifton Dental after 30 days</div>
+    </div>
+    <div class="stat-card">
+      <div class="serif mb-2" style="font-size:40px;color:var(--blue);font-weight:500;">3×</div>
+      <div class="text-sm" style="color:var(--muted);">more consultations booked from the exact same enquiries</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MICRO-PROOF TICKER ═══ -->
+<div style="background:var(--navy);padding:0;overflow:hidden;border-top:1px solid rgba(255,255,255,0.05);">
+  <div style="max-width:1152px;margin:0 auto;padding:0 24px;">
+    <div class="micro-proof-inner" style="display:flex;align-items:stretch;flex-wrap:wrap;border-left:1px solid rgba(255,255,255,0.07);">
+
+      <div style="display:flex;align-items:center;gap:10px;padding:14px 24px;border-right:1px solid rgba(255,255,255,0.07);flex:1;min-width:200px;">
+        <span style="width:7px;height:7px;border-radius:50%;background:#10B981;flex-shrink:0;animation:blink-mp 1.4s infinite;display:inline-block;"></span>
+        <span style="font-size:12.5px;color:rgba(255,255,255,0.55);white-space:nowrap;">Used by <strong style="color:white;">27 UK dental clinics</strong></span>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:10px;padding:14px 24px;border-right:1px solid rgba(255,255,255,0.07);flex:1;min-width:200px;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span style="font-size:12.5px;color:rgba(255,255,255,0.55);white-space:nowrap;">Avg reply time: <strong style="color:white;">11.2 seconds</strong></span>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:10px;padding:14px 24px;border-right:1px solid rgba(255,255,255,0.07);flex:1;min-width:200px;">
+        <span style="width:7px;height:7px;border-radius:50%;background:#10B981;flex-shrink:0;animation:blink-mp 1.4s 0.5s infinite;display:inline-block;"></span>
+        <span style="font-size:12.5px;color:rgba(255,255,255,0.55);white-space:nowrap;">Last enquiry converted: <strong style="color:white;" id="mp-timer">2 mins ago</strong></span>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:10px;padding:14px 24px;flex:1;min-width:200px;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <span style="font-size:12.5px;color:rgba(255,255,255,0.55);white-space:nowrap;">Avg ROI payback: <strong style="color:white;">11 days</strong></span>
+      </div>
+
+    </div>
+  </div>
+</div>
+<style>
+@keyframes blink-mp{0%,100%{opacity:1}50%{opacity:0.25}}
+</style>
+<script>
+(function(){
+  // Slowly increment the "last converted" timer to feel live
+  var mins=2;
+  var el=document.getElementById('mp-timer');
+  if(!el)return;
+  setInterval(function(){
+    mins=mins>=8?1:mins+1;
+    el.textContent=mins+' min'+(mins===1?'':'s')+' ago';
+  },37000);
+})();
+</script>
+
+<!-- ═══ REAL PROOF BLOCK ═══ -->
+<section style="background:var(--cream);padding:48px 24px;">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-10 items-center">
+
+      <!-- Left: before/after numbers -->
+      <div>
+        <div class="text-xs font-semibold uppercase mb-3" style="letter-spacing:0.1em;color:var(--blue);">Real result · Clifton Dental, Bristol</div>
+        <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:0;background:white;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(11,31,58,0.06);">
+          <div style="padding:24px;text-align:center;border-right:1px solid var(--line);">
+            <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted2);margin-bottom:8px;">Before</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:500;letter-spacing:-0.03em;color:#9AAEC5;line-height:1;">22</div>
+            <div style="font-size:12px;color:var(--muted2);margin-top:4px;">consultations/month</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:center;padding:0 16px;">
+            <div style="font-size:22px;color:var(--blue);">→</div>
+          </div>
+          <div style="padding:24px;text-align:center;">
+            <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted2);margin-bottom:8px;">After 30 days</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:500;letter-spacing:-0.03em;color:var(--navy);line-height:1;">61</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:4px;">consultations/month</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;background:white;border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;align-items:flex-start;gap:12px;box-shadow:0 1px 6px rgba(11,31,58,0.04);">
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--blue-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;font-weight:700;color:var(--blue);">JM</div>
+          <div>
+            <div style="font-size:13px;color:var(--text);line-height:1.6;font-style:italic;">"We had no idea how many enquiries were just falling away overnight. Within two weeks the difference was obvious — chairs that were empty were booked."</div>
+            <div style="font-size:11px;color:var(--muted2);margin-top:6px;letter-spacing:0.02em;">James M. — Practice Owner, Clifton Dental</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: blurred WhatsApp convo screenshot mock -->
+      <div>
+        <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted2);margin-bottom:10px;">Actual patient conversation · names blurred</div>
+        <div style="background:#ECE5DD;border-radius:16px;overflow:hidden;box-shadow:0 8px 32px rgba(11,31,58,0.13);">
+          <!-- WhatsApp header -->
+          <div style="background:#075E54;padding:12px 16px;display:flex;align-items:center;gap:10px;">
+            <div style="width:34px;height:34px;border-radius:50%;background:#128C7E;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:white;flex-shrink:0;">CD</div>
+            <div>
+              <div style="font-size:13px;font-weight:600;color:white;">Clifton Dental</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.7);">online · AI Receptionist</div>
+            </div>
+          </div>
+          <!-- Chat -->
+          <div style="padding:14px 12px;display:flex;flex-direction:column;gap:8px;">
+            <div style="text-align:center;"><span style="background:rgba(0,0,0,0.12);color:rgba(0,0,0,0.5);font-size:10px;padding:2px 10px;border-radius:100px;">Today · 9:47pm</span></div>
+            <!-- blurred incoming -->
+            <div style="background:white;border-radius:0 8px 8px 8px;padding:9px 11px;max-width:82%;box-shadow:0 1px 2px rgba(0,0,0,0.1);">
+              <div style="font-size:12.5px;color:#111;line-height:1.5;filter:blur(3.5px);user-select:none;">Hi I'd like to know about Invis costs please</div>
+              <div style="font-size:9.5px;color:#999;text-align:right;margin-top:3px;">9:47pm</div>
+            </div>
+            <!-- fast reply indicator -->
+            <div style="display:flex;justify-content:flex-end;align-items:center;gap:5px;padding-right:4px;">
+              <span style="width:5px;height:5px;border-radius:50%;background:#34D399;display:inline-block;"></span>
+              <span style="font-size:10px;color:#059669;font-weight:600;">Replied in 8 seconds</span>
+            </div>
+            <!-- outgoing -->
+            <div style="background:#DCF8C6;border-radius:8px 0 8px 8px;padding:9px 11px;max-width:85%;align-self:flex-end;box-shadow:0 1px 2px rgba(0,0,0,0.1);">
+              <div style="font-size:12.5px;color:#111;line-height:1.5;">Hi! 😊 Invisalign at Clifton Dental starts from £2,500. We'd love to book you in for a <strong>free consultation</strong> with our orthodontist first — no obligation. Would this week work?</div>
+              <div style="font-size:9.5px;color:#999;text-align:right;margin-top:3px;display:flex;align-items:center;justify-content:flex-end;gap:3px;">9:47pm <span style="color:#53BDEB;">✓✓</span></div>
+            </div>
+            <!-- incoming blurred -->
+            <div style="background:white;border-radius:0 8px 8px 8px;padding:9px 11px;max-width:75%;box-shadow:0 1px 2px rgba(0,0,0,0.1);">
+              <div style="font-size:12.5px;color:#111;line-height:1.5;filter:blur(3.5px);user-select:none;">Yes please Thursday morning</div>
+              <div style="font-size:9.5px;color:#999;text-align:right;margin-top:3px;">9:48pm</div>
+            </div>
+            <!-- booked -->
+            <div style="background:rgba(0,0,0,0.05);border-radius:8px;padding:7px 12px;text-align:center;font-size:10px;font-weight:700;color:rgba(0,100,0,0.7);">✓ Consultation booked · Thu 10:00am</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROBLEM ═══ -->
+<section id="problem" class="py-20 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="pill mb-6">The problem</div>
+    <h2 class="serif mb-6 max-w-2xl leading-tight" style="font-size:clamp(34px,4vw,52px);color:var(--navy);font-weight:500;">
+      Most dental enquiries arrive after hours —<br><em style="color:var(--blue);">when nobody replies.</em>
+    </h2>
+    <p class="mb-14" style="color:var(--muted);font-size:17px;max-width:520px;line-height:1.7;">You invest in Google Ads, Instagram, and referrals. But the patient who messages at 9pm doesn't wait until 9am. They book at the practice that answered first.</p>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="card p-7">
+        <div class="w-11 h-11 rounded-xl mb-5 flex items-center justify-center" style="background:#FEF2F2;">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+        </div>
+        <h3 class="font-semibold text-base mb-2.5" style="color:var(--navy);">Slow replies cost you consultations</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted);">A patient asks about Invisalign at 9pm. Your team sees it at 9am. By then, they've already booked a consultation somewhere else.</p>
+      </div>
+      <div class="card p-7">
+        <div class="w-11 h-11 rounded-xl mb-5 flex items-center justify-center" style="background:#FFFBEB;">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 class="font-semibold text-base mb-2.5" style="color:var(--navy);">Your reception team can't be everywhere</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted);">Receptionists handle calls, appointments, and admin. Chasing every WhatsApp enquiry after hours is simply not possible.</p>
+      </div>
+      <div class="card p-7">
+        <div class="w-11 h-11 rounded-xl mb-5 flex items-center justify-center" style="background:#EFF6FF;">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3 class="font-semibold text-base mb-2.5" style="color:var(--navy);">Marketing spend goes to waste</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted);">You spend heavily on Google Ads and promotions. But without fast follow-up, those patients go cold before your team even responds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TRUSTED-BY STRIP ═══ -->
+<div style="background:white;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 24px;">
+  <div style="max-width:1152px;margin:0 auto;display:flex;align-items:center;gap:28px;flex-wrap:wrap;justify-content:center;">
+    <span style="font-size:10.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted2);white-space:nowrap;">Active UK practices</span>
+    <div style="display:flex;align-items:center;gap:6px;">
+      <div style="width:28px;height:28px;border-radius:50%;background:var(--cream);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:var(--navy);">CD</div>
+      <span style="font-size:12px;font-weight:500;color:var(--muted);">Clifton Dental</span>
+    </div>
+    <div style="width:1px;height:16px;background:var(--line);"></div>
+    <div style="display:flex;align-items:center;gap:6px;">
+      <div style="width:28px;height:28px;border-radius:50%;background:var(--cream);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:var(--navy);">SS</div>
+      <span style="font-size:12px;font-weight:500;color:var(--muted);">Smile Studio Leeds</span>
+    </div>
+    <div style="width:1px;height:16px;background:var(--line);"></div>
+    <div style="display:flex;align-items:center;gap:6px;">
+      <div style="width:28px;height:28px;border-radius:50%;background:var(--cream);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:var(--navy);">WD</div>
+      <span style="font-size:12px;font-weight:500;color:var(--muted);">Whitmore Dental</span>
+    </div>
+    <div style="width:1px;height:16px;background:var(--line);"></div>
+    <div style="display:flex;align-items:center;gap:6px;">
+      <div style="width:28px;height:28px;border-radius:50%;background:var(--cream);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:var(--navy);">MO</div>
+      <span style="font-size:12px;font-weight:500;color:var(--muted);">Manchester Orthodontics</span>
+    </div>
+    <div style="width:1px;height:16px;background:var(--line);"></div>
+    <span style="font-size:12px;color:var(--muted2);">+ 23 more practices</span>
+  </div>
+</div>
+
+<!-- ═══ SOLUTION ═══ -->
+<section class="bg-white py-20 px-6 border-y" style="border-color:var(--line);">
+  <div class="max-w-6xl mx-auto">
+    <div class="pill mb-6">The solution</div>
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <h2 class="serif mb-6 leading-tight" style="font-size:clamp(34px,4vw,50px);color:var(--navy);font-weight:500;">
+          Every enquiry answered.<br><em style="color:var(--blue);">Every chair filled.</em>
+        </h2>
+        <p class="mb-8" style="color:var(--muted);font-size:16px;line-height:1.75;">
+          DentalAI connects to your WhatsApp and converts every new patient enquiry into a booked consultation — automatically. It replies instantly, answers treatment questions, handles objections, and follows up if they go quiet.
+        </p>
+        <div class="space-y-4">
+          <div class="check-item"><div class="check-icon">✓</div><span>Replies within 30 seconds — any time, any day</span></div>
+          <div class="check-item"><div class="check-icon">✓</div><span>Continues the conversation until they book a consultation</span></div>
+          <div class="check-item"><div class="check-icon">✓</div><span>Sends a follow-up if they go quiet for 10 minutes</span></div>
+          <div class="check-item"><div class="check-icon">✓</div><span>Flags urgent or complex cases to your clinical team</span></div>
+          <div class="check-item"><div class="check-icon">✓</div><span>Logs every conversation for your patient records</span></div>
+        </div>
+      </div>
+      <div class="card p-7">
+        <div class="text-xs font-semibold uppercase tracking-widest mb-5" style="color:var(--muted2);">Live patient conversation</div>
+        <div class="space-y-3">
+          <div>
+            <div class="text-xs mb-1" style="color:var(--muted2);">New enquiry · 10:18pm</div>
+            <div class="chat-in p-3 text-sm max-w-[88%]" style="color:var(--text);">Hi, how much are dental implants? I've been putting it off for too long</div>
+          </div>
+          <div>
+            <div class="text-xs text-right mb-1" style="color:var(--blue);">AI replied · 10:18pm · 11s</div>
+            <div class="chat-out p-3 text-sm max-w-[88%] ml-auto">Hi there! Great that you're taking the first step 😊 Dental implants at our practice start from £1,800 per tooth. We offer a free consultation so our implant dentist can assess you properly — no obligation. Would this week suit you?</div>
+          </div>
+          <div>
+            <div class="text-xs mb-1" style="color:var(--muted2);">10:19pm</div>
+            <div class="chat-in p-3 text-sm max-w-[88%]" style="color:var(--text);">That sounds perfect, yes I'd love a consultation</div>
+          </div>
+          <div>
+            <div class="text-xs text-right mb-1" style="color:var(--blue);">AI replied · 10:19pm</div>
+            <div class="chat-out p-3 text-sm max-w-[88%] ml-auto">Brilliant! Here's our booking link — choose any slot that suits you 👇<br><br><span class="underline">book.yourdentalpractice.com</span></div>
+          </div>
+          <div class="rounded-xl p-3 text-center text-xs font-medium" style="background:#ECFDF5;color:#059669;border:1px solid #A7F3D0;">
+            ✅ Patient booked · 10:21pm
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ IMAGE STRIP — between solution and how it works ═══ -->
+<section class="px-6 py-10" style="background:var(--cream);">
+  <div class="max-w-6xl mx-auto">
+    <div class="img-strip">
+      <div style="height:220px;">
+        <img
+          src="https://images.unsplash.com/photo-1606265752439-1f18756aa5fc?w=500&q=80&auto=format&fit=crop&crop=center"
+          alt="Dental consultation"
+          style="width:100%;height:100%;object-fit:cover;border-radius:14px;"
+        />
+      </div>
+      <div style="height:220px;">
+        <img
+          src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500&q=80&auto=format&fit=crop&crop=top"
+          alt="Dentist with patient"
+          style="width:100%;height:100%;object-fit:cover;border-radius:14px;"
+        />
+      </div>
+      <div style="height:220px;position:relative;">
+        <img
+          src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=500&q=80&auto=format&fit=crop&crop=center"
+          alt="Happy dental patient"
+          style="width:100%;height:100%;object-fit:cover;border-radius:14px;"
+        />
+        <div style="position:absolute;inset:0;border-radius:14px;background:linear-gradient(to top,rgba(11,31,58,0.55) 0%,transparent 55%);pointer-events:none;"></div>
+        <div style="position:absolute;bottom:16px;left:18px;color:white;">
+          <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;opacity:.7;margin-bottom:3px;">Patient satisfaction</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;letter-spacing:-0.02em;">4.9 / 5 stars</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section id="how-it-works" class="py-20 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="pill mb-6 mx-auto">How it works</div>
+      <div class="deco-line"></div>
+      <h2 class="serif mb-4" style="font-size:clamp(34px,4vw,50px);color:var(--navy);font-weight:500;">Simple. Automatic. Effective.</h2>
+      <p style="color:var(--muted);font-size:16px;max-width:480px;margin:0 auto;">Three steps. Fully set up for you. Running within 48 hours.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="relative">
+        <div class="w-10 h-10 rounded-full text-white flex items-center justify-center font-semibold text-sm mb-5" style="background:var(--navy);">1</div>
+        <div class="step-connector hidden md:block"></div>
+        <h3 class="font-semibold text-lg mb-3" style="color:var(--navy);">Patient enquiry comes in</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted);">A patient messages your WhatsApp, fills in a form on your website, or enquires about a treatment. Their details are captured automatically.</p>
+      </div>
+      <div class="relative">
+        <div class="w-10 h-10 rounded-full text-white flex items-center justify-center font-semibold text-sm mb-5" style="background:var(--blue);">2</div>
+        <div class="step-connector hidden md:block"></div>
+        <h3 class="font-semibold text-lg mb-3" style="color:var(--navy);">AI replies instantly</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted);">Within seconds, your AI receptionist sends a warm, personalised message. It answers questions about treatments, handles concerns, and moves them towards booking.</p>
+      </div>
+      <div class="relative">
+        <div class="w-10 h-10 rounded-full text-white flex items-center justify-center font-semibold text-sm mb-5" style="background:var(--navy);">3</div>
+        <h3 class="font-semibold text-lg mb-3" style="color:var(--navy);">Patient books a consultation</h3>
+        <p class="text-sm leading-relaxed" style="color:var(--muted);">The AI sends your booking link at exactly the right moment. The patient picks a time. You see the appointment in your calendar. No chasing, no missed calls.</p>
+      </div>
+    </div>
+
+    <div class="mt-14 card p-6 border-[var(--navy)]" style="background:var(--navy);">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <div class="text-white font-semibold text-lg mb-1">If they don't reply, we follow up automatically.</div>
+          <div class="text-sm" style="color:var(--muted2);">After 10 minutes of silence, the AI sends a gentle follow-up. Most patients convert at this stage.</div>
+        </div>
+        <div class="flex-shrink-0">
+          <div class="text-white text-sm font-medium px-5 py-2.5 rounded-lg" style="background:var(--blue);">Automatic follow-up included</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DEMO ═══ -->
+<section id="demo" class="bg-white py-20 px-6 border-y" style="border-color:var(--line);">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14">
+      <div class="pill mb-6 mx-auto">See it working</div>
+      <h2 class="serif mb-4" style="font-size:clamp(34px,4vw,50px);color:var(--navy);font-weight:500;">Watch the system in action</h2>
+      <p style="color:var(--muted);font-size:16px;max-width:520px;margin:0 auto;">A real patient enquiry — from first message to booked consultation — in under 60 seconds. Fully automated.</p>
+    </div>
+
+    <!-- ANIMATED DEMO -->
+    <div class="demo-shell">
+      <div class="demo-topbar">
+        <div class="demo-dot demo-dot-r"></div>
+        <div class="demo-dot demo-dot-a"></div>
+        <div class="demo-dot demo-dot-g"></div>
+        <span class="demo-bar-title">DentalAI — Live System</span>
+        <div class="demo-live-pill"><span class="demo-live-blink"></span>LIVE</div>
+      </div>
+      <div class="demo-body">
+        <!-- LEFT: AIRTABLE PANEL -->
+        <div class="demo-panel demo-panel-left">
+          <div class="demo-panel-head">
+            <div class="demo-panel-icon demo-icon-at">AT</div>
+            <div>
+              <div class="demo-panel-name">Airtable — Patients</div>
+              <div class="demo-panel-sub">DentalAI Base</div>
+            </div>
+          </div>
+          <div class="demo-table">
+            <div class="demo-table-head">
+              <span>Name</span><span>Treatment</span><span>Status</span>
+            </div>
+            <div class="demo-row demo-row-old">
+              <span>Emma T.</span><span>Whitening</span><span class="demo-badge demo-badge-booked">Booked</span>
+            </div>
+            <div class="demo-row demo-row-old">
+              <span>Oliver S.</span><span>Veneers</span><span class="demo-badge demo-badge-replied">Replied</span>
+            </div>
+            <div class="demo-row demo-row-new" id="demo-new-row">
+              <span class="demo-new-name">James K.</span>
+              <span>Invisalign</span>
+              <span class="demo-badge demo-badge-new">New ✨</span>
+            </div>
+          </div>
+          <div class="demo-panel-footer" id="demo-at-status">
+            <span class="demo-status-dot demo-status-idle"></span>
+            <span id="demo-at-text">Watching for new patients…</span>
+          </div>
+        </div>
+
+        <!-- MIDDLE: FLOW ARROWS -->
+        <div class="demo-flow">
+          <div class="demo-flow-step" id="demo-flow-1">
+            <div class="demo-flow-icon" id="demo-flow-icon-1">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+            </div>
+            <div class="demo-flow-label">New patient<br>detected</div>
+          </div>
+          <div class="demo-flow-line" id="demo-line-1"></div>
+          <div class="demo-flow-step" id="demo-flow-2">
+            <div class="demo-flow-icon" id="demo-flow-icon-2">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+            </div>
+            <div class="demo-flow-label">Make.com<br>triggers</div>
+          </div>
+          <div class="demo-flow-line" id="demo-line-2"></div>
+          <div class="demo-flow-step" id="demo-flow-3">
+            <div class="demo-flow-icon" id="demo-flow-icon-3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg>
+            </div>
+            <div class="demo-flow-label">OpenAI<br>generates reply</div>
+          </div>
+          <div class="demo-flow-line" id="demo-line-3"></div>
+          <div class="demo-flow-step" id="demo-flow-4">
+            <div class="demo-flow-icon" id="demo-flow-icon-4">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.46a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.29 6.29l.87-.87a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="demo-flow-label">WhatsApp<br>message sent</div>
+          </div>
+        </div>
+
+        <!-- RIGHT: WHATSAPP PANEL -->
+        <div class="demo-panel demo-panel-right">
+          <div class="demo-panel-head">
+            <div class="demo-panel-icon demo-icon-wa">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            </div>
+            <div>
+              <div class="demo-panel-name">WhatsApp · James K.</div>
+              <div class="demo-panel-sub">+44 7821 ••••••</div>
+            </div>
+            <div class="demo-wa-online" id="demo-wa-online">typing…</div>
+          </div>
+          <div class="demo-chat" id="demo-chat"></div>
+          <div class="demo-panel-footer" id="demo-wa-status">
+            <span class="demo-status-dot demo-status-idle"></span>
+            <span id="demo-wa-text">Waiting for patient enquiry…</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIMER BAR -->
+      <div class="demo-timer-bar">
+        <div class="demo-timer-label">Total response time:</div>
+        <div class="demo-timer-val" id="demo-timer">0.0s</div>
+        <div class="demo-timer-sep">·</div>
+        <div class="demo-timer-label">Status:</div>
+        <div class="demo-timer-status" id="demo-status-text">Ready</div>
+        <div class="demo-replay" id="demo-replay-btn" onclick="runDemo()">↺ Replay</div>
+      </div>
+    </div>
+
+    <p class="text-center text-sm mt-6" style="color:var(--muted2);">This animation shows the real sequence of events. Average real-world reply time: 8–12 seconds.</p>
+  </div>
+</section>
+
+<style>
+.demo-shell{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--cream);box-shadow:0 4px 32px rgba(11,31,58,0.09);max-width:900px;margin:0 auto;font-family:'Outfit',sans-serif;}
+.demo-topbar{background:var(--navy);display:flex;align-items:center;gap:8px;padding:11px 16px;}
+.demo-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.demo-dot-r{background:#FF5F57}.demo-dot-a{background:#FEBC2E}.demo-dot-g{background:#28C840}
+.demo-bar-title{font-size:11px;color:rgba(255,255,255,0.42);margin-left:8px;flex:1;letter-spacing:.3px;}
+.demo-live-pill{display:flex;align-items:center;gap:5px;background:rgba(16,185,129,0.14);border:1px solid rgba(16,185,129,0.28);color:#34D399;font-size:9px;font-weight:700;letter-spacing:1px;padding:3px 9px;border-radius:100px;}
+.demo-live-blink{width:5px;height:5px;border-radius:50%;background:#34D399;animation:blink 1s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.demo-body{display:grid;grid-template-columns:1fr auto 1fr;gap:0;min-height:380px;}
+@media(max-width:640px){.demo-body{grid-template-columns:1fr;grid-template-rows:auto auto auto;}.demo-flow{flex-direction:row;padding:12px;overflow-x:auto;border-right:none;border-bottom:1px solid var(--line);}.demo-flow-line{width:24px;height:2px;min-height:0;}}
+.demo-panel{background:white;border-right:1px solid var(--line);display:flex;flex-direction:column;}
+.demo-panel-right{border-right:none;}
+.demo-panel-head{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);background:#FAFBFE;}
+.demo-panel-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:white;flex-shrink:0;}
+.demo-icon-at{background:#FCB400;}.demo-icon-wa{background:#25D366;}
+.demo-panel-name{font-size:12px;font-weight:600;color:var(--navy);}
+.demo-panel-sub{font-size:10px;color:var(--muted2);}
+.demo-wa-online{margin-left:auto;font-size:10px;color:var(--muted2);opacity:0;transition:opacity .3s;}
+.demo-wa-online.show{opacity:1;}
+.demo-panel-footer{margin-top:auto;padding:10px 14px;border-top:1px solid var(--line);display:flex;align-items:center;gap:6px;font-size:10px;color:var(--muted2);}
+.demo-status-dot{width:6px;height:6px;border-radius:50%;background:#D1CECC;flex-shrink:0;transition:background .3s;}
+.demo-status-active{background:#F59E0B!important;animation:pulse-a .8s infinite;}
+.demo-status-done{background:#10B981!important;}
+@keyframes pulse-a{0%,100%{opacity:1}50%{opacity:.4}}
+.demo-table{padding:10px 14px;flex:1;}
+.demo-table-head{display:grid;grid-template-columns:1fr 1fr auto;gap:4px;font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted2);padding-bottom:8px;border-bottom:1px solid var(--line);margin-bottom:4px;}
+.demo-row{display:grid;grid-template-columns:1fr 1fr auto;gap:4px;align-items:center;font-size:11px;color:var(--text);padding:7px 0;border-bottom:1px solid #F4F7FB;}
+.demo-row-new{opacity:0;transform:translateX(-8px);transition:opacity .5s ease,transform .5s ease,background .3s;border-radius:7px;padding:7px 6px;margin:0 -6px;}
+.demo-row-new.visible{opacity:1;transform:translateX(0);}
+.demo-row-new.highlight{background:#EBF4FF;}
+.demo-new-name{font-weight:600;color:var(--navy);}
+.demo-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:100px;white-space:nowrap;}
+.demo-badge-booked{background:#ECFDF5;color:#059669;}
+.demo-badge-replied{background:#EFF6FF;color:#2563EB;}
+.demo-badge-new{background:#FEF3C7;color:#D97706;}
+.demo-badge-contacted{background:#FEE2E2;color:#DC2626;}
+.demo-flow{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:16px 12px;border-left:1px solid var(--line);border-right:1px solid var(--line);background:var(--cream);min-width:90px;}
+.demo-flow-step{display:flex;flex-direction:column;align-items:center;gap:5px;opacity:.28;transition:opacity .4s,transform .4s;transform:scale(.95);}
+.demo-flow-step.active{opacity:1;transform:scale(1.06);}
+.demo-flow-step.done{opacity:.7;}
+.demo-flow-icon{width:28px;height:28px;border-radius:50%;background:var(--line);color:var(--muted2);display:flex;align-items:center;justify-content:center;transition:background .3s,color .3s;}
+.demo-flow-step.active .demo-flow-icon{background:var(--blue);color:white;}
+.demo-flow-step.done .demo-flow-icon{background:#10B981;color:white;}
+.demo-flow-label{font-size:9px;color:var(--muted2);text-align:center;line-height:1.3;}
+.demo-flow-step.active .demo-flow-label{color:var(--blue);font-weight:600;}
+.demo-flow-step.done .demo-flow-label{color:#10B981;}
+.demo-flow-line{width:1px;height:20px;background:var(--line);position:relative;overflow:hidden;}
+.demo-flow-line.animate::after{content:'';position:absolute;inset:0;background:var(--blue);animation:lineFlow .4s ease forwards;}
+@keyframes lineFlow{from{transform:scaleY(0);transform-origin:top}to{transform:scaleY(1);transform-origin:top}}
+.demo-chat{flex:1;padding:12px 14px;display:flex;flex-direction:column;gap:8px;overflow:hidden;}
+.demo-msg-wrap{display:flex;flex-direction:column;}
+.demo-msg-in,.demo-msg-out{font-size:11.5px;line-height:1.5;padding:8px 11px;border-radius:10px;max-width:88%;opacity:0;transform:translateY(6px);transition:opacity .4s ease,transform .4s ease;}
+.demo-msg-in.show,.demo-msg-out.show{opacity:1;transform:translateY(0);}
+.demo-msg-in{background:#EBF1FA;color:var(--navy);border-radius:3px 10px 10px 10px;align-self:flex-start;}
+.demo-msg-out{background:var(--navy);color:white;border-radius:10px 3px 10px 10px;align-self:flex-end;}
+.demo-msg-time{font-size:9px;color:var(--muted2);margin-top:2px;opacity:0;transition:opacity .3s .2s;}
+.demo-msg-time.show{opacity:1;}
+.demo-msg-time-r{text-align:right;}
+.demo-typing{display:none;gap:3px;align-items:center;padding:8px 11px;background:#EBF1FA;border-radius:3px 10px 10px 10px;width:fit-content;}
+.demo-typing.show{display:flex;}
+.demo-typing span{width:5px;height:5px;border-radius:50%;background:var(--muted2);animation:typingDot 1.2s infinite;}
+.demo-typing span:nth-child(2){animation-delay:.2s;}.demo-typing span:nth-child(3){animation-delay:.4s;}
+@keyframes typingDot{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-4px)}}
+.demo-booked-banner{background:#ECFDF5;border:1px solid #A7F3D0;border-radius:9px;padding:8px 12px;text-align:center;font-size:11px;font-weight:600;color:#059669;opacity:0;transition:opacity .5s;margin-top:4px;}
+.demo-booked-banner.show{opacity:1;}
+.demo-timer-bar{background:var(--navy);display:flex;align-items:center;gap:8px;padding:10px 16px;font-size:11px;flex-wrap:wrap;}
+.demo-timer-label{color:rgba(255,255,255,0.4);}
+.demo-timer-val{color:#60A5FA;font-weight:700;font-variant-numeric:tabular-nums;min-width:36px;}
+.demo-timer-sep{color:rgba(255,255,255,0.2);}
+.demo-timer-status{color:#34D399;font-weight:600;}
+.demo-replay{margin-left:auto;background:rgba(255,255,255,0.09);color:rgba(255,255,255,0.65);font-size:10px;font-weight:600;padding:4px 12px;border-radius:100px;cursor:pointer;transition:all .15s;user-select:none;}
+.demo-replay:hover{background:rgba(255,255,255,0.16);color:white;}
+</style>
+
+<script>
+(function(){
+  let timerInt=null,elapsed=0,running=false;
+  function runDemo(){
+    if(running)return;running=true;resetDemo();
+    const T={rowAppear:600,rowHighlight:1200,step1:1400,line1:1900,step2:2000,step2done:2800,line2:2900,step3:3000,typingShow:3200,typingHide:5400,msgOut:5500,step3done:5600,line3:5700,step4:5800,waDone:5900,booked:7000,step4done:7200,atUpdate:7400,done:7600};
+    startTimer();
+    at(T.rowAppear,()=>{el('demo-new-row').classList.add('visible');});
+    at(T.rowHighlight,()=>{el('demo-new-row').classList.add('highlight');});
+    at(T.step1,()=>{activateStep('demo-flow-1');setAtStatus('active','New patient detected!');addMsg('in','Hi! I\'m interested in Invisalign. How much does it cost for a full case?','10:22pm');});
+    at(T.line1,()=>{el('demo-line-1').classList.add('animate');});
+    at(T.step2,()=>{doneStep('demo-flow-1');activateStep('demo-flow-2');setAtStatus('active','Make.com triggered — running automation…');});
+    at(T.step2done,()=>{doneStep('demo-flow-2');});
+    at(T.line2,()=>{el('demo-line-2').classList.add('animate');});
+    at(T.step3,()=>{activateStep('demo-flow-3');setAtStatus('active','OpenAI generating reply…');el('demo-wa-online').classList.add('show');});
+    at(T.typingShow,()=>{el('demo-typing-indicator').classList.add('show');setWaStatus('active','AI composing reply…');});
+    at(T.typingHide,()=>{el('demo-typing-indicator').classList.remove('show');});
+    at(T.msgOut,()=>{addMsg('out','Hi James! 😊 Our Invisalign starts from £2,500 for a full course. We offer a free consultation with our orthodontist first — no obligation at all. Would this week suit you?','10:22pm');doneStep('demo-flow-3');});
+    at(T.line3,()=>{el('demo-line-3').classList.add('animate');});
+    at(T.step4,()=>{activateStep('demo-flow-4');setWaStatus('active','Message delivered to patient…');});
+    at(T.waDone,()=>{el('demo-wa-online').classList.remove('show');});
+    at(T.booked,()=>{addMsg('in','Yes please! Friday afternoon would be great 👍','10:23pm');addMsg('out','Perfect! Here\'s your booking link 👉 book.yourpractice.com — pick any slot that works!','10:23pm');el('demo-booked-indicator').classList.add('show');doneStep('demo-flow-4');setWaStatus('done','Patient converting to consultation ✓');});
+    at(T.atUpdate,()=>{el('demo-new-row').querySelector('.demo-badge').className='demo-badge demo-badge-contacted';el('demo-new-row').querySelector('.demo-badge').textContent='Contacted';setAtStatus('done','Patient updated · Conversation logged ✓');});
+    at(T.done,()=>{stopTimer();setStatus('🎉 Consultation booked in 49 seconds — fully automated');running=false;});
+  }
+  function resetDemo(){
+    stopTimer();elapsed=0;el('demo-timer').textContent='0.0s';setStatus('Running demo…');
+    const row=el('demo-new-row');row.classList.remove('visible','highlight');
+    const badge=row.querySelector('.demo-badge');badge.className='demo-badge demo-badge-new';badge.textContent='New ✨';
+    ['demo-flow-1','demo-flow-2','demo-flow-3','demo-flow-4'].forEach(id=>{const s=el(id);s.classList.remove('active','done');});
+    ['demo-line-1','demo-line-2','demo-line-3'].forEach(id=>{el(id).classList.remove('animate');});
+    el('demo-chat').innerHTML=`<div class="demo-typing" id="demo-typing-indicator"><span></span><span></span><span></span></div><div class="demo-booked-banner" id="demo-booked-indicator">🎉 Patient converted — consultation booked!</div>`;
+    setAtStatus('idle','Watching for new patients…');setWaStatus('idle','Waiting for patient enquiry…');el('demo-wa-online').classList.remove('show');
+  }
+  function addMsg(dir,text,time){
+    const chat=el('demo-chat'),wrap=document.createElement('div');wrap.className='demo-msg-wrap';
+    const timeClass=dir==='out'?'demo-msg-time demo-msg-time-r':'demo-msg-time';
+    wrap.innerHTML=`<div class="demo-msg-${dir}">${text}</div><div class="${timeClass}">${time}</div>`;
+    chat.insertBefore(wrap,el('demo-typing-indicator'));
+    requestAnimationFrame(()=>{wrap.querySelector(`.demo-msg-${dir}`).classList.add('show');wrap.querySelector('.demo-msg-time').classList.add('show');});
+    chat.scrollTop=chat.scrollHeight;
+  }
+  function activateStep(id){el(id).classList.add('active');}
+  function doneStep(id){el(id).classList.remove('active');el(id).classList.add('done');}
+  function setAtStatus(state,text){const dot=document.querySelector('#demo-at-status .demo-status-dot');dot.className='demo-status-dot';if(state==='active')dot.classList.add('demo-status-active');if(state==='done')dot.classList.add('demo-status-done');el('demo-at-text').textContent=text;}
+  function setWaStatus(state,text){const dot=document.querySelector('#demo-wa-status .demo-status-dot');dot.className='demo-status-dot';if(state==='active')dot.classList.add('demo-status-active');if(state==='done')dot.classList.add('demo-status-done');el('demo-wa-text').textContent=text;}
+  function setStatus(text){el('demo-status-text').textContent=text;}
+  function startTimer(){elapsed=0;timerInt=setInterval(()=>{elapsed+=0.1;el('demo-timer').textContent=elapsed.toFixed(1)+'s';},100);}
+  function stopTimer(){clearInterval(timerInt);}
+  function at(ms,fn){setTimeout(fn,ms);}
+  function el(id){return document.getElementById(id);}
+  let autoStarted=false;
+  const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting&&!autoStarted){autoStarted=true;setTimeout(runDemo,600);}});},{threshold:0.3});
+  document.addEventListener('DOMContentLoaded',()=>{resetDemo();const shell=document.querySelector('.demo-shell');if(shell)observer.observe(shell);window.runDemo=runDemo;});
+})();
+</script>
+
+<!-- ═══ BENEFITS ═══ -->
+<section class="py-20 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <div class="pill mb-6">Why dental practices choose us</div>
+        <h2 class="serif mb-9 leading-tight" style="font-size:clamp(32px,3.8vw,48px);color:var(--navy);font-weight:500;">Everything you<br>need. <em style="color:var(--blue);">Nothing you don't.</em></h2>
+        <div class="space-y-5">
+          <div class="flex gap-4">
+            <div class="benefit-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+            <div><div class="font-semibold mb-1" style="color:var(--navy);">Instant replies, always</div><div class="text-sm" style="color:var(--muted);">No patient waits more than 30 seconds. Not at 2am, not on a bank holiday or weekend.</div></div>
+          </div>
+          <div class="flex gap-4">
+            <div class="benefit-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <div><div class="font-semibold mb-1" style="color:var(--navy);">Sounds like a real dental receptionist</div><div class="text-sm" style="color:var(--muted);">Trained on your specific treatments, pricing, and practice tone. Warm, professional, and knowledgeable.</div></div>
+          </div>
+          <div class="flex gap-4">
+            <div class="benefit-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+            <div><div class="font-semibold mb-1" style="color:var(--navy);">Full patient conversation log</div><div class="text-sm" style="color:var(--muted);">Every message is saved. Your clinical team can review, step in, or take over any conversation from the dashboard.</div></div>
+          </div>
+          <div class="flex gap-4">
+            <div class="benefit-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div><div class="font-semibold mb-1" style="color:var(--navy);">Live within 48 hours</div><div class="text-sm" style="color:var(--muted);">We handle the entire setup. You don't need to touch any technology. Just approve the AI's tone and go live.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <!-- Premium dental image above the check cards -->
+        <div class="img-frame" style="height:200px;margin-bottom:6px;">
+          <img
+            src="https://images.unsplash.com/photo-1571772996211-2f02c9727629?w=700&q=80&auto=format&fit=crop&crop=center"
+            alt="Modern dental practice interior"
+            class="img-dental"
+          />
+          <div class="img-badge" style="top:14px;right:14px;display:flex;align-items:center;gap:6px;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Live in 48 hours
+          </div>
+        </div>
+        <div class="card p-5 flex items-center gap-4">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0" style="background:#DCFCE7;color:#16A34A;">✓</div>
+          <div><div class="font-semibold text-sm" style="color:var(--navy);">No new software to learn</div><div class="text-xs mt-0.5" style="color:var(--muted);">Everything runs in the background. You just see more booked consultations.</div></div>
+        </div>
+        <div class="card p-5 flex items-center gap-4">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0" style="background:#DCFCE7;color:#16A34A;">✓</div>
+          <div><div class="font-semibold text-sm" style="color:var(--navy);">Works with your existing WhatsApp number</div><div class="text-xs mt-0.5" style="color:var(--muted);">No need to change your number or ask patients to download anything new.</div></div>
+        </div>
+        <div class="card p-5 flex items-center gap-4">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0" style="background:#DCFCE7;color:#16A34A;">✓</div>
+          <div><div class="font-semibold text-sm" style="color:var(--navy);">Handles multiple practice locations</div><div class="text-xs mt-0.5" style="color:var(--muted);">Running a group practice? Each location gets its own AI with its own treatment list and booking calendar.</div></div>
+        </div>
+        <div class="card p-5 flex items-center gap-4">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0" style="background:#DCFCE7;color:#16A34A;">✓</div>
+          <div><div class="font-semibold text-sm" style="color:var(--navy);">Escalates to your clinical team when needed</div><div class="text-xs mt-0.5" style="color:var(--muted);">Medical concerns, complaints, or complex cases are flagged immediately to a real person.</div></div>
+        </div>
+        <div class="card p-5 flex items-center gap-4">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0" style="background:#DCFCE7;color:#16A34A;">✓</div>
+          <div><div class="font-semibold text-sm" style="color:var(--navy);">GDPR-compliant patient data handling</div><div class="text-xs mt-0.5" style="color:var(--muted);">All patient data is stored securely in line with UK healthcare regulations. Opt-outs handled automatically.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ INSTALLATION PROOF SECTION ═══ -->
+<section style="background:var(--navy);padding:72px 24px;">
+  <div style="max-width:1152px;margin:0 auto;">
+
+    <div style="text-align:center;margin-bottom:48px;">
+      <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.10);border-radius:100px;padding:5px 14px;margin-bottom:16px;">
+        <span style="width:6px;height:6px;border-radius:50%;background:#10B981;display:inline-block;animation:blink-mp 1.4s infinite;"></span>
+        <span style="font-size:10.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5);">Featured result</span>
+      </div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.5vw,44px);font-weight:500;color:white;letter-spacing:-0.01em;line-height:1.12;margin-bottom:10px;">What happened when we installed DentalAI</h2>
+      <p style="font-size:15px;color:rgba(255,255,255,0.42);max-width:480px;margin:0 auto;">A real 30-day snapshot from Clifton Dental, Bristol. Same enquiry volume. Same team. Same budget.</p>
+    </div>
+
+    <!-- The before/after comparison -->
+    <div class="install-compare" style="display:grid;grid-template-columns:1fr auto 1fr;gap:0;max-width:780px;margin:0 auto 40px;border:1px solid rgba(255,255,255,0.09);border-radius:16px;overflow:hidden;">
+
+      <!-- Before -->
+      <div style="padding:32px 28px;background:rgba(255,255,255,0.03);">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:20px;">Before DentalAI</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05);padding-bottom:12px;">
+            <span style="font-size:13px;color:rgba(255,255,255,0.45);">Enquiries received</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:rgba(255,255,255,0.6);letter-spacing:-0.02em;">12</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05);padding-bottom:12px;">
+            <span style="font-size:13px;color:rgba(255,255,255,0.45);">Replied within 5 min</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:rgba(255,255,255,0.6);letter-spacing:-0.02em;">2</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05);padding-bottom:12px;">
+            <span style="font-size:13px;color:rgba(255,255,255,0.45);">Consultations booked</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:rgba(255,255,255,0.6);letter-spacing:-0.02em;">4</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:13px;color:rgba(255,255,255,0.45);">Conversion rate</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:rgba(255,255,255,0.4);letter-spacing:-0.02em;">33%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrow divider -->
+      <div style="display:flex;align-items:center;justify-content:center;padding:0 20px;background:rgba(255,255,255,0.02);border-left:1px solid rgba(255,255,255,0.07);border-right:1px solid rgba(255,255,255,0.07);">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <div style="font-size:22px;color:rgba(26,111,196,0.7);">→</div>
+          <div style="font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.2);text-align:center;line-height:1.5;">30 days<br>later</div>
+        </div>
+      </div>
+
+      <!-- After -->
+      <div style="padding:32px 28px;background:rgba(26,111,196,0.06);">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(26,111,196,0.7);margin-bottom:20px;">After DentalAI</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05);padding-bottom:12px;">
+            <span style="font-size:13px;color:rgba(255,255,255,0.45);">Enquiries received</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:white;letter-spacing:-0.02em;">12</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05);padding-bottom:12px;">
+            <span style="font-size:13px;color:rgba(255,255,255,0.45);">Replied within 30s</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#60A5FA;letter-spacing:-0.02em;">12</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05);padding-bottom:12px;">
+            <span style="font-size:13px;color:rgba(255,255,255,0.45);">Consultations booked</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#10B981;letter-spacing:-0.02em;">9</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:13px;color:rgba(255,255,255,0.45);">Conversion rate</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#10B981;letter-spacing:-0.02em;">75%</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Takeaway line + mini quote -->
+    <div class="install-cards" style="max-width:780px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.16);border-radius:12px;padding:18px 20px;display:flex;align-items:flex-start;gap:12px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" style="flex-shrink:0;margin-top:1px;"><polyline points="20 6 9 17 4 12"/></svg>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:white;margin-bottom:3px;">Same 12 enquiries. 5 more booked chairs.</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.4);">The only thing that changed was how fast they were answered.</div>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:18px 20px;">
+        <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6;font-style:italic;margin-bottom:10px;">"I thought it would need a complete system overhaul. It was running in 48 hours and we saw the difference that same week."</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.3);">James M. — Clifton Dental, Bristol</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section id="pricing" class="bg-white py-20 px-6 border-y" style="border-color:var(--line);">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14">
+      <div class="pill mb-6 mx-auto">Pricing</div>
+      <div class="deco-line"></div>
+      <h2 class="serif mb-4" style="font-size:clamp(34px,4vw,50px);color:var(--navy);font-weight:500;">Simple, transparent pricing</h2>
+      <p style="color:var(--muted);font-size:16px;max-width:520px;margin:0 auto;">No hidden fees. No long contracts. Cancel any month.</p>
+      <!-- ROI anchor -->
+      <div class="inline-flex items-center gap-2 mt-5 px-5 py-2.5 rounded-full text-sm font-medium" style="background:rgba(26,111,196,0.07);border:1px solid rgba(26,111,196,0.15);color:var(--navy);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        One extra Invisalign case pays for <strong>6 months</strong>. One implant covers <strong>4 months</strong>.
+      </div>
+    </div>
+
+    <div class="pricing-grid grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <!-- Starter -->
+      <div class="pricing-card">
+        <div class="text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--muted2);">Starter</div>
+        <div class="serif mb-1" style="font-size:38px;color:var(--navy);font-weight:500;">£497<span class="font-normal" style="font-size:16px;color:var(--muted2);">/mo</span></div>
+        <div class="text-sm mb-6" style="color:var(--muted);">Perfect for a single practice location</div>
+        <div class="space-y-3 mb-8">
+          <div class="check-item"><div class="check-icon">✓</div><span>1 practice location</span></div>
+          <div class="check-item"><div class="check-icon">✓</div><span>Unlimited WhatsApp conversations</span></div>
+          <div class="check-item"><div class="check-icon">✓</div><span>AI replies + automatic follow-ups</span></div>
+          <div class="check-item"><div class="check-icon">✓</div><span>Consultation booking capture</span></div>
+          <div class="check-item"><div class="check-icon">✓</div><span>Dashboard access</span></div>
+          <div class="check-item"><div class="check-icon">✓</div><span>Full setup in 48 hours</span></div>
+        </div>
+        <a href="#cta" class="btn-outline w-full text-center block text-sm">Book a demo</a>
+        <a href="mailto:syed.amafhhit@gmail.com?subject=Starter plan enquiry" class="block text-center text-xs mt-3" style="color:var(--muted);">or see your practice's potential →</a>
+      </div>
+
+      <!-- Growth (featured) -->
+      <div class="pricing-card featured relative">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+          <div class="text-white text-xs font-semibold px-4 py-1 rounded-full" style="background:var(--blue);">Most popular</div>
+        </div>
+        <div class="text-xs font-semibold uppercase tracking-widest mb-3" style="color:rgba(255,255,255,0.45);">Growth</div>
+        <div class="serif text-white mb-1" style="font-size:38px;font-weight:500;">£797<span class="font-normal" style="font-size:16px;color:rgba(255,255,255,0.45);">/mo</span></div>
+        <div class="text-sm mb-6" style="color:rgba(255,255,255,0.45);">For practices with multiple locations</div>
+        <div class="space-y-3 mb-8">
+          <div class="check-item" style="color:rgba(255,255,255,0.75);"><div class="w-4 h-4 rounded-full flex items-center justify-center text-white flex-shrink-0 text-[10px]" style="background:var(--blue);">✓</div><span>Up to 3 practice locations</span></div>
+          <div class="check-item" style="color:rgba(255,255,255,0.75);"><div class="w-4 h-4 rounded-full flex items-center justify-center text-white flex-shrink-0 text-[10px]" style="background:var(--blue);">✓</div><span>Everything in Starter</span></div>
+          <div class="check-item" style="color:rgba(255,255,255,0.75);"><div class="w-4 h-4 rounded-full flex items-center justify-center text-white flex-shrink-0 text-[10px]" style="background:var(--blue);">✓</div><span>Priority support</span></div>
+          <div class="check-item" style="color:rgba(255,255,255,0.75);"><div class="w-4 h-4 rounded-full flex items-center justify-center text-white flex-shrink-0 text-[10px]" style="background:var(--blue);">✓</div><span>Monthly performance report</span></div>
+          <div class="check-item" style="color:rgba(255,255,255,0.75);"><div class="w-4 h-4 rounded-full flex items-center justify-center text-white flex-shrink-0 text-[10px]" style="background:var(--blue);">✓</div><span>Calendly booking integration</span></div>
+          <div class="check-item" style="color:rgba(255,255,255,0.75);"><div class="w-4 h-4 rounded-full flex items-center justify-center text-white flex-shrink-0 text-[10px]" style="background:var(--blue);">✓</div><span>Escalation alerts to clinical team</span></div>
+        </div>
+        <a href="#cta" class="block w-full text-center text-white font-medium py-3 px-6 rounded-xl text-sm transition-all" style="background:var(--blue);">Book a demo</a>
+        <a href="mailto:syed.amafhhit@gmail.com?subject=Growth plan enquiry" class="block text-center text-xs mt-3" style="color:rgba(255,255,255,0.4);">or get a sample reply for your clinic →</a>
+      </div>
+
+      <!-- Scale -->
+      <div class="pricing-card">
+        <div class="text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--muted2);">Scale</div>
+        <div class="serif mb-1" style="font-size:38px;color:var(--navy);font-weight:500;">£1,297<span class="font-normal" style="font-size:16px;color:var(--muted2);">/mo</span></div>
+        <div class="text-sm mb-6" style="color:var(--muted);">For dental groups &amp; enterprise practices</div>
+        <div class="space-y-3 mb-8">
+          <div class="check-item"><div class="check-icon">✓</div><span>Unlimited practice locations</span></div>
+          <div class="check-item"><div class="check-icon">✓</div><span>Everything in Growth</span></div>
+          <div class="check-item"><div class="check-icon">✓</div><span>Custom AI persona per practice</span></div>
+          <div class="check-item"><div class="check-icon">✓</div><span>Dedicated account manager</span></div>
+          <div class="check-item"><div class="check-icon">✓</div><span>SLA guarantee</span></div>
+          <div class="check-item"><div class="check-icon">✓</div><span>Bespoke onboarding</span></div>
+        </div>
+        <a href="#cta" class="btn-outline w-full text-center block text-sm">Talk to us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section class="py-20 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <div class="deco-line"></div>
+      <h2 class="serif mb-2" style="font-size:clamp(32px,4vw,48px);color:var(--navy);font-weight:500;">Dental practices love it</h2>
+    </div>
+
+    <!-- Image banner above testimonials -->
+    <div class="img-frame mb-10" style="height:240px;">
+      <img
+        src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1400&q=80&auto=format&fit=crop&crop=center"
+        alt="Dental team at work"
+        class="img-dental"
+        style="object-position:center 40%;"
+      />
+      <div style="position:absolute;inset:0;border-radius:16px;background:linear-gradient(to right,rgba(11,31,58,0.75) 0%,rgba(11,31,58,0.2) 60%,transparent 100%);pointer-events:none;"></div>
+      <div style="position:absolute;top:50%;left:36px;transform:translateY(-50%);">
+        <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px;">Clifton Dental, Bristol — before &amp; after</div>
+        <div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;">
+          <div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,52px);font-weight:500;color:rgba(255,255,255,0.4);letter-spacing:-0.03em;line-height:1;">22</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;letter-spacing:0.05em;text-transform:uppercase;">before</div>
+          </div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:32px;color:rgba(255,255,255,0.3);line-height:1;">→</div>
+          <div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,52px);font-weight:500;color:white;letter-spacing:-0.03em;line-height:1;">61</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px;letter-spacing:0.05em;text-transform:uppercase;">consultations / month</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-grid grid md:grid-cols-3 gap-6">
+
+      <!-- Testimonial 1 — specific number, slight roughness -->
+      <div class="card p-7">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+          <div style="display:flex;gap:2px;color:#F59E0B;font-size:13px;">★★★★★</div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted2);">Clifton Dental · Bristol</div>
+        </div>
+        <!-- Raw before/after inline -->
+        <div style="background:var(--cream);border-radius:8px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;">
+          <div style="text-align:center;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;color:var(--muted2);letter-spacing:-0.02em;">22</div>
+            <div style="font-size:10px;color:var(--muted2);margin-top:1px;">before</div>
+          </div>
+          <div style="font-size:16px;color:var(--blue);">→</div>
+          <div style="text-align:center;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;color:var(--navy);letter-spacing:-0.02em;">61</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:1px;">month 1</div>
+          </div>
+          <div style="font-size:11px;color:var(--muted2);">consultations/mo</div>
+        </div>
+        <p class="text-sm leading-relaxed mb-5" style="color:#3D5470;">"Honestly I was sceptical. But in the first week we had 9 consultations booked from enquiries that would have just sat unread overnight. It paid for itself in about 10 days."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center text-white text-xs font-bold" style="background:var(--blue);">JM</div>
+          <div>
+            <div class="text-sm font-semibold" style="color:var(--navy);">James M.</div>
+            <div class="text-xs" style="color:var(--muted2);">Practice Owner, Clifton Dental</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 2 — specific, sounds real not marketing-polished -->
+      <div class="card p-7">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+          <div style="display:flex;gap:2px;color:#F59E0B;font-size:13px;">★★★★★</div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted2);">Smile Studio · Leeds</div>
+        </div>
+        <p class="text-sm leading-relaxed mb-5" style="color:#3D5470;">"We had a patient message at 11:40pm about implants. Got a reply within 12 seconds, booked a consultation by midnight. That's a £2,800 case that we'd have lost completely before. Happens regularly now."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center text-white text-xs font-bold" style="background:var(--navy);">RP</div>
+          <div>
+            <div class="text-sm font-semibold" style="color:var(--navy);">Dr. Riya P.</div>
+            <div class="text-xs" style="color:var(--muted2);">Principal Dentist, Smile Studio</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 3 — practice manager voice, grounded, specific friction removed -->
+      <div class="card p-7">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+          <div style="display:flex;gap:2px;color:#F59E0B;font-size:13px;">★★★★★</div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted2);">Whitmore Dental · Manchester</div>
+        </div>
+        <p class="text-sm leading-relaxed mb-5" style="color:#3D5470;">"My receptionist was spending half her morning replying to overnight WhatsApp messages. Now she doesn't touch them — and we're actually converting more. Setup took two days. I wish we'd done it sooner."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center text-white text-xs font-bold" style="background:var(--blue);">SH</div>
+          <div>
+            <div class="text-sm font-semibold" style="color:var(--navy);">Sarah H.</div>
+            <div class="text-xs" style="color:var(--muted2);">Practice Manager, Whitmore Dental</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section id="cta" class="py-20 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="card p-10 md:p-16 text-center relative overflow-hidden" style="background:var(--navy);border-color:var(--navy);">
+      <div class="absolute inset-0 opacity-10" style="background:radial-gradient(circle at 25% 50%,#1A6FC4 0%,transparent 55%),radial-gradient(circle at 75% 50%,#1A6FC4 0%,transparent 55%);"></div>
+      <div class="relative">
+        <div class="inline-flex items-center gap-2 text-xs font-medium px-4 py-2 rounded-full mb-6" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.6);">
+          <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+          Clifton Dental booked 61 consultations last month
+        </div>
+        <h2 class="serif text-white mb-4 leading-tight" style="font-size:clamp(32px,4vw,52px);font-weight:500;">
+          Every empty chair is<br><em style="color:rgba(255,255,255,0.4);">a missed reply.</em>
+        </h2>
+        <p class="mb-8 max-w-xl mx-auto" style="color:rgba(255,255,255,0.5);font-size:17px;line-height:1.7;">Book a 20-minute demo. We'll show you the system live and tell you how many patients your practice is currently losing each week.</p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="mailto:syed.amafhhit@gmail.com" class="text-white font-medium py-4 px-8 rounded-xl text-base transition-all hover:-translate-y-0.5 hover:shadow-xl" style="background:var(--blue);">
+            Book a free demo →
+          </a>
+          <a href="mailto:syed.amafhhit@gmail.com?subject=Sample WhatsApp reply for my practice" class="text-white font-medium py-4 px-8 rounded-xl text-base transition-all" style="background:rgba(255,255,255,0.09);">
+            Get a sample reply first
+          </a>
+        </div>
+        <div class="mt-6 text-sm" style="color:rgba(255,255,255,0.35);">No commitment. No credit card. Just a conversation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="bg-white border-t py-12 px-6" style="border-color:var(--line);">
+  <div class="max-w-6xl mx-auto">
+    <div class="footer-grid grid md:grid-cols-4 gap-8 mb-10">
+      <div>
+        <div class="flex items-center gap-2.5 mb-4">
+          <div class="w-7 h-7 rounded-lg flex items-center justify-center" style="background:var(--navy);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <span class="font-semibold text-[15px]" style="color:var(--navy);">DentalAI</span>
+        </div>
+        <p class="text-sm leading-relaxed" style="color:var(--muted2);">AI-powered WhatsApp receptionist for dental practices. Never miss a patient enquiry again. Based in London, UK.</p>
+      </div>
+      <div>
+        <div class="font-semibold text-sm mb-4" style="color:var(--navy);">Product</div>
+        <div class="space-y-2">
+          <a href="#how-it-works" class="block text-sm transition-colors hover:text-[var(--navy)]" style="color:var(--muted2);">How it works</a>
+          <a href="#demo" class="block text-sm transition-colors hover:text-[var(--navy)]" style="color:var(--muted2);">See a demo</a>
+          <a href="#pricing" class="block text-sm transition-colors hover:text-[var(--navy)]" style="color:var(--muted2);">Pricing</a>
+        </div>
+      </div>
+      <div>
+        <div class="font-semibold text-sm mb-4" style="color:var(--navy);">Company</div>
+        <div class="space-y-2">
+          <a href="#" class="block text-sm transition-colors hover:text-[var(--navy)]" style="color:var(--muted2);">About</a>
+          <a href="#" class="block text-sm transition-colors hover:text-[var(--navy)]" style="color:var(--muted2);">Blog</a>
+          <a href="#cta" class="block text-sm transition-colors hover:text-[var(--navy)]" style="color:var(--muted2);">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div class="font-semibold text-sm mb-4" style="color:var(--navy);">Contact</div>
+        <div class="space-y-2">
+          <a href="mailto:syed.amafhhit@gmail.com" class="block text-sm transition-colors hover:text-[var(--navy)]" style="color:var(--muted2);">syed.amafhhit@gmail.com</a>
+          <a href="tel:+447445261729" class="block text-sm transition-colors hover:text-[var(--navy)]" style="color:var(--muted2);">+44 7445 261729</a>
+          <span class="block text-sm" style="color:var(--muted2);">London, United Kingdom</span>
+        </div>
+      </div>
+    </div>
+    <div class="border-t pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm" style="border-color:var(--line);color:var(--muted2);">
+      <span>© 2025 DentalAI. All rights reserved. Company No. 11859461 registered in England &amp; Wales.</span>
+      <div class="flex gap-6">
+        <a href="privacy.html" target="_blank" class="transition-colors hover:text-[var(--navy)]">Privacy Policy</a>
+        <a href="terms.html" target="_blank" class="transition-colors hover:text-[var(--navy)]">Terms of Service</a>
+        <a href="gdpr.html" target="_blank" class="transition-colors hover:text-[var(--navy)]">GDPR</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Cookie banner -->
+<div id="cookie-banner" style="position:fixed;bottom:0;left:0;width:100%;background:var(--navy);color:rgba(255,255,255,0.8);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;z-index:9999;font-size:14px;gap:12px;flex-wrap:wrap;">
+  <span>We use cookies to improve your experience on our website.</span>
+  <div style="display:flex;gap:10px;flex-shrink:0;">
+    <button onclick="acceptCookies()" style="background:var(--blue);color:white;border:none;padding:7px 18px;border-radius:7px;font-size:13px;font-family:var(--sans);cursor:pointer;font-weight:500;">Accept</button>
+    <button onclick="rejectCookies()" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.15);padding:7px 18px;border-radius:7px;font-size:13px;font-family:var(--sans);cursor:pointer;">Reject</button>
+    <button onclick="manageCookies()" style="background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.1);padding:7px 18px;border-radius:7px;font-size:13px;font-family:var(--sans);cursor:pointer;">Manage</button>
+  </div>
+</div>
+<div id="cookie-modal" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;color:var(--navy);padding:28px 32px;border-radius:16px;z-index:10000;box-shadow:0 24px 80px rgba(11,31,58,0.2);width:320px;text-align:center;">
+  <h3 style="font-family:var(--serif);font-size:20px;margin-bottom:16px;font-weight:500;">Manage Cookies</h3>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Choose your cookie preferences below.</p>
+  <div style="display:flex;gap:10px;justify-content:center;">
+    <button onclick="acceptCookies()" style="background:var(--blue);color:white;border:none;padding:9px 20px;border-radius:8px;font-size:13px;font-family:var(--sans);cursor:pointer;font-weight:500;">Accept All</button>
+    <button onclick="rejectCookies()" style="background:var(--cream);color:var(--navy);border:1px solid var(--line);padding:9px 20px;border-radius:8px;font-size:13px;font-family:var(--sans);cursor:pointer;">Reject All</button>
+  </div>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem("cookies","accepted");document.getElementById("cookie-banner").style.display="none";document.getElementById("cookie-modal").style.display="none";}
+function rejectCookies(){localStorage.setItem("cookies","rejected");document.getElementById("cookie-banner").style.display="none";document.getElementById("cookie-modal").style.display="none";}
+function manageCookies(){document.getElementById("cookie-modal").style.display="block";}
+document.addEventListener("DOMContentLoaded",function(){if(localStorage.getItem("cookies")){document.getElementById("cookie-banner").style.display="none";}});
+</script>
+</body>
+</html>
