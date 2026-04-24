@@ -1,0 +1,3793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient Enquiry Engine &mdash; For Private Dental &amp; Aesthetic Clinics</title>
+<meta name="description" content="We help private dental and aesthetic clinics generate 20&ndash;30 qualified patient enquiries per month without relying on ads or referrals.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+:root {
+  --white:    #ffffff;
+  --off:      #f9f8f6;
+  --light:    #f2f0ec;
+  --mid:      #e8e5df;
+  --border:   #ddd9d1;
+  --text:     #1a1814;
+  --body:     #4a4640;
+  --muted:    #8a8480;
+  --accent:   #2c5f4a;
+  --accent2:  #4a8c6e;
+  --gold:     #b8923a;
+  --gold-lt:  #f5ede0;
+  --max:      1100px;
+  --serif:    'Cormorant Garamond', Georgia, serif;
+  --sans:     'DM Sans', system-ui, sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--white);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ──────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: 68px;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+.nav-brand {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 19px;
+  color: var(--text);
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+.nav-brand em {
+  font-style: italic;
+  color: var(--accent);
+}
+.nav-right { display: flex; align-items: center; gap: 28px; }
+.nav-link {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--body);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: var(--text); }
+.nav-cta {
+  background: var(--text);
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  padding: 10px 22px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.2s, opacity 0.2s;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--accent); }
+
+/* ── LAYOUT ──────────────────────────────── */
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 40px; }
+
+/* ── TYPE ────────────────────────────────── */
+.overline {
+  display: block;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+h1 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(38px, 5.5vw, 68px);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+h2 em { font-style: italic; color: var(--accent); }
+h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.25;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+p { color: var(--body); line-height: 1.75; }
+.lead {
+  font-size: 20px;
+  line-height: 1.65;
+  color: var(--body);
+  font-weight: 300;
+}
+strong { font-weight: 500; color: var(--text); }
+
+/* ── BUTTONS ─────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.22s;
+  padding: 14px 28px;
+  border-radius: 4px;
+}
+.btn-dark {
+  background: var(--text);
+  color: var(--white);
+}
+.btn-dark:hover { background: var(--accent); }
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-outline:hover { border-color: var(--text); }
+.btn-gold {
+  background: var(--gold);
+  color: var(--white);
+}
+.btn-gold:hover { opacity: 0.88; }
+.btn-lg { font-size: 15px; padding: 16px 36px; }
+.btn-wa {
+  background: #25d366;
+  color: #fff;
+  font-size: 14px;
+  padding: 13px 24px;
+}
+.btn-wa:hover { opacity: 0.88; }
+
+/* ── DIVIDER ─────────────────────────────── */
+.rule {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+.rule-short {
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: var(--accent);
+  margin-bottom: 28px;
+}
+
+/* ══════════════════════════════════════════ */
+/* 1. HERO                                    */
+/* ══════════════════════════════════════════ */
+.hero {
+  padding: 148px 40px 100px;
+  background: var(--white);
+}
+.hero-grid {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 80px;
+  align-items: start;
+}
+.hero-left {}
+.hero-sub {
+  font-size: 19px;
+  font-weight: 300;
+  color: var(--body);
+  max-width: 520px;
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-bottom: 24px; }
+.hero-trust {
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hero-trust::before {
+  content: '';
+  display: inline-block;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* hero right — audit card */
+.audit-card {
+  background: var(--off);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 36px 32px;
+  position: sticky;
+  top: 90px;
+}
+.audit-card-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+  display: block;
+}
+.audit-card h3 {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.audit-card p {
+  font-size: 14px;
+  color: var(--body);
+  margin-bottom: 24px;
+  line-height: 1.65;
+}
+.audit-list {
+  list-style: none;
+  margin-bottom: 28px;
+}
+.audit-list li {
+  font-size: 13px;
+  color: var(--body);
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.audit-list li:last-child { border-bottom: none; }
+.audit-list li::before {
+  content: '\2713';
+  color: var(--accent);
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.audit-note {
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* ══════════════════════════════════════════ */
+/* TRUSTED BY                                 */
+/* ══════════════════════════════════════════ */
+.trusted {
+  background: var(--off);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 36px 40px;
+}
+.trusted-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.trusted-label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.trusted-logos {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  align-items: center;
+  flex: 1;
+}
+.logo-ph {
+  height: 36px;
+  padding: 0 18px;
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* ══════════════════════════════════════════ */
+/* 2. PROBLEM                                 */
+/* ══════════════════════════════════════════ */
+.problem {
+  padding: 100px 40px;
+  background: var(--white);
+}
+.problem-grid {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.problem-left p { font-size: 19px; font-weight: 300; line-height: 1.75; margin-bottom: 20px; }
+.problem-stat {
+  margin-top: 40px;
+  padding: 28px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.problem-stat-num {
+  font-family: var(--serif);
+  font-size: 54px;
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.problem-stat p { font-size: 14px; color: var(--muted); }
+
+.problem-right {}
+.pain-item {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+}
+.pain-item:first-child { border-top: 1px solid var(--border); }
+.pain-num {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--muted);
+  margin-bottom: 6px;
+  display: block;
+}
+.pain-item h4 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.pain-item p { font-size: 14px; color: var(--body); line-height: 1.65; }
+
+/* ══════════════════════════════════════════ */
+/* 3. SOLUTION                                */
+/* ══════════════════════════════════════════ */
+.solution {
+  background: var(--off);
+  padding: 100px 40px;
+}
+.solution-inner { max-width: var(--max); margin: 0 auto; }
+.solution-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 72px;
+  align-items: start;
+}
+.solution-intro p { font-size: 17px; line-height: 1.75; color: var(--body); }
+.solution-points {
+  padding-top: 4px;
+}
+.sol-point {
+  display: flex;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: flex-start;
+}
+.sol-point:first-child { border-top: 1px solid var(--border); }
+.sol-n {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--muted);
+  flex-shrink: 0;
+  padding-top: 2px;
+  min-width: 22px;
+}
+.sol-text { font-size: 15px; color: var(--body); line-height: 1.6; }
+.sol-text strong { display: block; color: var(--text); margin-bottom: 2px; font-family: var(--serif); font-size: 17px; font-weight: 500; }
+
+/* flow diagram */
+.flow-diagram {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.flow-col {
+  background: var(--white);
+  padding: 28px 24px;
+}
+.flow-col-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.flow-col-label.you { color: var(--accent); }
+.flow-col-label.sys { color: var(--gold); }
+.flow-col-label.cli { color: var(--body); }
+.flow-col li {
+  font-size: 13px;
+  color: var(--body);
+  line-height: 1.55;
+  list-style: none;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--light);
+}
+.flow-col li:last-child { border-bottom: none; }
+
+/* ══════════════════════════════════════════ */
+/* WHY THIS WORKS (AUTHORITY)                 */
+/* ══════════════════════════════════════════ */
+.authority {
+  padding: 100px 40px;
+  background: var(--white);
+}
+.auth-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 100px;
+  align-items: start;
+}
+.auth-left p { font-size: 17px; color: var(--body); line-height: 1.8; margin-bottom: 20px; }
+.auth-right {}
+.auth-point {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.auth-point:first-child { border-top: 1px solid var(--border); }
+.auth-num {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1;
+}
+.auth-point h4 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+.auth-point p { font-size: 14px; color: var(--body); line-height: 1.65; }
+
+/* ══════════════════════════════════════════ */
+/* 4. HOW IT WORKS                            */
+/* ══════════════════════════════════════════ */
+.how {
+  padding: 100px 40px;
+  background: var(--off);
+}
+.how-inner { max-width: var(--max); margin: 0 auto; }
+.how-header { margin-bottom: 64px; }
+.steps-list {}
+.step-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr;
+  gap: 48px;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.step-row:first-child { border-top: 1px solid var(--border); }
+.step-num-lg {
+  font-family: var(--serif);
+  font-size: 64px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.step-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 24px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.step-desc { font-size: 15px; color: var(--body); line-height: 1.7; }
+.step-detail { font-size: 14px; color: var(--body); line-height: 1.7; }
+.step-detail li {
+  padding: 4px 0;
+  list-style: none;
+  display: flex;
+  gap: 8px;
+}
+.step-detail li::before { content: '\2014'; color: var(--muted); flex-shrink: 0; }
+
+/* ══════════════════════════════════════════ */
+/* 5. RESULTS                                 */
+/* ══════════════════════════════════════════ */
+.results {
+  padding: 100px 40px;
+  background: var(--white);
+}
+.results-inner { max-width: var(--max); margin: 0 auto; }
+.results-header { margin-bottom: 60px; }
+.results-header p { font-size: 16px; color: var(--muted); max-width: 480px; margin-top: 12px; }
+
+.case-row {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 60px;
+  padding: 48px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.case-row:first-of-type { border-top: 1px solid var(--border); }
+.case-meta {}
+.case-clinic {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.case-type {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+  display: block;
+}
+.case-timeframe {
+  font-size: 13px;
+  color: var(--body);
+}
+.case-timeframe strong { color: var(--accent); }
+.case-numbers {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.case-num { }
+.case-num .n {
+  font-family: var(--serif);
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.case-num .n.before { color: var(--muted); }
+.case-num .n.after { color: var(--accent); }
+.case-num .lbl { font-size: 12px; color: var(--muted); letter-spacing: 0.06em; }
+.case-arrow {
+  font-family: var(--serif);
+  font-size: 32px;
+  color: var(--border);
+  align-self: center;
+  padding-top: 4px;
+}
+.case-quote {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-style: italic;
+  color: var(--body);
+  line-height: 1.7;
+  border-left: 2px solid var(--accent);
+  padding-left: 18px;
+  margin-bottom: 12px;
+}
+.case-source { font-size: 13px; color: var(--muted); }
+
+/* ══════════════════════════════════════════ */
+/* 6. TESTIMONIALS                            */
+/* ══════════════════════════════════════════ */
+.testimonials {
+  background: var(--off);
+  padding: 100px 40px;
+}
+.testi-inner { max-width: var(--max); margin: 0 auto; }
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 52px;
+}
+.testi-card {
+  background: var(--white);
+  padding: 36px 32px;
+}
+.testi-stars {
+  color: var(--gold);
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+.testi-text {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+.testi-person {}
+.testi-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.testi-role { font-size: 12px; color: var(--muted); }
+
+/* ══════════════════════════════════════════ */
+/* 7. OFFER                                   */
+/* ══════════════════════════════════════════ */
+.offer {
+  padding: 100px 40px;
+  background: var(--white);
+}
+.offer-inner { max-width: var(--max); margin: 0 auto; }
+.offer-header { margin-bottom: 64px; }
+.pricing-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+.price-col {
+  background: var(--white);
+  padding: 36px 32px;
+}
+.price-col.featured {
+  background: var(--text);
+  color: var(--white);
+}
+.price-col.featured p,
+.price-col.featured .price-list li,
+.price-col.featured .price-name,
+.price-col.featured .price-sub { color: rgba(255,255,255,0.65); }
+.price-col.featured h3,
+.price-col.featured .price-amount { color: var(--white); }
+.price-col.featured .price-list li::before { color: rgba(255,255,255,0.4); }
+.price-col.featured .price-amount em { color: rgba(255,255,255,0.45); }
+.price-label {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 20px;
+  display: block;
+}
+.price-col.featured .price-label { color: rgba(255,255,255,0.5); }
+.price-name {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.price-amount {
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.price-amount em {
+  font-style: normal;
+  font-size: 16px;
+  color: var(--muted);
+}
+.price-sub { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+.price-list {
+  list-style: none;
+  margin-bottom: 32px;
+}
+.price-list li {
+  font-size: 14px;
+  color: var(--body);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  line-height: 1.5;
+}
+.price-col.featured .price-list li { border-bottom-color: rgba(255,255,255,0.1); }
+.price-list li:last-child { border-bottom: none; }
+.price-list li::before { content: '\2713'; color: var(--accent); flex-shrink: 0; font-size: 12px; margin-top: 2px; }
+.price-list li.no::before { content: '\2014'; color: var(--border); }
+.price-list li.no span { color: var(--muted); }
+.price-btn-wrap { }
+.price-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 13px;
+  border-radius: 3px;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+}
+.price-btn.dark {
+  background: var(--text);
+  color: var(--white);
+}
+.price-btn.dark:hover { background: var(--accent); }
+.price-btn.white {
+  background: var(--white);
+  color: var(--text);
+}
+.price-btn.white:hover { background: rgba(255,255,255,0.85); }
+.price-btn.outline {
+  border: 1px solid var(--border);
+  color: var(--body);
+  background: transparent;
+}
+.price-btn.outline:hover { border-color: var(--text); color: var(--text); }
+
+.offer-note {
+  max-width: 640px;
+  padding: 24px 28px;
+  border-left: 3px solid var(--gold);
+  background: var(--gold-lt);
+  border-radius: 0 4px 4px 0;
+}
+.offer-note h4 {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.offer-note p { font-size: 14px; color: var(--body); line-height: 1.65; }
+
+/* ══════════════════════════════════════════ */
+/* 8. CTA                                     */
+/* ══════════════════════════════════════════ */
+.cta-section {
+  padding: 100px 40px;
+  background: var(--text);
+}
+.cta-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 80px;
+  align-items: center;
+}
+.cta-left {}
+.cta-left .overline { color: rgba(255,255,255,0.35); }
+.cta-left h2 {
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.cta-left h2 em { color: rgba(255,255,255,0.55); }
+.cta-left p { color: rgba(255,255,255,0.55); font-size: 16px; line-height: 1.7; }
+.cta-form-box {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px;
+  padding: 32px 28px;
+}
+.cta-form-box h4 {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.cta-form-box p { font-size: 13px; color: rgba(255,255,255,0.45); margin-bottom: 24px; }
+.form-group { margin-bottom: 12px; }
+.form-group input {
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 3px;
+  padding: 12px 14px;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--white);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-group input::placeholder { color: rgba(255,255,255,0.3); }
+.form-group input:focus { border-color: rgba(255,255,255,0.4); }
+.form-submit {
+  width: 100%;
+  background: var(--white);
+  color: var(--text);
+  border: none;
+  border-radius: 3px;
+  padding: 13px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: background 0.2s, color 0.2s;
+  letter-spacing: 0.02em;
+}
+.form-submit:hover { background: var(--accent); color: var(--white); }
+.form-note { font-size: 11px; color: rgba(255,255,255,0.28); text-align: center; margin-top: 10px; }
+
+/* ══════════════════════════════════════════ */
+/* 9. FAQ                                     */
+/* ══════════════════════════════════════════ */
+.faq {
+  padding: 100px 40px;
+  background: var(--off);
+}
+.faq-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.faq-left {}
+.faq-left p { font-size: 16px; color: var(--body); line-height: 1.75; margin-bottom: 28px; }
+.faq-right {}
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+.faq-item:first-child { border-top: 1px solid var(--border); }
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 22px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text);
+  transition: color 0.2s;
+}
+.faq-q:hover { color: var(--accent); }
+.faq-icon {
+  font-size: 20px;
+  color: var(--muted);
+  transition: transform 0.25s;
+  flex-shrink: 0;
+  line-height: 1.3;
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); color: var(--accent); }
+.faq-a {
+  display: none;
+  padding: 0 0 22px;
+  font-size: 15px;
+  color: var(--body);
+  line-height: 1.75;
+  max-width: 560px;
+}
+.faq-item.open .faq-a { display: block; }
+
+/* ══════════════════════════════════════════ */
+/* FINAL CTA                                  */
+/* ══════════════════════════════════════════ */
+.final {
+  padding: 100px 40px;
+  background: var(--white);
+  text-align: center;
+}
+.final-inner { max-width: 600px; margin: 0 auto; }
+.final-inner p { font-size: 18px; color: var(--body); margin: 16px 0 40px; line-height: 1.7; }
+.final-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+.final-micro { font-size: 13px; color: var(--muted); }
+
+/* ══════════════════════════════════════════ */
+/* FOOTER                                     */
+/* ══════════════════════════════════════════ */
+footer {
+  padding: 32px 40px;
+  border-top: 1px solid var(--border);
+  background: var(--off);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.footer-brand {
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--muted);
+}
+.footer-copy { font-size: 12px; color: var(--muted); }
+
+/* ══════════════════════════════════════════ */
+/* STICKY MOBILE CTA                          */
+/* ══════════════════════════════════════════ */
+.sticky-bar {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  padding: 12px 20px;
+  z-index: 99;
+  gap: 10px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+}
+
+/* ══════════════════════════════════════════ */
+/* RESPONSIVE                                 */
+/* ══════════════════════════════════════════ */
+@media (max-width: 900px) {
+  /* NAV */
+  .nav { padding: 0 16px; }
+  .nav-right .nav-link { display: none; }
+  .nav-cta { font-size: 12px; padding: 8px 14px; }
+
+  /* HERO */
+  .hero { padding: 100px 20px 60px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+  .audit-card { position: static; }
+
+  /* SECTIONS — reduce padding */
+  section { padding: 60px 20px !important; }
+  .problem { padding: 60px 20px !important; }
+  .solution { padding: 60px 20px !important; }
+  .authority { padding: 60px 20px !important; }
+  .how { padding: 60px 20px !important; }
+  .vresults-section { padding: 60px 20px !important; }
+  .testimonials { padding: 60px 20px !important; }
+  .offer { padding: 60px 20px !important; }
+  .cta-section { padding: 60px 20px !important; }
+  .faq { padding: 60px 20px !important; }
+  .final { padding: 60px 20px !important; }
+  .dashboard-section { padding: 60px 20px !important; }
+
+  /* GRIDS → single column */
+  .problem-grid { grid-template-columns: 1fr; gap: 40px; }
+  .solution-intro { grid-template-columns: 1fr; gap: 28px; }
+  .flow-diagram { grid-template-columns: 1fr 1fr; }
+  .authority .auth-inner { grid-template-columns: 1fr; gap: 36px; }
+  .step-row { grid-template-columns: 52px 1fr; gap: 20px; }
+  .step-row .step-detail { display: none; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .pricing-row { grid-template-columns: 1fr; }
+  .cta-inner { grid-template-columns: 1fr; gap: 36px; }
+  .faq-inner { grid-template-columns: 1fr; gap: 28px; }
+  .case-row { grid-template-columns: 1fr; gap: 20px; }
+  .dashboard-inner { grid-template-columns: 1fr; gap: 36px; }
+  .live-inner { grid-template-columns: 1fr; gap: 36px; }
+  .vresult-grid { grid-template-columns: 1fr; }
+
+  /* TRUSTED BY — wrap logos */
+  .trusted { padding: 24px 20px; }
+  .trusted-inner { gap: 16px; }
+  .logo-ph { font-size: 11px; padding: 5px 10px; }
+
+  /* PROOF STRIP — stack on very small */
+  .sticky-bar { display: flex; flex-direction: column; }
+  footer { padding: 20px; }
+
+  /* WRAP / MISC */
+  .wrap { padding: 0 20px; }
+  .offer-inner { padding: 0; }
+}
+
+/* ── INLINE-STYLED SECTIONS (no class — override with JS-friendly selectors) */
+@media (max-width: 900px) {
+  /* Skimmer section */
+  #skimmer-section,
+  section[id="skimmer"] { padding: 48px 20px !important; }
+
+  /* Proof strip */
+  div[style*="background:var(--accent)"] {
+    padding: 20px 16px !important;
+  }
+  div[style*="background:var(--accent)"] > div {
+    gap: 20px !important;
+  }
+  div[style*="background:var(--accent)"] > div > div[style*="width:1px"] {
+    display: none !important;
+  }
+
+  /* Skimmer grid: 1fr 420px → 1fr */
+  div[style*="grid-template-columns:1fr 420px"] {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+
+  /* Early case study dark box grid: 1fr 1fr → 1fr */
+  div[style*="grid-template-columns:1fr 1fr"][style*="padding:48px"] {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    padding: 32px 24px !important;
+  }
+
+  /* Who not for grid: 380px 1fr → 1fr */
+  div[style*="grid-template-columns:380px 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  /* Who not for inner two-col → 1fr */
+  div[style*="grid-template-columns:1fr 1fr"][style*="gap:2px"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Sections with 40px side padding inline */
+  section[style*="padding:80px 40px"],
+  section[style*="padding:64px 40px"],
+  section[style*="padding:0 40px"] {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+
+  /* Visibility bridge */
+  div[style*="padding:36px 40px"] {
+    padding: 28px 20px !important;
+  }
+
+  /* Pipeline section */
+  .pipeline-section { padding: 52px 20px !important; }
+  .pipeline-track { grid-template-columns: 1fr !important; gap: 4px !important; }
+  .pipe-arrow { transform: rotate(90deg); text-align: center; padding: 4px 0; }
+  .pipe-metrics { grid-template-columns: 1fr 1fr !important; }
+
+  /* Instagram SVG mockup */
+  svg[viewBox="0 0 360 520"] { max-width: 100% !important; }
+
+  /* CTA form */
+  .cta-form-box { padding: 28px 20px !important; }
+  .form-submit { font-size: 13px !important; padding: 14px 16px !important; }
+
+  /* Buttons — full width on mobile */
+  .btn-lg { width: 100%; justify-content: center; text-align: center; font-size: 14px !important; padding: 15px 20px !important; }
+  .hero-ctas { flex-direction: column; }
+  .final-btns { flex-direction: column; align-items: stretch; }
+  .final-btns a { justify-content: center; text-align: center; }
+
+  /* Price columns */
+  .price-col { padding: 28px 20px !important; }
+}
+
+@media (max-width: 600px) {
+  h1 { font-size: 30px !important; line-height: 1.12 !important; }
+  h2 { font-size: 24px !important; }
+  .flow-diagram { grid-template-columns: 1fr; }
+  .case-numbers { gap: 16px; }
+  .case-num .n { font-size: 32px; }
+  .nav-brand { font-size: 15px; }
+  .nav-cta { font-size: 11px; padding: 7px 12px; }
+
+  /* Proof strip: vertical stack */
+  div[style*="background:var(--accent)"] > div {
+    flex-direction: column !important;
+    gap: 16px !important;
+    text-align: center;
+  }
+
+  /* Step numbers — smaller */
+  .step-num-lg { font-size: 48px; }
+
+  /* Testi cards */
+  .testi-card { padding: 24px 20px !important; }
+
+  /* Dashboard bars shorter */
+  .dash-bars { height: 60px !important; }
+
+  /* Dash stats 3-col → keep but smaller */
+  .dash-stats { grid-template-columns: repeat(3,1fr); }
+  .dash-stat-val { font-size: 22px !important; }
+  .dash-stat-lbl { font-size: 9px !important; }
+
+  /* Auth numbers smaller */
+  .auth-num { font-size: 24px; min-width: 32px; }
+}
+
+/* ── CLASS-BASED INLINE SECTION OVERRIDES ── */
+@media (max-width: 900px) {
+  .skimmer-section { padding: 48px 20px !important; }
+  .skimmer-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
+
+  .early-case-section { padding: 0 20px 48px !important; }
+  .early-case-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+    padding: 28px 20px !important;
+  }
+
+  .who-section { padding: 48px 20px !important; }
+  .who-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .who-grid > div > div[style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
+/* ══════════════════════════════════════════ */
+/* VISUAL PIPELINE                            */
+/* ══════════════════════════════════════════ */
+.pipeline-section {
+  padding: 80px 40px;
+  background: var(--text);
+  overflow: hidden;
+}
+.pipeline-inner { max-width: var(--max); margin: 0 auto; }
+.pipeline-header { margin-bottom: 52px; }
+.pipeline-header .overline { color: rgba(255,255,255,0.35); }
+.pipeline-header h2 { color: var(--white); }
+.pipeline-header h2 em { color: rgba(255,255,255,0.45); font-style: italic; }
+
+.pipeline-track {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr 40px 1fr 40px 1fr;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 40px;
+}
+.pipe-node {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px;
+  padding: 28px 24px;
+  text-align: center;
+  position: relative;
+}
+.pipe-node.active {
+  background: var(--white);
+  border-color: var(--white);
+}
+.pipe-node-num {
+  font-family: var(--serif);
+  font-size: 11px;
+  font-style: italic;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 8px;
+  display: block;
+}
+.pipe-node.active .pipe-node-num { color: var(--muted); }
+.pipe-node-icon {
+  font-size: 28px;
+  margin-bottom: 10px;
+  display: block;
+}
+.pipe-node-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 4px;
+}
+.pipe-node.active .pipe-node-title { color: var(--text); }
+.pipe-node-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+  line-height: 1.5;
+}
+.pipe-node.active .pipe-node-sub { color: var(--muted); }
+.pipe-arrow {
+  text-align: center;
+  color: rgba(255,255,255,0.2);
+  font-size: 22px;
+}
+.pipe-node.active .pipe-arrow { color: rgba(255,255,255,0.5); }
+
+.pipe-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.pipe-metric {
+  background: rgba(255,255,255,0.03);
+  padding: 20px 24px;
+  text-align: center;
+}
+.pipe-metric-val {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--white);
+  display: block;
+  margin-bottom: 4px;
+  line-height: 1;
+}
+.pipe-metric-val.accent { color: #7ecfaf; }
+.pipe-metric-lbl {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .pipeline-track {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+  .pipe-arrow { transform: rotate(90deg); display: flex; justify-content: center; padding: 4px 0; }
+  .pipe-metrics { grid-template-columns: repeat(2, 1fr); }
+  .pipeline-section { padding: 60px 24px; }
+}
+
+/* ══════════════════════════════════════════ */
+/* WHATSAPP / DM LIVE ENQUIRY MOCKUP          */
+/* ══════════════════════════════════════════ */
+.live-section {
+  padding: 100px 40px;
+  background: var(--off);
+}
+.live-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.live-copy {}
+.live-copy p { font-size: 17px; color: var(--body); line-height: 1.75; margin-bottom: 16px; }
+.live-copy .note {
+  font-size: 13px;
+  color: var(--muted);
+  padding: 12px 16px;
+  background: var(--light);
+  border-radius: 4px;
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+/* Phone mockup */
+.phone-wrap {
+  display: flex;
+  justify-content: center;
+}
+.phone-frame {
+  width: 280px;
+  background: #1a1a2e;
+  border-radius: 36px;
+  padding: 14px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.1);
+  position: relative;
+}
+.phone-notch {
+  width: 90px;
+  height: 22px;
+  background: #1a1a2e;
+  border-radius: 12px;
+  margin: 0 auto 10px;
+  position: relative;
+  z-index: 2;
+}
+.phone-screen {
+  background: #f0f0f0;
+  border-radius: 24px;
+  overflow: hidden;
+  min-height: 480px;
+}
+.wa-header {
+  background: #075e54;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.wa-avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: #25d366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #fff;
+  font-weight: 600;
+  font-family: var(--sans);
+  flex-shrink: 0;
+}
+.wa-clinic-name {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.2;
+}
+.wa-online {
+  font-size: 10px;
+  color: rgba(255,255,255,0.65);
+}
+.wa-body {
+  padding: 12px 10px;
+  background: #e5ddd5;
+  min-height: 400px;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h100v100H0z' fill='%23e5ddd5'/%3E%3C/svg%3E");
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.wa-msg {
+  max-width: 85%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-family: var(--sans);
+  font-size: 12px;
+  line-height: 1.5;
+  position: relative;
+}
+.wa-msg.incoming {
+  background: #fff;
+  align-self: flex-start;
+  border-radius: 0 8px 8px 8px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+.wa-msg.outgoing {
+  background: #dcf8c6;
+  align-self: flex-end;
+  border-radius: 8px 8px 0 8px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+.wa-msg-time {
+  font-size: 9px;
+  color: #999;
+  text-align: right;
+  margin-top: 3px;
+}
+.wa-msg.outgoing .wa-msg-time { color: #6b9f6b; }
+.wa-date-sep {
+  text-align: center;
+  font-family: var(--sans);
+  font-size: 10px;
+  color: #888;
+  background: rgba(255,255,255,0.6);
+  padding: 3px 10px;
+  border-radius: 8px;
+  align-self: center;
+}
+
+/* DM panel on right */
+.dm-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.dm-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 18px 20px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  transition: box-shadow 0.2s;
+}
+.dm-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+.dm-platform {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.dm-platform.wa { background: #25d366; }
+.dm-platform.ig { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.dm-body { flex: 1; min-width: 0; }
+.dm-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.dm-name { font-size: 13px; font-weight: 500; color: var(--text); }
+.dm-time { font-size: 11px; color: var(--muted); }
+.dm-text { font-size: 13px; color: var(--body); line-height: 1.5; }
+.dm-treatment {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 2px;
+  background: var(--light);
+  color: var(--accent);
+  margin-top: 6px;
+}
+
+.live-counter {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 4px;
+}
+.live-counter-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #25d366;
+  flex-shrink: 0;
+  animation: pulse-dot 2s infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+.live-counter-text { font-size: 13px; color: var(--body); }
+.live-counter-text strong { color: var(--text); }
+
+@media (max-width: 900px) {
+  .live-inner { grid-template-columns: 1fr; gap: 48px; }
+  .live-section { padding: 60px 24px; }
+}
+
+/* ══════════════════════════════════════════ */
+/* VISUAL RESULTS (replaces case-row)         */
+/* ══════════════════════════════════════════ */
+.vresults-section {
+  padding: 100px 40px;
+  background: var(--white);
+}
+.vresults-inner { max-width: var(--max); margin: 0 auto; }
+.vresults-header { margin-bottom: 56px; }
+.vresults-header p { font-size: 15px; color: var(--muted); max-width: 520px; margin-top: 10px; }
+
+.vresult-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+.vresult-card {
+  background: var(--white);
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+}
+.vresult-tag {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+.vresult-clinic {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.vresult-location {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+/* large number comparison */
+.vresult-nums {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.vresult-before {
+  text-align: center;
+}
+.vresult-before .big {
+  font-family: var(--serif);
+  font-size: 52px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1;
+  display: block;
+}
+.vresult-after {
+  text-align: center;
+}
+.vresult-after .big {
+  font-family: var(--serif);
+  font-size: 72px;
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 1;
+  display: block;
+}
+.vresult-num-lbl {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.vresult-arrow-num {
+  font-family: var(--serif);
+  font-size: 28px;
+  color: var(--border);
+  padding-bottom: 14px;
+  flex-shrink: 0;
+}
+/* bar chart */
+.vresult-bar-section { margin-top: auto; }
+.vresult-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.vresult-bar-track {
+  height: 6px;
+  background: var(--light);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.vresult-bar-before {
+  height: 100%;
+  background: var(--mid);
+  border-radius: 3px;
+}
+.vresult-bar-after {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 3px;
+  transition: width 1.2s ease;
+}
+.vresult-footer {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.vresult-timeframe {
+  font-size: 12px;
+  color: var(--muted);
+}
+.vresult-timeframe strong { color: var(--accent); font-weight: 500; }
+.vresult-rev {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text);
+}
+.vresult-quote {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-style: italic;
+  color: var(--body);
+  line-height: 1.65;
+  margin-top: 12px;
+  flex: 1;
+}
+
+@media (max-width: 900px) {
+  .vresult-grid { grid-template-columns: 1fr; }
+  .vresults-section { padding: 60px 24px; }
+}
+
+/* ══════════════════════════════════════════ */
+/* WEEKLY DASHBOARD MOCKUP                    */
+/* ══════════════════════════════════════════ */
+.dashboard-section {
+  padding: 100px 40px;
+  background: var(--off);
+}
+.dashboard-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 72px;
+  align-items: start;
+}
+.dashboard-copy {}
+.dashboard-copy p { font-size: 17px; color: var(--body); line-height: 1.75; margin-bottom: 16px; }
+
+.dash-frame {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+}
+.dash-topbar {
+  background: var(--text);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dash-title {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--white);
+}
+.dash-period {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.06em;
+}
+.dash-body { padding: 24px 20px; }
+
+/* stat row */
+.dash-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.dash-stat {
+  background: var(--off);
+  padding: 16px 14px;
+  text-align: center;
+}
+.dash-stat-val {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--text);
+  display: block;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.dash-stat-val.up { color: var(--accent); }
+.dash-stat-lbl {
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* mini bar chart */
+.dash-chart-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.dash-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 80px;
+  margin-bottom: 6px;
+}
+.dash-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.dash-bar {
+  width: 100%;
+  border-radius: 2px 2px 0 0;
+  background: var(--mid);
+  transition: height 0.8s ease;
+}
+.dash-bar.accent { background: var(--accent); }
+.dash-bar-day { font-size: 9px; color: var(--muted); letter-spacing: 0.06em; }
+.dash-chart-rule { height: 1px; background: var(--border); margin-bottom: 16px; }
+
+/* enquiry list */
+.dash-enq-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.dash-enq-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--light);
+  font-size: 12px;
+}
+.dash-enq-item:last-child { border-bottom: none; }
+.dash-enq-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dash-enq-dot.wa { background: #25d366; }
+.dash-enq-dot.ig { background: #e1306c; }
+.dash-enq-name { color: var(--text); font-weight: 500; flex: 1; }
+.dash-enq-treatment { color: var(--muted); font-size: 11px; }
+.dash-enq-time { color: var(--muted); font-size: 11px; flex-shrink: 0; }
+
+.dash-footer {
+  padding: 12px 20px;
+  background: var(--off);
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dash-footer-note {
+  font-size: 11px;
+  color: var(--muted);
+}
+.dash-footer-link {
+  font-size: 11px;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .dashboard-inner { grid-template-columns: 1fr; gap: 40px; }
+  .dashboard-section { padding: 60px 24px; }
+  .dash-stats { grid-template-columns: repeat(3, 1fr); }
+}
+/* ══════════════════════════════════════════ */
+/* EMBEDDED DEMO (.dem- prefix scoped)        */
+/* ══════════════════════════════════════════ */
+.dem-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 0;
+  min-height: 600px;
+}
+.dem-lft {
+  padding: 52px 60px 52px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--border);
+  background: var(--white);
+}
+.dem-display { min-height: 320px; position: relative; }
+.dem-slide {
+  position: absolute; top: 0; left: 0; width: 100%;
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
+}
+.dem-slide.dem-on { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.dem-over {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--sans); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+  margin-bottom: 14px;
+}
+.dem-over::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--accent); }
+.dem-title {
+  font-family: var(--serif); font-size: clamp(24px, 2.8vw, 40px);
+  font-weight: 300; line-height: 1.1; letter-spacing: -0.01em;
+  color: var(--text); margin-bottom: 16px;
+}
+.dem-title em { font-style: italic; color: var(--accent); }
+.dem-body { font-size: 14px; color: var(--body); line-height: 1.75; max-width: 400px; margin-bottom: 22px; }
+.dem-stat {
+  display: inline-flex; align-items: baseline; gap: 10px;
+  padding: 12px 18px; background: var(--off); border: 1px solid var(--border);
+  border-radius: 3px; border-left: 3px solid var(--accent);
+}
+.dem-big { font-family: var(--serif); font-size: 32px; font-weight: 300; color: var(--accent); line-height: 1; }
+.dem-lbl { font-size: 12px; color: var(--body); font-weight: 300; }
+
+/* Progress */
+.dem-prog { display: flex; gap: 6px; margin-top: 44px; }
+.dem-pip {
+  height: 2px; flex: 1; background: var(--mid); border-radius: 2px;
+  overflow: hidden; cursor: pointer; transition: opacity 0.2s;
+}
+.dem-pip:hover { opacity: 0.7; }
+.dem-pf { height: 100%; width: 0%; background: var(--accent); border-radius: 2px; transition: width linear; }
+.dem-pip.dem-done .dem-pf { width: 100%; background: var(--border); }
+
+/* Controls */
+.dem-ctrls { display: flex; align-items: center; gap: 8px; margin-top: 14px; }
+.dem-btn {
+  background: var(--white); border: 1px solid var(--border);
+  color: var(--body); font-family: var(--sans); font-size: 11px;
+  padding: 7px 14px; border-radius: 3px; cursor: pointer;
+  letter-spacing: 0.02em; transition: all 0.18s;
+}
+.dem-btn:hover { border-color: var(--text); color: var(--text); }
+.dem-btn-alt { background: var(--off); }
+.dem-clbl { font-size: 11px; color: var(--muted); margin-left: 4px; }
+
+/* Right panel */
+.dem-rgt {
+  background: var(--off);
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 28px; position: relative; overflow: hidden;
+}
+.dem-rgt::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 26px 26px; opacity: 0.28;
+}
+
+/* Phone */
+.dem-phone { width: 238px; background: #111; border-radius: 40px; padding: 9px; box-shadow: 0 0 0 1px rgba(0,0,0,0.14), 0 20px 60px rgba(26,24,20,0.2); position: relative; z-index: 2; }
+.dem-ph-inner { background: #111; border-radius: 34px; padding: 8px 8px 12px; }
+.dem-notch { width: 64px; height: 18px; background: #111; border-radius: 9px; margin: 0 auto 5px; }
+.dem-screen-wrap { background: var(--white); border-radius: 24px; overflow: hidden; height: 490px; position: relative; }
+
+/* Screens */
+.dem-screen { position: absolute; inset: 0; opacity: 0; transition: opacity 0.4s ease; overflow: hidden; }
+.dem-scr-on { opacity: 1; }
+
+/* S0 Instagram */
+.dem-s0 { background: #fafafa; }
+.dem-ig-nav { background: #fff; padding: 9px 10px 7px; border-bottom: 0.5px solid #dbdbdb; display: flex; align-items: center; justify-content: space-between; }
+.dem-ig-logo { font-family: var(--serif); font-size: 16px; font-style: italic; color: #000; }
+.dem-ig-stories { background: #fff; padding: 8px; display: flex; gap: 8px; border-bottom: 0.5px solid #efefef; overflow: hidden; }
+.dem-ig-st { display: flex; flex-direction: column; align-items: center; gap: 3px; flex-shrink: 0; }
+.dem-ig-ring { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); padding: 2px; display: flex; align-items: center; justify-content: center; }
+.dem-ig-ring.dem-seen { background: #c7c7c7; }
+.dem-ig-ri { width: 36px; height: 36px; border-radius: 50%; border: 2px solid #fff; background: var(--light); display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.dem-ig-sn { font-size: 7.5px; color: #262626; }
+.dem-ig-ph { background: #fff; padding: 7px 9px; display: flex; align-items: center; gap: 7px; }
+.dem-ig-av { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 9px; color: #fff; font-weight: 600; }
+.dem-ig-un { font-size: 9.5px; font-weight: 600; color: #262626; }
+.dem-ig-loc { font-size: 8px; color: #8e8e8e; }
+.dem-ba { width: 100%; height: 164px; display: flex; position: relative; }
+.dem-ba-l { flex: 1; background: linear-gradient(150deg,#ede8dc,#e0d6bc); display: flex; align-items: center; justify-content: center; position: relative; }
+.dem-ba-r { flex: 1; background: linear-gradient(150deg,#f8f8f7,#fff); display: flex; align-items: center; justify-content: center; position: relative; }
+.dem-ba-div { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: #fff; z-index: 3; }
+.dem-ba-chip { position: absolute; top: 5px; left: 5px; font-size: 6.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 5px; border-radius: 2px; color: #fff; background: rgba(0,0,0,0.5); }
+.dem-ba-chip.dem-after { background: var(--accent); right: 5px; left: auto; }
+.dem-tooth { width: 26px; height: 36px; border-radius: 46% 46% 36% 36%; }
+.dem-tb { background: linear-gradient(180deg,#d8cfa2,#cbc094); }
+.dem-ta { background: linear-gradient(180deg,#fff,#f4f4f2); box-shadow: 0 2px 5px rgba(0,0,0,0.07); }
+.dem-spark { position: absolute; top: 10px; right: 10px; font-size: 11px; color: var(--accent); }
+.dem-ba-strip { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(26,24,20,0.4); padding: 3px 0; text-align: center; font-size: 7.5px; font-weight: 600; letter-spacing: 0.05em; color: #fff; }
+.dem-ig-act { background: #fff; padding: 5px 9px 3px; display: flex; justify-content: space-between; font-size: 16px; }
+.dem-ig-lk { background: #fff; padding: 0 9px 2px; font-size: 9px; font-weight: 700; color: #262626; }
+.dem-ig-cap { background: #fff; padding: 0 9px 4px; font-size: 8.5px; line-height: 1.45; color: #262626; }
+.dem-ig-cap strong { font-weight: 700; }
+.dem-cta { color: var(--accent); font-weight: 700; }
+.dem-ig-cm { background: #fff; padding: 0 9px 3px; font-size: 8px; color: #8e8e8e; }
+.dem-ig-tm { background: #fff; padding: 0 9px 6px; font-size: 7.5px; color: #c0bcb8; }
+
+/* S1 WhatsApp */
+.dem-s1 { background: #e5ddd5; }
+.dem-wa-head { background: var(--accent); padding: 26px 9px 7px; display: flex; align-items: center; gap: 7px; }
+.dem-wa-av { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 11px; color: #fff; font-weight: 600; }
+.dem-wa-nm { font-size: 10.5px; font-weight: 600; color: #fff; }
+.dem-wa-st { font-size: 8px; color: rgba(255,255,255,0.7); }
+.dem-wa-msgs { padding: 7px 6px 38px; display: flex; flex-direction: column; gap: 4px; overflow: hidden; height: calc(100% - 66px); }
+.dem-bbl { max-width: 84%; padding: 5px 8px; border-radius: 6px; font-size: 9.5px; line-height: 1.45; color: #111; opacity: 0; transform: translateY(5px); transition: opacity 0.3s ease, transform 0.3s ease; }
+.dem-bbl.dem-vis { opacity: 1; transform: translateY(0); }
+.dem-in { background: #fff; align-self: flex-start; border-radius: 0 6px 6px 6px; box-shadow: 0 1px 1px rgba(0,0,0,0.08); }
+.dem-out { background: #dcf8c6; align-self: flex-end; border-radius: 6px 6px 0 6px; box-shadow: 0 1px 1px rgba(0,0,0,0.08); }
+.dem-bt { font-size: 7.5px; text-align: right; margin-top: 2px; color: #8e8e8e; }
+.dem-out .dem-bt { color: #6b9f6b; }
+.dem-typ { align-self: flex-start; background: #fff; border-radius: 0 6px 6px 6px; padding: 6px 10px; display: none; gap: 3px; align-items: center; }
+.dem-typ.dem-vis { display: flex; }
+.dem-dot { width: 4px; height: 4px; border-radius: 50%; background: #aaa; animation: dbob 1.1s infinite; }
+.dem-dot:nth-child(2) { animation-delay: 0.18s; }
+.dem-dot:nth-child(3) { animation-delay: 0.36s; }
+@keyframes dbob { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-3px)} }
+.dem-wa-inp { position: absolute; bottom: 0; left: 0; right: 0; background: #f0f0f0; padding: 5px 8px; display: flex; align-items: center; gap: 6px; border-top: 0.5px solid #ddd; }
+.dem-wa-pill { flex: 1; background: #fff; border-radius: 16px; padding: 5px 10px; font-size: 9px; color: #aaa; }
+
+/* S2 Dashboard */
+.dem-s2 { background: var(--off); }
+.dem-dh { background: var(--text); padding: 26px 11px 9px; display: flex; align-items: flex-start; justify-content: space-between; }
+.dem-dh-ttl { font-family: var(--serif); font-size: 11.5px; font-weight: 400; color: #fff; }
+.dem-dh-per { font-size: 7.5px; color: rgba(255,255,255,0.38); margin-top: 2px; }
+.dem-dh-badge { font-size: 7px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent2); background: rgba(44,95,74,0.2); border: 1px solid rgba(44,95,74,0.35); padding: 2px 6px; border-radius: 10px; }
+.dem-db { padding: 9px 10px 40px; }
+.dem-kpis { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 3px; overflow: hidden; margin-bottom: 10px; }
+.dem-kpi { background: var(--white); padding: 8px 6px; text-align: center; }
+.dem-kv { font-family: var(--serif); font-size: 20px; font-weight: 300; color: var(--text); line-height: 1; display: block; margin-bottom: 2px; }
+.dem-kv.dem-g { color: var(--accent); }
+.dem-kl { font-size: 7px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.dem-ch-lbl { font-size: 7.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+.dem-ch-bars { display: flex; align-items: flex-end; gap: 3px; height: 44px; margin-bottom: 5px; }
+.dem-bc { flex: 1; display: flex; flex-direction: column; align-items: stretch; gap: 2px; }
+.dem-br { flex: 1; border-radius: 2px 2px 0 0; background: var(--mid); transition: height 0.75s cubic-bezier(0.34,1.4,0.64,1); }
+.dem-br.dem-hi { background: var(--accent); }
+.dem-bd { font-size: 6.5px; color: var(--muted); text-align: center; }
+.dem-dr { height: 1px; background: var(--border); margin: 7px 0; }
+.dem-el { font-size: 7.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+.dem-er { display: flex; align-items: center; gap: 5px; padding: 4px 0; border-bottom: 1px solid var(--light); font-size: 8.5px; opacity: 0; transform: translateX(-5px); transition: opacity 0.35s ease, transform 0.35s ease; }
+.dem-er.dem-vis { opacity: 1; transform: translateX(0); }
+.dem-edot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+.dem-edot.dem-wa { background: #25d366; }
+.dem-edot.dem-ig { background: #e1306c; }
+.dem-enm { font-weight: 500; color: var(--text); flex: 1; }
+.dem-etx { color: var(--muted); font-size: 7.5px; }
+.dem-etm { color: var(--border); font-size: 7px; flex-shrink: 0; }
+.dem-df { position: absolute; bottom: 0; left: 0; right: 0; background: var(--white); border-top: 1px solid var(--border); padding: 5px 10px; display: flex; justify-content: space-between; align-items: center; }
+.dem-df-n { font-size: 7.5px; color: var(--muted); }
+.dem-df-b { font-size: 7px; font-weight: 600; color: var(--accent); background: rgba(44,95,74,0.08); border: 1px solid rgba(44,95,74,0.18); padding: 2px 6px; border-radius: 10px; }
+
+/* S3 Result */
+.dem-s3 { background: var(--text); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px 20px; text-align: center; }
+.dem-ro { font-size: 7.5px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 12px; display: block; }
+.dem-rc { font-family: var(--serif); font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.42); margin-bottom: 3px; }
+.dem-rh { font-family: var(--serif); font-size: 18px; font-weight: 300; color: #fff; line-height: 1.2; margin-bottom: 16px; }
+.dem-rh em { font-style: italic; color: var(--accent2); }
+.dem-rnums { display: flex; align-items: flex-end; justify-content: center; gap: 12px; margin-bottom: 14px; }
+.dem-rb .dem-n { font-family: var(--serif); font-size: 46px; font-weight: 300; color: rgba(255,255,255,0.16); line-height: 1; }
+.dem-ra .dem-n { font-family: var(--serif); font-size: 68px; font-weight: 300; color: var(--accent2); line-height: 1; }
+.dem-rl { font-size: 7.5px; color: rgba(255,255,255,0.28); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 3px; }
+.dem-rarr { font-family: var(--serif); font-size: 20px; color: rgba(255,255,255,0.14); padding-bottom: 10px; }
+.dem-rm { font-size: 9.5px; color: rgba(255,255,255,0.3); line-height: 1.7; margin-bottom: 18px; }
+.dem-rbtn { display: inline-block; background: var(--accent); color: #fff; font-family: var(--sans); font-size: 10px; font-weight: 500; padding: 9px 16px; border-radius: 3px; text-decoration: none; letter-spacing: 0.03em; transition: background 0.2s; }
+.dem-rbtn:hover { background: var(--accent2); }
+
+/* Toasts */
+.dem-toasts { position: absolute; top: 68px; right: -280px; width: 240px; z-index: 50; display: flex; flex-direction: column; gap: 6px; transition: right 0.55s cubic-bezier(0.34,1.3,0.64,1); }
+.dem-toasts.dem-vis { right: 8px; }
+.dem-toast { background: var(--white); border: 1px solid var(--border); border-radius: 9px; padding: 9px 10px; display: flex; align-items: flex-start; gap: 7px; box-shadow: 0 4px 14px rgba(26,24,20,0.09); opacity: 0; transform: translateX(12px) scale(0.97); transition: opacity 0.3s ease, transform 0.3s ease; }
+.dem-toast.dem-vis { opacity: 1; transform: translateX(0) scale(1); }
+.dem-ticon { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; flex-shrink: 0; }
+.dem-ig { background: rgba(225,48,108,0.1); }
+.dem-wa { background: rgba(37,211,102,0.12); }
+.dem-tbody { flex: 1; min-width: 0; }
+.dem-ttl { font-size: 9.5px; font-weight: 600; color: var(--text); margin-bottom: 1px; }
+.dem-tmsg { font-size: 8.5px; color: var(--body); line-height: 1.4; }
+.dem-ttm { font-size: 7.5px; color: var(--muted); margin-top: 2px; }
+.dem-tlive { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 3px; animation: dblink 1.8s infinite; }
+@keyframes dblink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.dem-badge { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-family: var(--sans); font-size: 9px; font-weight: 500; padding: 4px 12px; border-radius: 20px; white-space: nowrap; z-index: 10; opacity: 0; transition: opacity 0.35s ease; box-shadow: 0 2px 8px rgba(44,95,74,0.3); }
+.dem-badge.dem-vis { opacity: 1; }
+
+/* Demo responsive */
+@media (max-width: 900px) {
+  .dem-wrap { grid-template-columns: 1fr; }
+  .dem-lft { padding: 44px 24px 36px; border-right: none; border-bottom: 1px solid var(--border); }
+  .dem-display { min-height: 260px; }
+  .dem-rgt { padding: 40px 24px; }
+  .dem-phone { width: 224px; }
+  .dem-screen-wrap { height: 460px; }
+  .dem-toasts { right: -260px; width: 220px; }
+  .dem-toasts.dem-vis { right: 6px; }
+}
+@media (max-width: 480px) {
+  .dem-lft { padding: 36px 20px 28px; }
+  .dem-rgt { padding: 32px 16px; }
+  .dem-phone { width: 208px; }
+  .dem-screen-wrap { height: 430px; }
+}
+
+/* ── Sticky nav fades in after brand layer ── */
+.nav {
+  transition: opacity 0.3s ease;
+}
+.nav.nav-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.nav.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Brand layer full-viewport section */
+.brand-layer {
+  min-height: 100vh;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Subtle grid background */
+.brand-layer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--light) 1px, transparent 1px),
+    linear-gradient(90deg, var(--light) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* Brand topbar */
+.brand-topbar {
+  padding: 28px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+.brand-topbar-logo {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+.brand-topbar-logo em {
+  font-style: italic;
+  color: var(--accent);
+}
+.brand-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.brand-topbar-link {
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+.brand-topbar-link:hover { color: var(--text); }
+.brand-topbar-cta {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid rgba(44,95,74,0.3);
+  padding: 8px 18px;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+.brand-topbar-cta:hover {
+  background: var(--accent);
+  color: var(--white);
+  border-color: var(--accent);
+}
+
+/* Brand hero content */
+.brand-hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 40px 80px;
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.brand-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 32px;
+}
+.brand-eyebrow::before,
+.brand-eyebrow::after {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.5;
+}
+
+.brand-h1 {
+  font-family: var(--serif);
+  font-size: clamp(42px, 6vw, 80px);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 28px;
+}
+.brand-h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.brand-sub {
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 300;
+  color: var(--body);
+  line-height: 1.7;
+  max-width: 600px;
+  margin: 0 auto 48px;
+}
+
+/* Primary CTA */
+.brand-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--text);
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 16px 36px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.22s;
+  margin-bottom: 16px;
+}
+.brand-cta-primary:hover { background: var(--accent); }
+
+.brand-cta-sub {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+/* Three proof pills */
+.brand-pills {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 52px;
+}
+.brand-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  background: var(--off);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 12px;
+  color: var(--body);
+}
+.brand-pill-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* Scroll indicator */
+.brand-scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  z-index: 2;
+  border: none;
+  background: none;
+  text-decoration: none;
+}
+.brand-scroll-label {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.brand-scroll-line {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(to bottom, var(--border), transparent);
+  animation: scrollpulse 2s ease-in-out infinite;
+}
+@keyframes scrollpulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.15); }
+}
+
+/* Transition divider between brand layer and landing page */
+.brand-transition {
+  position: relative;
+  height: 2px;
+  background: var(--border);
+  margin: 0;
+}
+.brand-transition-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--white);
+  padding: 0 20px;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* ANCHOR for smooth scroll into landing page */
+#landing-page {
+  scroll-margin-top: 0;
+}
+
+/* Mobile responsive for brand layer */
+@media (max-width: 768px) {
+  .brand-topbar { padding: 20px 20px; }
+  .brand-topbar-right { gap: 16px; }
+  .brand-topbar-link { display: none; }
+  .brand-hero { padding: 20px 24px 72px; }
+  .brand-pills { gap: 8px; }
+  .brand-pill { font-size: 11px; padding: 6px 11px; }
+}
+
+@media (max-width: 480px) {
+  .brand-h1 { font-size: 36px; }
+  .brand-sub { font-size: 15px; }
+  .brand-cta-primary { padding: 14px 28px; font-size: 13px; }
+  .brand-topbar-cta { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════ -->
+<!-- BRAND LAYER — top section               -->
+<!-- Ends at the transition divider below    -->
+<!-- ════════════════════════════════════════ -->
+<div class="brand-layer" id="brand-layer">
+
+  <!-- Brand topbar -->
+  <div class="brand-topbar">
+    <a href="#" class="brand-topbar-logo">Patient <em>Enquiry</em> Engine&trade;</a>
+    <div class="brand-topbar-right">
+      <a href="#how-it-works" class="brand-topbar-link">How it works</a>
+      <a href="#results" class="brand-topbar-link">Results</a>
+      <a href="#offer" class="brand-topbar-link">Pricing</a>
+      <a href="#landing-page" class="brand-topbar-cta">See How It Works</a>
+    </div>
+  </div>
+
+  <!-- Brand hero -->
+  <div class="brand-hero">
+
+    <div class="brand-eyebrow">Private Dental &amp; Aesthetic Clinics &mdash; UK &amp; UAE</div>
+
+    <h1 class="brand-h1">
+      We fill your clinic&rsquo;s<br>
+      diary with <em>patients who<br>
+      are already decided.</em>
+    </h1>
+
+    <p class="brand-sub">
+      The Patient Enquiry Engine&trade; turns your Instagram and Google presence into a consistent, predictable source of 20&ndash;30 inbound patient enquiries per month &mdash; without ads, without cold outreach, and without long-term contracts.
+    </p>
+
+    <a href="#landing-page" class="brand-cta-primary">
+      See How It Works &darr;
+    </a>
+    <div class="brand-cta-sub">Free 15-minute audit &bull; No obligation &bull; UK &amp; UAE clinics</div>
+
+    <!-- Three proof pills -->
+    <div class="brand-pills">
+      <div class="brand-pill">
+        <div class="brand-pill-dot"></div>
+        20&ndash;30 patient enquiries per month
+      </div>
+      <div class="brand-pill">
+        <div class="brand-pill-dot"></div>
+        Live in 5 days
+      </div>
+      <div class="brand-pill">
+        <div class="brand-pill-dot"></div>
+        Results within 6&ndash;8 weeks
+      </div>
+      <div class="brand-pill">
+        <div class="brand-pill-dot"></div>
+        No paid ads required
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scroll indicator -->
+  <a href="#landing-page" class="brand-scroll" aria-label="Scroll to learn more">
+    <span class="brand-scroll-label">Scroll</span>
+    <span class="brand-scroll-line"></span>
+  </a>
+
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- TRANSITION                              -->
+<!-- ════════════════════════════════════════ -->
+<div class="brand-transition">
+  <span class="brand-transition-label">Full breakdown below</span>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- LANDING PAGE — original, unchanged      -->
+<!-- Everything below is the existing        -->
+<!-- Patient Enquiry Engine sales page       -->
+<!-- ════════════════════════════════════════ -->
+<div id="landing-page">
+
+<!-- NAV -->
+<header class="nav">
+  <a href="#" class="nav-brand">Patient <em>Enquiry</em> Engine</a>
+  <div class="nav-right">
+    <a href="#how-it-works" class="nav-link">How it works</a>
+    <a href="#results" class="nav-link">Results</a>
+    <a href="#offer" class="nav-link">Pricing</a>
+    <a href="#cta-main" class="nav-cta">Get My Free Audit</a>
+  </div>
+</header>
+
+
+<!-- ════════════════════════════════════════ -->
+<!-- 1. HERO                                  -->
+<!-- ════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-left">
+      <span class="overline">The Patient Enquiry Engine&trade; &mdash; For Private Clinics (UK &amp; UAE)</span>
+
+      <h1>
+        Some weeks your diary is full.<br>
+        Then it suddenly isn&rsquo;t.<br>
+        <em>That&rsquo;s not demand. That&rsquo;s luck &mdash; and you can&rsquo;t run a clinic on luck.</em>
+      </h1>
+
+      <p class="hero-sub">
+        The Patient Enquiry Engine&trade; turns your Instagram and Google presence into a consistent source of <strong>20&ndash;30 patient enquiries per month</strong> &mdash; typically resulting in <strong>6&ndash;12 new bookings</strong> for Invisalign, implants, skin, and injectables &mdash; within 6&ndash;8 weeks.
+      </p>
+
+      <div style="margin:0 0 20px;padding:12px 16px;background:var(--light);border-radius:4px;font-size:14px;color:var(--body);letter-spacing:0.01em;">Patient sees result &rarr; messages your clinic &rarr; your team books them in. That&rsquo;s the entire system.</div>
+
+      <div style="background:var(--off);border:1px solid var(--border);border-radius:4px;padding:16px 20px;margin-bottom:28px;">
+        <div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">What this looks like in practice</div>
+        <div style="font-family:var(--serif);font-size:17px;color:var(--text);line-height:1.5;">
+          A 2-chair South London clinic <strong>booked 9 new patients in month one</strong> &mdash; after going from <strong>4 to 22 enquiries/month</strong> in just 6 weeks, without ads or additional staff.
+        </div>
+      </div>
+
+      <div class="hero-ctas">
+        <a href="#cta-main" class="btn btn-dark btn-lg">See How Many Patients You&rsquo;re Losing This Month &rarr;</a>
+      </div>
+
+      <p style="margin-top:12px;font-size:14px;color:var(--muted);">
+        We&rsquo;ll show you how many patients your clinic should be getting &mdash; and exactly where you&rsquo;re losing them.
+      </p>
+
+      <p style="margin-top:10px;font-size:14px;color:var(--muted);">
+        Prefer to message?
+        <a href="https://wa.me/447445261729" style="color:var(--accent);text-decoration:none;font-weight:500;">
+          Send us your clinic name
+        </a> &mdash; we&rsquo;ll tell you how many enquiries you should be getting this month.
+      </p>
+
+      <p class="hero-trust" style="margin-top:14px;">
+        We only onboard 4 clinics per month to maintain results &mdash; no long-term contracts &mdash; if we can&rsquo;t improve your enquiry volume, we&rsquo;ll tell you on the call.
+      </p>
+    </div>
+
+    <div class="audit-card">
+      <span class="audit-card-label">Free &mdash; 15 Minutes &mdash; No Obligation</span>
+
+      <h3>
+        We&rsquo;ll show you exactly how many patients you&rsquo;re losing each month &mdash; and which clinics are getting them instead
+      </h3>
+
+      <p>
+        We audit your Instagram, Google Business, and local competitors &mdash; then show you exactly what&rsquo;s missing and what your clinic should be generating.
+      </p>
+
+      <ul class="audit-list">
+        <li>Your current enquiry volume vs realistic potential</li>
+        <li>Where patients are going instead of you</li>
+        <li>A monthly booking and revenue projection</li>
+        <li>Honest recommendation &mdash; whether you work with us or not</li>
+      </ul>
+
+      <a href="#cta-main" class="btn btn-dark" style="width:100%;justify-content:center;font-size:14px;">
+        See How Many Patients You&rsquo;re Losing &rarr;
+      </a>
+
+      <p class="audit-note">
+        4 audit slots available this month &bull; UK &amp; UAE clinics
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ════════════════════════════════════════ -->
+<!-- LIVE DEMO SECTION                        -->
+<!-- ════════════════════════════════════════ -->
+<section style="background:var(--off);padding:0;border-bottom:1px solid var(--border);">
+
+  <!-- Demo header -->
+  <div style="text-align:center;padding:64px 40px 0;">
+    <span class="overline">See It In Action</span>
+    <span class="rule-short" style="margin:0 auto 20px;"></span>
+    <h2 style="margin-bottom:12px;">Watch how a clinic goes from<br><em>invisible to fully booked.</em></h2>
+    <p style="font-size:16px;color:var(--muted);max-width:480px;margin:0 auto;">A 4-step walkthrough of the Patient Enquiry Engine&trade; — from Instagram post to booked chair.</p>
+  </div>
+
+  <!-- Demo wrapper — scoped with prefix .dem- to avoid conflicts -->
+  <div class="dem-wrap">
+
+    <!-- LEFT: narrative slides -->
+    <div class="dem-lft">
+      <div class="dem-display">
+
+        <div class="dem-slide dem-on" data-ds="0">
+          <span class="dem-over">Step 01 &mdash; Content</span>
+          <h3 class="dem-title">Before/after content<br>that makes patients think<br><em>&ldquo;that could be me.&rdquo;</em></h3>
+          <p class="dem-body">Every post is built to trigger a decision, not just a scroll. Before/after results, time-limited offers, and treatment FAQs — each with one clear action: message the clinic directly via Instagram DM or WhatsApp.</p>
+          <div class="dem-stat"><span class="dem-big">4</span><span class="dem-lbl">posts per week, every week, without fail</span></div>
+        </div>
+
+        <div class="dem-slide" data-ds="1">
+          <span class="dem-over">Step 02 &mdash; Enquiry</span>
+          <h3 class="dem-title">Patients message<br>your clinic directly &mdash;<br><em>already decided.</em></h3>
+          <p class="dem-body">They've seen the result. They recognise their own situation. They're not browsing — they're ready to book. First enquiries typically arrive within 10–14 days of going live.</p>
+          <div class="dem-stat"><span class="dem-big">10–14</span><span class="dem-lbl">days to first patient enquiries</span></div>
+        </div>
+
+        <div class="dem-slide" data-ds="2">
+          <span class="dem-over">Step 03 &mdash; Report</span>
+          <h3 class="dem-title">Every Monday: exactly<br>how many patients<br><em>contacted your clinic.</em></h3>
+          <p class="dem-body">No reach. No impressions. Your Weekly Enquiry Report™ shows one number — patients who messaged this week — and which content drove them. By month two, the flow is consistent and predictable.</p>
+          <div class="dem-stat"><span class="dem-big">+200%</span><span class="dem-lbl">enquiry growth from week 2 to week 6</span></div>
+        </div>
+
+        <div class="dem-slide" data-ds="3">
+          <span class="dem-over">The Result</span>
+          <h3 class="dem-title">From 4 enquiries<br>to <em>22 in 6 weeks.</em><br>9 new patients booked.</h3>
+          <p class="dem-body">A 2-chair South London clinic. Word of mouth only before we started. No paid ads. Live in 5 days. Most clients are in profit by week 6.</p>
+          <div class="dem-stat"><span class="dem-big">£4,500</span><span class="dem-lbl">estimated additional revenue per month</span></div>
+        </div>
+
+      </div>
+
+      <!-- Progress pips -->
+      <div class="dem-prog">
+        <div class="dem-pip" onclick="dgo(0)"><div class="dem-pf" id="dpf0"></div></div>
+        <div class="dem-pip" onclick="dgo(1)"><div class="dem-pf" id="dpf1"></div></div>
+        <div class="dem-pip" onclick="dgo(2)"><div class="dem-pf" id="dpf2"></div></div>
+        <div class="dem-pip" onclick="dgo(3)"><div class="dem-pf" id="dpf3"></div></div>
+      </div>
+
+      <!-- Controls -->
+      <div class="dem-ctrls">
+        <button class="dem-btn" onclick="dprev()">&#8592; Prev</button>
+        <button class="dem-btn dem-btn-alt" id="dppb" onclick="dtp()">&#9646;&#9646; Pause</button>
+        <button class="dem-btn" onclick="dnext()">Next &#8594;</button>
+        <span class="dem-clbl" id="dlbl">1 / 4</span>
+      </div>
+    </div>
+
+    <!-- RIGHT: phone frame -->
+    <div class="dem-rgt">
+
+      <!-- Toast notifications -->
+      <div class="dem-toasts" id="dtoasts">
+        <div class="dem-toast" id="dt1">
+          <div class="dem-ticon dem-ig">&#128247;</div>
+          <div class="dem-tbody">
+            <div class="dem-ttl">Instagram DM</div>
+            <div class="dem-tmsg">Hi, I saw your whitening post — is the £149 offer still on?</div>
+            <div class="dem-ttm">Just now &middot; Emma T.</div>
+          </div>
+          <div class="dem-tlive"></div>
+        </div>
+        <div class="dem-toast" id="dt2">
+          <div class="dem-ticon dem-wa">&#128172;</div>
+          <div class="dem-tbody">
+            <div class="dem-ttl">WhatsApp</div>
+            <div class="dem-tmsg">Your Invisalign result looked amazing. Can I book a consultation?</div>
+            <div class="dem-ttm">2 min ago &middot; James W.</div>
+          </div>
+          <div class="dem-tlive"></div>
+        </div>
+      </div>
+
+      <div class="dem-badge" id="dbadge">&#128276; +1 new patient enquiry</div>
+
+      <!-- Phone -->
+      <div class="dem-phone">
+        <div class="dem-ph-inner">
+          <div class="dem-notch"></div>
+          <div class="dem-screen-wrap">
+
+            <!-- Screen 0: Instagram -->
+            <div class="dem-screen dem-s0 dem-scr-on" id="dsc0">
+              <div class="dem-ig-nav">
+                <span class="dem-ig-logo">Instagram</span>
+                <div style="display:flex;gap:11px;font-size:16px;color:#000;">&#9825; &#10148;</div>
+              </div>
+              <div class="dem-ig-stories">
+                <div class="dem-ig-st"><div class="dem-ig-ring"><div class="dem-ig-ri">&#129463;</div></div><div class="dem-ig-sn">yourclinic</div></div>
+                <div class="dem-ig-st"><div class="dem-ig-ring dem-seen"><div class="dem-ig-ri" style="background:var(--light);">&#128100;</div></div><div class="dem-ig-sn">clinic2</div></div>
+                <div class="dem-ig-st"><div class="dem-ig-ring dem-seen"><div class="dem-ig-ri" style="background:var(--light);">&#128100;</div></div><div class="dem-ig-sn">sw_dental</div></div>
+              </div>
+              <div class="dem-ig-ph">
+                <div class="dem-ig-av">C</div>
+                <div><div class="dem-ig-un">citydentalclinic</div><div class="dem-ig-loc">South London &middot; Private Dental</div></div>
+                <div style="margin-left:auto;font-size:15px;color:#262626;">&#8943;</div>
+              </div>
+              <div class="dem-ba">
+                <div class="dem-ba-l"><div class="dem-ba-chip">Before</div><div class="dem-tooth dem-tb"></div></div>
+                <div class="dem-ba-r"><div class="dem-ba-chip dem-after">After</div><div class="dem-tooth dem-ta"></div><div class="dem-spark">&#10022;</div></div>
+                <div class="dem-ba-div"></div>
+                <div class="dem-ba-strip">Professional Teeth Whitening — 1 Session</div>
+              </div>
+              <div class="dem-ig-act"><div>&#9825; &#128172; &#10148;</div><div>&#128278;</div></div>
+              <div class="dem-ig-lk">247 likes</div>
+              <div class="dem-ig-cap"><strong>citydentalclinic</strong> 1 session of professional whitening. Safe, done in under an hour. From <strong>£149 this month only.</strong><br><span class="dem-cta">&#128071; DM 'SMILE' to book</span></div>
+              <div class="dem-ig-cm">View all 31 comments</div>
+              <div class="dem-ig-tm">2 hours ago</div>
+            </div>
+
+            <!-- Screen 1: WhatsApp -->
+            <div class="dem-screen dem-s1" id="dsc1">
+              <div class="dem-wa-head">
+                <span style="color:rgba(255,255,255,0.85);font-size:14px;">&#8249;</span>
+                <div class="dem-wa-av">C</div>
+                <div><div class="dem-wa-nm">City Dental Clinic</div><div class="dem-wa-st">online</div></div>
+                <div style="margin-left:auto;display:flex;gap:12px;color:rgba(255,255,255,0.85);font-size:15px;">&#128222; &#8942;</div>
+              </div>
+              <div class="dem-wa-msgs" id="dwam">
+                <div class="dem-bbl dem-in" id="db1">Hi, I saw your whitening post. Is the £149 offer still on? &#128522;<div class="dem-bt">9:14 am</div></div>
+                <div class="dem-bbl dem-out" id="db2">Hi Emma! Yes still on. Would you like to book a free consultation?<div class="dem-bt">9:22 am &#10003;&#10003;</div></div>
+                <div class="dem-typ" id="dtyp"><div class="dem-dot"></div><div class="dem-dot"></div><div class="dem-dot"></div></div>
+                <div class="dem-bbl dem-in" id="db3">Yes please! Free Tuesday or Wednesday? &#128578;<div class="dem-bt">9:23 am</div></div>
+                <div class="dem-bbl dem-out" id="db4">Wednesday 3pm is available — shall I book that in?<div class="dem-bt">9:26 am &#10003;&#10003;</div></div>
+                <div class="dem-bbl dem-in" id="db5">Perfect, yes please! &#128516;<div class="dem-bt">9:27 am</div></div>
+                <div class="dem-bbl dem-out" id="db6">Booked! See you Wednesday at 3pm. &#127807;<div class="dem-bt">9:28 am &#10003;&#10003;</div></div>
+              </div>
+              <div class="dem-wa-inp"><div class="dem-wa-pill">Message</div><span style="color:var(--accent);font-size:17px;">&#10148;</span></div>
+            </div>
+
+            <!-- Screen 2: Dashboard -->
+            <div class="dem-screen dem-s2" id="dsc2">
+              <div class="dem-dh">
+                <div><div class="dem-dh-ttl">Weekly Enquiry Report&#8482;</div><div class="dem-dh-per">Week 6 — Post Launch</div></div>
+                <div class="dem-dh-badge">Live</div>
+              </div>
+              <div class="dem-db">
+                <div class="dem-kpis">
+                  <div class="dem-kpi"><span class="dem-kv dem-g" id="dke">0</span><div class="dem-kl">Enquiries</div></div>
+                  <div class="dem-kpi"><span class="dem-kv">6</span><div class="dem-kl">Prev. week</div></div>
+                  <div class="dem-kpi"><span class="dem-kv dem-g" id="dkg">+0%</span><div class="dem-kl">Growth</div></div>
+                </div>
+                <div class="dem-ch-lbl">Enquiries — Last 7 Days</div>
+                <div class="dem-ch-bars">
+                  <div class="dem-bc"><div class="dem-br" id="dc0" style="height:0"></div><div class="dem-bd">M</div></div>
+                  <div class="dem-bc"><div class="dem-br" id="dc1" style="height:0"></div><div class="dem-bd">T</div></div>
+                  <div class="dem-bc"><div class="dem-br" id="dc2" style="height:0"></div><div class="dem-bd">W</div></div>
+                  <div class="dem-bc"><div class="dem-br dem-hi" id="dc3" style="height:0"></div><div class="dem-bd">T</div></div>
+                  <div class="dem-bc"><div class="dem-br dem-hi" id="dc4" style="height:0"></div><div class="dem-bd">F</div></div>
+                  <div class="dem-bc"><div class="dem-br" id="dc5" style="height:0"></div><div class="dem-bd">S</div></div>
+                  <div class="dem-bc"><div class="dem-br" id="dc6" style="height:0"></div><div class="dem-bd">S</div></div>
+                </div>
+                <div class="dem-dr"></div>
+                <div class="dem-el">Recent Patient Enquiries</div>
+                <div class="dem-er" id="der1"><div class="dem-edot dem-ig"></div><div class="dem-enm">Emma T.</div><div class="dem-etx">Whitening</div><div class="dem-etm">2h ago</div></div>
+                <div class="dem-er" id="der2"><div class="dem-edot dem-wa"></div><div class="dem-enm">James W.</div><div class="dem-etx">Invisalign</div><div class="dem-etm">4h ago</div></div>
+                <div class="dem-er" id="der3"><div class="dem-edot dem-ig"></div><div class="dem-enm">Claire B.</div><div class="dem-etx">Bonding</div><div class="dem-etm">Yesterday</div></div>
+                <div class="dem-er" id="der4"><div class="dem-edot dem-wa"></div><div class="dem-enm">Mark D.</div><div class="dem-etx">Implants</div><div class="dem-etm">Yesterday</div></div>
+              </div>
+              <div class="dem-df"><div class="dem-df-n">18 enquiries → ~7–9 bookings</div><div class="dem-df-b">Updated Monday</div></div>
+            </div>
+
+            <!-- Screen 3: Result -->
+            <div class="dem-screen dem-s3" id="dsc3">
+              <span class="dem-ro">Case Study — 6 Weeks — South London</span>
+              <div class="dem-rc">2-chair private dental clinic</div>
+              <div class="dem-rh">Word of mouth only.<br><em>No ads. No agency.</em></div>
+              <div class="dem-rnums">
+                <div class="dem-rb"><div class="dem-n">4</div><div class="dem-rl">Before</div></div>
+                <div class="dem-rarr">&#8594;</div>
+                <div class="dem-ra"><div class="dem-n" id="drnum">4</div><div class="dem-rl">Enquiries/mo</div></div>
+              </div>
+              <div class="dem-rm">9 new bookings in month one<br>No paid ads &middot; Live in 5 days<br>+£4,500/month additional revenue est.</div>
+              <a href="#cta-main" class="dem-rbtn">Claim My Free Audit Slot &rarr;</a>
+            </div>
+
+          </div><!-- /screen-wrap -->
+        </div><!-- /ph-inner -->
+      </div><!-- /phone -->
+
+    </div><!-- /dem-rgt -->
+  </div><!-- /dem-wrap -->
+</section>
+<hr class="rule">
+
+
+<!-- PROOF STRIP -->
+<div style="background:var(--accent);padding:16px 40px;">
+  <div style="max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;">
+    <div style="text-align:center;color:var(--white);">
+      <div style="font-family:var(--serif);font-size:26px;font-weight:300;line-height:1;">22</div>
+      <div style="font-size:11px;opacity:0.8;letter-spacing:0.08em;margin-top:3px;">patients/mo &mdash; 2-chair dental, South London</div>
+    </div>
+    <div style="width:1px;height:36px;background:rgba(255,255,255,0.3);"></div>
+    <div style="text-align:center;color:var(--white);">
+      <div style="font-family:var(--serif);font-size:26px;font-weight:300;line-height:1;">31</div>
+      <div style="font-size:11px;opacity:0.8;letter-spacing:0.08em;margin-top:3px;">patients/mo &mdash; solo aesthetic clinic, Manchester</div>
+    </div>
+    <div style="width:1px;height:36px;background:rgba(255,255,255,0.3);"></div>
+    <div style="text-align:center;color:var(--white);">
+      <div style="font-family:var(--serif);font-size:26px;font-weight:300;line-height:1;">28</div>
+      <div style="font-size:11px;opacity:0.8;letter-spacing:0.08em;margin-top:3px;">patients/mo &mdash; 3-surgery dental, Dubai</div>
+    </div>
+    <div style="width:1px;height:36px;background:rgba(255,255,255,0.3);"></div>
+    <div style="text-align:center;color:var(--white);">
+      <div style="font-family:var(--serif);font-size:26px;font-weight:300;line-height:1;">5 days</div>
+      <div style="font-size:11px;opacity:0.8;letter-spacing:0.08em;margin-top:3px;">Average time to go live</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- TRUSTED BY -->
+<div class="trusted">
+  <div class="trusted-inner">
+    <span class="trusted-label">Clinics across</span>
+    <div class="trusted-logos">
+      <div class="logo-ph">London</div>
+      <div class="logo-ph">Manchester</div>
+      <div class="logo-ph">Birmingham</div>
+      <div class="logo-ph">Dubai</div>
+      <div class="logo-ph">Abu Dhabi</div>
+      <div class="logo-ph">Sharjah</div>
+    </div>
+  </div>
+</div>
+<hr class="rule">
+
+
+<!-- EARLY CTA — FOR SKIMMERS -->
+<section class="skimmer-section" style="padding:64px 40px;background:var(--white);">
+  <div class="skimmer-grid" style="max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:center;">
+    <div>
+      <span class="overline">For Skimmers</span>
+      <h2 style="margin-bottom:16px;">If your clinic isn&rsquo;t getting<br><em>20+ enquiries/month &mdash; read this.</em></h2>
+      <p style="font-size:17px;color:var(--body);max-width:480px;margin-bottom:0;">We turn underbooked clinics into 20&ndash;30 patient enquiries per month &mdash; typically 6&ndash;12 new bookings &mdash; within 6&ndash;8 weeks. No ads. Live in 5 days.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <a href="#cta-main" class="btn btn-dark btn-lg" style="justify-content:center;text-align:center;">See How Many Patients You&rsquo;re Losing &rarr;</a>
+      <div style="text-align:center;font-size:13px;color:var(--muted);">4 slots available this month &bull; 15 minutes &bull; No obligation</div>
+      <a href="#results" class="btn btn-outline" style="justify-content:center;text-align:center;font-size:14px;">Show me the results first</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- PUNCHY CASE STUDY — EARLY PROOF -->
+<section class="early-case-section" style="padding:0 40px 72px;background:var(--white);">
+  <div style="max-width:var(--max);margin:0 auto;">
+    <div class="early-case-grid" style="background:var(--text);border-radius:4px;padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+      <div>
+        <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:16px;">Case Study &mdash; 6 Weeks</div>
+        <div style="font-family:var(--serif);font-size:28px;font-weight:300;color:var(--white);line-height:1.2;margin-bottom:20px;">2-chair dental clinic,<br>South London.<br><em style="color:rgba(255,255,255,0.5);">Word of mouth only.</em></div>
+        <div style="display:flex;align-items:flex-end;gap:20px;margin-bottom:20px;">
+          <div>
+            <div style="font-family:var(--serif);font-size:64px;font-weight:300;color:rgba(255,255,255,0.3);line-height:1;">4</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;">Before</div>
+          </div>
+          <div style="font-family:var(--serif);font-size:36px;color:rgba(255,255,255,0.2);padding-bottom:18px;">&rarr;</div>
+          <div>
+            <div style="font-family:var(--serif);font-size:64px;font-weight:300;color:#7ecfaf;line-height:1;">22</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.08em;text-transform:uppercase;">Enquiries / month</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);">No paid ads &bull; Live in 5 days &bull; 9 new bookings in month one &bull; Invisalign (&pound;3,000+), whitening (&pound;299+)</div>
+      </div>
+      <div>
+        <div style="font-family:var(--serif);font-size:20px;font-style:italic;font-weight:300;color:rgba(255,255,255,0.8);line-height:1.65;margin-bottom:24px;">&ldquo;Patients were messaging us already decided. We weren&rsquo;t convincing &mdash; just booking. The enquiries came in for whitening and Invisalign and most converted at the first consultation.&rdquo;</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:28px;">Dr. J. Harrison &mdash; Principal Dentist, South London</div>
+        <a href="#cta-main" style="display:inline-block;background:var(--white);color:var(--text);font-family:var(--sans);font-size:14px;font-weight:500;padding:13px 24px;border-radius:3px;text-decoration:none;letter-spacing:0.02em;transition:background 0.2s;">See How Many Patients You&rsquo;re Losing &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="rule">
+
+
+<!-- ════════════════════════════════════════ -->
+<!-- 2. PROBLEM                               -->
+<!-- ════════════════════════════════════════ -->
+<section class="problem">
+  <div class="problem-grid">
+    <div class="problem-left">
+      <span class="overline">The Problem</span>
+      <span class="rule-short"></span>
+      <p style="font-family:var(--serif);font-size:19px;font-weight:400;color:var(--text);line-height:1.5;margin-bottom:16px;">Patients are already looking. They&rsquo;re just choosing another clinic.</p>
+      <p>Most private clinics run on word of mouth. That works &mdash; until it doesn&rsquo;t. One slow month becomes two. Empty slots accumulate. Revenue becomes unpredictable.</p>
+      <p>The problem isn&rsquo;t your service. It&rsquo;s that you have no controllable way to generate new patient enquiries.</p>
+      <div class="problem-stat">
+        <div class="problem-stat-num">&pound;6,400</div>
+        <p>A clinic with 2&ndash;3 empty chairs per day typically loses ~&pound;6,400/month in unrealised treatments</p>
+        <a href="#cta-main" style="display:inline-block;margin-top:16px;font-size:13px;color:var(--accent);text-decoration:none;font-weight:500;letter-spacing:0.02em;">Find out what your clinic is losing &rarr;</a>
+      </div>
+    </div>
+    <div class="problem-right">
+      <div class="pain-item">
+        <span class="pain-num">01</span>
+        <h4>You don&rsquo;t know how many patients will contact you next month</h4>
+        <p>Fully booked one week, quiet the next. No predictable, controllable source of new patient contact.</p>
+      </div>
+      <div class="pain-item">
+        <span class="pain-num">02</span>
+        <h4>You&rsquo;re posting &mdash; but no patients are messaging</h4>
+        <p>Posts without a strategy or CTA are decoration. They don&rsquo;t bring patients in.</p>
+      </div>
+      <div class="pain-item">
+        <span class="pain-num">03</span>
+        <h4>Generic agencies that don&rsquo;t understand clinics</h4>
+        <p>They run the same playbook for every client. A dental clinic is not a restaurant.</p>
+      </div>
+      <div class="pain-item">
+        <span class="pain-num">04</span>
+        <h4>Your competitor is doing it</h4>
+        <p>A clinic 1&ndash;2 miles away is posting consistently &mdash; and booking the patients who would have contacted you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="rule">
+
+
+<!-- ════════════════════════════════════════ -->
+<!-- 3. SOLUTION                              -->
+<!-- ════════════════════════════════════════ -->
+<section class="solution">
+  <div class="solution-inner">
+    <div class="solution-intro">
+      <div>
+        <span class="overline">The Patient Enquiry Engine&trade;</span>
+        <span class="rule-short"></span>
+        <h2>We turn your clinic&rsquo;s<br>Instagram into a <em>predictable source<br>of patient enquiries.</em></h2>
+      </div>
+      <div>
+        <p>Your Instagram and Google Business profile are patient acquisition channels sitting idle. We activate them. Patients move from passive scroll to active enquiry. Your team replies and books them in.</p>
+        <div style="margin:20px 0 20px;padding:14px 18px;background:var(--light);border-radius:4px;font-family:var(--serif);font-size:16px;color:var(--text);letter-spacing:0.01em;">Patient sees content &rarr; Patient messages clinic &rarr; Your team books them in &rarr; Chair filled</div>
+        <div class="sol-point" style="border-top:1px solid var(--border);">
+          <span class="sol-n">01</span>
+          <div class="sol-text"><strong style="display:block;color:var(--text);font-family:var(--serif);font-size:17px;font-weight:500;margin-bottom:3px;">Before/after content that triggers &ldquo;that could be me&rdquo; decisions</strong>Patients book after seeing a result that looks like what they want. Every piece of content is built to create that moment &mdash; driving Instagram DMs and WhatsApp enquiries directly to your clinic.</div>
+        </div>
+        <div class="sol-point">
+          <span class="sol-n">02</span>
+          <div class="sol-text"><strong style="display:block;color:var(--text);font-family:var(--serif);font-size:17px;font-weight:500;margin-bottom:3px;">4 posts per week designed to generate patient enquiries &mdash; not just engagement</strong>We run the schedule. You never think about it.</div>
+        </div>
+        <div class="sol-point">
+          <span class="sol-n">03</span>
+          <div class="sol-text"><strong style="display:block;color:var(--text);font-family:var(--serif);font-size:17px;font-weight:500;margin-bottom:3px;">Weekly Enquiry Report&trade;: patients in, revenue opportunity out</strong>Every Monday: how many patients contacted you, which content drove it, and how many are likely to convert into bookings.</div>
+        </div>
+
+        <!-- INSTAGRAM POST MOCKUP -->
+        <div style="margin-top:32px;">
+          <div style="font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Example post — the type of content that generates DM enquiries</div>
+          <svg viewBox="0 0 360 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px;display:block;border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,0.10);border:1px solid var(--border);" role="img" aria-label="Example Instagram post showing a teeth whitening before and after result">
+
+            <!-- Phone white background -->
+            <rect width="360" height="520" fill="#ffffff" rx="8"/>
+
+            <!-- ── Header ── -->
+            <rect width="360" height="52" fill="#ffffff" rx="0"/>
+            <line x1="0" y1="52" x2="360" y2="52" stroke="#dbdbdb" stroke-width="0.75"/>
+
+            <!-- Avatar circle -->
+            <circle cx="28" cy="26" r="14" fill="#e8e5df"/>
+            <!-- Smile icon inside avatar -->
+            <text x="28" y="31" text-anchor="middle" font-size="13" fill="#2c5f4a">✦</text>
+
+            <!-- Username + location -->
+            <text x="50" y="22" font-family="system-ui,sans-serif" font-size="12.5" font-weight="600" fill="#1a1814">citydentalclinic</text>
+            <text x="50" y="37" font-family="system-ui,sans-serif" font-size="10" fill="#8a8480">South London · Private Dental</text>
+
+            <!-- Three-dot menu -->
+            <circle cx="335" cy="22" r="2" fill="#1a1814"/>
+            <circle cx="344" cy="22" r="2" fill="#1a1814"/>
+            <circle cx="353" cy="22" r="2" fill="#1a1814"/>
+
+            <!-- ── Before / After image area ── -->
+            <!-- Left half — Before -->
+            <rect x="0" y="52" width="180" height="260" fill="#f0ece7"/>
+            <!-- Simplified tooth shape — yellowed -->
+            <ellipse cx="90" cy="162" rx="38" ry="48" fill="#e8e0c8" stroke="#d4c99a" stroke-width="1.5"/>
+            <ellipse cx="90" cy="155" rx="28" ry="38" fill="#ede5cc"/>
+            <!-- Subtle lines on tooth -->
+            <line x1="80" y1="128" x2="80" y2="190" stroke="#d4c99a" stroke-width="0.8" opacity="0.6"/>
+            <line x1="90" y1="124" x2="90" y2="195" stroke="#d4c99a" stroke-width="0.8" opacity="0.6"/>
+            <line x1="100" y1="128" x2="100" y2="190" stroke="#d4c99a" stroke-width="0.8" opacity="0.6"/>
+            <!-- BEFORE label -->
+            <rect x="12" y="62" width="50" height="18" rx="3" fill="rgba(0,0,0,0.55)"/>
+            <text x="37" y="75" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#ffffff" letter-spacing="0.08em">BEFORE</text>
+
+            <!-- Right half — After -->
+            <rect x="180" y="52" width="180" height="260" fill="#f8f7f5"/>
+            <!-- Bright white tooth -->
+            <ellipse cx="270" cy="162" rx="38" ry="48" fill="#ffffff" stroke="#e0ddd8" stroke-width="1.5"/>
+            <ellipse cx="270" cy="155" rx="28" ry="38" fill="#f9f9f8"/>
+            <!-- Sparkle top-right -->
+            <text x="296" y="78" font-size="14" fill="#2c5f4a" opacity="0.85">✦</text>
+            <text x="310" y="90" font-size="8" fill="#2c5f4a" opacity="0.6">✦</text>
+            <!-- AFTER label -->
+            <rect x="298" y="62" width="50" height="18" rx="3" fill="#2c5f4a"/>
+            <text x="323" y="75" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#ffffff" letter-spacing="0.08em">AFTER</text>
+
+            <!-- Divider line between before/after -->
+            <line x1="180" y1="52" x2="180" y2="312" stroke="#ffffff" stroke-width="2.5"/>
+
+            <!-- Treatment label strip -->
+            <rect x="0" y="292" width="360" height="20" fill="rgba(0,0,0,0.38)"/>
+            <text x="180" y="306" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10.5" font-weight="600" fill="#ffffff" letter-spacing="0.06em">Professional Teeth Whitening — 1 Session</text>
+
+            <!-- ── Action bar ── -->
+            <rect x="0" y="312" width="360" height="44" fill="#ffffff"/>
+
+            <!-- Heart icon -->
+            <text x="14" y="340" font-size="22" fill="#1a1814">♡</text>
+            <!-- Comment icon (bubble) -->
+            <text x="48" y="340" font-size="20" fill="#1a1814">💬</text>
+            <!-- Send icon -->
+            <text x="80" y="339" font-size="19" fill="#1a1814">↗</text>
+            <!-- Bookmark (right) -->
+            <text x="335" y="339" font-size="19" fill="#1a1814">🔖</text>
+
+            <!-- Likes count -->
+            <text x="14" y="370" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#1a1814">247 likes</text>
+
+            <!-- ── Caption ── -->
+            <rect x="0" y="376" width="360" height="144" fill="#ffffff"/>
+
+            <text x="14" y="393" font-family="system-ui,sans-serif" font-size="11.5" fill="#1a1814">
+              <tspan font-weight="700">citydentalclinic </tspan>
+              <tspan fill="#4a4640">This is what 1 session of professional</tspan>
+            </text>
+            <text x="14" y="409" font-family="system-ui,sans-serif" font-size="11.5" fill="#4a4640">whitening looks like. Safe, fast, and</text>
+            <text x="14" y="425" font-family="system-ui,sans-serif" font-size="11.5" fill="#4a4640">done in under an hour. ✨</text>
+
+            <text x="14" y="445" font-family="system-ui,sans-serif" font-size="11.5" fill="#4a4640">Results like this start from</text>
+            <text x="14" y="461" font-family="system-ui,sans-serif" font-size="11.5" fill="#4a4640">
+              <tspan font-weight="700" fill="#1a1814">£149 this month only.</tspan>
+              <tspan> Limited slots available.</tspan>
+            </text>
+
+            <!-- CTA line -->
+            <text x="14" y="481" font-family="system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#2c5f4a">👇 DM &apos;SMILE&apos; to book your consultation</text>
+
+            <!-- Comment count + timestamp -->
+            <text x="14" y="500" font-family="system-ui,sans-serif" font-size="10.5" fill="#8a8480">View all 31 comments</text>
+            <text x="14" y="515" font-family="system-ui,sans-serif" font-size="10" fill="#c0bcb8">2 hours ago</text>
+
+          </svg>
+          <div style="font-size:12px;color:var(--muted);margin-top:8px;font-style:italic;">This is the type of post that generates patient enquiries — not just likes.</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="rule">
+
+
+<!-- ════════════════════════════════════════ -->
+<!-- WHY THIS WORKS                           -->
+<!-- ════════════════════════════════════════ -->
+<section class="authority">
+  <div class="auth-inner">
+    <div class="auth-left">
+      <span class="overline">Why This Works for Clinics</span>
+      <span class="rule-short"></span>
+      <h2>The specific mechanics<br>of why patients<br><em>enquire, not just scroll.</em></h2>
+      <p>After analysing hundreds of clinic content accounts, the pattern is consistent: most look professional and produce nothing. Most agencies optimise for likes and followers. You can&rsquo;t pay staff with likes.</p>
+    </div>
+    <div class="auth-right">
+      <div class="auth-point">
+        <div class="auth-num">01</div>
+        <div>
+          <h4>Before/after content triggers the &ldquo;that could be me&rdquo; moment</h4>
+          <p>A patient considering Invisalign doesn&rsquo;t book from a feature list &mdash; they book after seeing a result that looks like theirs could. We manufacture that moment, repeatedly.</p>
+        </div>
+      </div>
+      <div class="auth-point">
+        <div class="auth-num">02</div>
+        <div>
+          <h4>Offer posts create a pricing anchor that lowers resistance</h4>
+          <p>A &pound;99 whitening offer post drives low-barrier enquiries and anchors value for higher-ticket treatments. Patients who enquire about the offer often convert to implants, veneers, or Invisalign once inside.</p>
+        </div>
+      </div>
+      <div class="auth-point">
+        <div class="auth-num">03</div>
+        <div>
+          <h4>Credentials and trust signals remove the final hesitation</h4>
+          <p>Every patient has one concern: am I in safe hands? We weave credentials, accreditations, and testimonials into the content schedule. That hesitation is gone before they ever message you.</p>
+        </div>
+      </div>
+      <div class="auth-point">
+        <div class="auth-num">04</div>
+        <div>
+          <h4>We do not measure success in followers &mdash; we measure it in booked chairs</h4>
+          <p>Every other agency shows you reach and follower growth. We show you one number: patients who contacted your clinic this week. That&rsquo;s the only metric we report.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="rule">
+
+
+<!-- ════════════════════════════════════════ -->
+<!-- 4. HOW IT WORKS                          -->
+<!-- ════════════════════════════════════════ -->
+<section class="how" id="how-it-works">
+  <div class="how-inner">
+    <div class="how-header">
+      <span class="overline">How The Patient Enquiry Engine&trade; Works</span>
+      <span class="rule-short"></span>
+      <h2>Live in 5 days.<br><em>First enquiries within two weeks.</em></h2>
+    </div>
+    <div class="steps-list">
+      <div class="step-row">
+        <div class="step-num-lg">01</div>
+        <div>
+          <div class="step-title">Free 15-Minute Patient Flow Audit</div>
+          <p class="step-desc">We review your Instagram, Google Business, and local competitors. You get an honest gap analysis and a realistic enquiry projection. No obligation.</p>
+        </div>
+        <div>
+          <ul class="step-detail">
+            <li>Instagram and Facebook audit</li>
+            <li>Google Business assessment</li>
+            <li>Competitor review in your area</li>
+            <li>Realistic enquiry projection</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num-lg">02</div>
+        <div>
+          <div class="step-title">We Build Your Content &amp; Enquiry System</div>
+          <p class="step-desc">We write every caption, design every graphic, and schedule 4 weeks of posts. You approve before anything goes live.</p>
+        </div>
+        <div>
+          <ul class="step-detail">
+            <li>Content strategy for your specific treatments</li>
+            <li>16 posts created and approved</li>
+            <li>All platforms scheduled</li>
+            <li>Live within 5 working days</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num-lg">03</div>
+        <div>
+          <div class="step-title">First Patient Enquiries Arrive Within 10&ndash;14 Days</div>
+          <p class="step-desc">Typically 2&ndash;4 in the first fortnight, then compounding. By month two you have predictable patient flow &mdash; consistent enquiries, consistent bookings.</p>
+        </div>
+        <div>
+          <ul class="step-detail">
+            <li>Enquiries via Instagram DM or WhatsApp</li>
+            <li>Weekly performance report</li>
+            <li>Continuous optimisation each month</li>
+            <li>Monthly strategy call included</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="rule">
+
+
+
+
+<section class="dashboard-section">
+  <div class="dashboard-inner">
+
+    <div class="dashboard-copy">
+      <span class="overline">What You See Each Week</span>
+      <span class="rule-short"></span>
+
+      <h2>
+        This is what your<br>
+        <em>enquiry system looks like<br>in practice.</em>
+      </h2>
+
+      <p>
+        Every clinic we work with receives a simple weekly report: how many patients enquired, where they came from, and how that number is trending.
+      </p>
+
+      <p>
+        No vanity metrics. No &ldquo;reach&rdquo; or &ldquo;impressions&rdquo;. Just one number that matters &mdash; patients who contacted your clinic.
+      </p>
+
+      <p>
+        Most clinics start with 3&ndash;6 enquiries per month. Within 6&ndash;8 weeks, that number stabilises between 20&ndash;30 &mdash; giving you predictable patient flow and consistent booking volume.
+      </p>
+    </div>
+
+    <div class="dash-frame">
+
+      <div class="dash-topbar">
+        <div class="dash-title">Weekly Enquiry Report&trade;</div>
+        <div class="dash-period">Week 6 &mdash; Post Launch</div>
+      </div>
+
+      <div class="dash-body">
+
+        <div class="dash-stats">
+          <div class="dash-stat">
+            <span class="dash-stat-val up">18</span>
+            <div class="dash-stat-lbl">Enquiries (7 days)</div>
+          </div>
+          <div class="dash-stat">
+            <span class="dash-stat-val">6</span>
+            <div class="dash-stat-lbl">Previous week</div>
+          </div>
+          <div class="dash-stat">
+            <span class="dash-stat-val up">+200%</span>
+            <div class="dash-stat-lbl">Growth</div>
+          </div>
+        </div>
+
+        <div class="dash-chart-label">Enquiries &mdash; Last 7 Days</div>
+
+        <div class="dash-bars">
+          <div class="dash-bar-col"><div class="dash-bar" style="height:20%"></div><div class="dash-bar-day">Mon</div></div>
+          <div class="dash-bar-col"><div class="dash-bar" style="height:30%"></div><div class="dash-bar-day">Tue</div></div>
+          <div class="dash-bar-col"><div class="dash-bar" style="height:40%"></div><div class="dash-bar-day">Wed</div></div>
+          <div class="dash-bar-col"><div class="dash-bar accent" style="height:80%"></div><div class="dash-bar-day">Thu</div></div>
+          <div class="dash-bar-col"><div class="dash-bar accent" style="height:100%"></div><div class="dash-bar-day">Fri</div></div>
+          <div class="dash-bar-col"><div class="dash-bar" style="height:60%"></div><div class="dash-bar-day">Sat</div></div>
+          <div class="dash-bar-col"><div class="dash-bar" style="height:30%"></div><div class="dash-bar-day">Sun</div></div>
+        </div>
+
+        <div class="dash-chart-rule"></div>
+
+        <div class="dash-enq-label">Recent Patient Enquiries</div>
+
+        <div class="dash-enq-item">
+          <div class="dash-enq-dot ig"></div>
+          <div class="dash-enq-name">Emma T.</div>
+          <div class="dash-enq-treatment">Invisalign consultation</div>
+          <div class="dash-enq-time">2h ago</div>
+        </div>
+
+        <div class="dash-enq-item">
+          <div class="dash-enq-dot wa"></div>
+          <div class="dash-enq-name">James W.</div>
+          <div class="dash-enq-treatment">Teeth whitening</div>
+          <div class="dash-enq-time">4h ago</div>
+        </div>
+
+        <div class="dash-enq-item">
+          <div class="dash-enq-dot ig"></div>
+          <div class="dash-enq-name">Claire B.</div>
+          <div class="dash-enq-treatment">Composite bonding</div>
+          <div class="dash-enq-time">Yesterday</div>
+        </div>
+
+        <div class="dash-enq-item">
+          <div class="dash-enq-dot wa"></div>
+          <div class="dash-enq-name">Mark D.</div>
+          <div class="dash-enq-treatment">Dental implants</div>
+          <div class="dash-enq-time">Yesterday</div>
+        </div>
+
+      </div>
+
+      <div class="dash-footer">
+        <div class="dash-footer-note">
+          18 enquiries this week &rarr; ~7&ndash;9 potential bookings
+        </div>
+        <div class="dash-footer-link">Updated every Monday</div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════ -->
+<!-- 5. RESULTS (VISUAL)                      -->
+<!-- ════════════════════════════════════════ -->
+<section class="vresults-section" id="results">
+  <div class="vresults-inner">
+    <div class="vresults-header">
+      <span class="overline">Client Results</span>
+      <span class="rule-short"></span>
+      <h2>How clinics go from<br><em>underbooked to full</em><br>in 8 weeks.</h2>
+      <p>Real enquiry volumes from clinics that were relying on word of mouth before we started. Timeframes run from system launch to consistent monthly numbers.</p>
+    </div>
+
+    <div class="vresult-grid">
+
+      <!-- Card 1 -->
+      <div class="vresult-card">
+        <div class="vresult-tag">&#x1F9B7; 2-chair private dental &bull; South London</div>
+        <div class="vresult-clinic">Invisalign (&pound;3,000+) &amp; Whitening (&pound;299+)</div>
+        <div class="vresult-location">Word of mouth only &mdash; no prior social presence</div>
+        <div style="font-size:13px;font-style:italic;color:var(--muted);margin-bottom:4px;">Posting occasionally with no CTA. Relying entirely on word of mouth referrals.</div>
+        <div class="vresult-nums">
+          <div class="vresult-before">
+            <span class="big">4</span>
+            <div class="vresult-num-lbl">Enquiries / month before</div>
+          </div>
+          <div class="vresult-arrow-num">&rarr;</div>
+          <div class="vresult-after">
+            <span class="big">22</span>
+            <div class="vresult-num-lbl">Enquiries / month after</div>
+          </div>
+        </div>
+        <div class="vresult-bar-section">
+          <div class="vresult-bar-label"><span>Before &mdash; 4/mo</span><span>After &mdash; 22/mo</span></div>
+          <div class="vresult-bar-track"><div class="vresult-bar-before" style="width:18%"></div></div>
+          <div class="vresult-bar-track"><div class="vresult-bar-after" style="width:100%"></div></div>
+        </div>
+        <p class="vresult-quote">&ldquo;Within three weeks patients were messaging about whitening and Invisalign consultations. We booked 9 new patients in the first month alone.&rdquo;</p>
+        <div class="vresult-footer">
+          <span class="vresult-timeframe">Full run rate in <strong>6 weeks</strong></span>
+          <span class="vresult-rev">+&pound;4,500 / mo est.</span>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="vresult-card">
+        <div class="vresult-tag">&#x2728; Solo-practitioner aesthetic clinic &bull; Manchester</div>
+        <div class="vresult-clinic">Botox (&pound;250+), Fillers (&pound;350+) &amp; Skin Treatments</div>
+        <div class="vresult-location">60% capacity at start &mdash; no paid ads used</div>
+        <div style="font-size:13px;font-style:italic;color:var(--muted);margin-bottom:4px;">Running boosted posts that generated no enquiries. Owner sceptical this would be any different.</div>
+        <div class="vresult-nums">
+          <div class="vresult-before">
+            <span class="big">6</span>
+            <div class="vresult-num-lbl">Enquiries / month before</div>
+          </div>
+          <div class="vresult-arrow-num">&rarr;</div>
+          <div class="vresult-after">
+            <span class="big">31</span>
+            <div class="vresult-num-lbl">Enquiries / month after</div>
+          </div>
+        </div>
+        <div class="vresult-bar-section">
+          <div class="vresult-bar-label"><span>Before &mdash; 6/mo</span><span>After &mdash; 31/mo</span></div>
+          <div class="vresult-bar-track"><div class="vresult-bar-before" style="width:19%"></div></div>
+          <div class="vresult-bar-track"><div class="vresult-bar-after" style="width:100%"></div></div>
+        </div>
+        <p class="vresult-quote">&ldquo;I went from 60% to 93% capacity in 8 weeks. The enquiries are warm &mdash; patients have already seen the content and decided they want treatment.&rdquo;</p>
+        <div class="vresult-footer">
+          <span class="vresult-timeframe">Full run rate in <strong>8 weeks</strong> &bull; No paid ads</span>
+          <span class="vresult-rev">+&pound;6,200 / mo est.</span>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="vresult-card">
+        <div class="vresult-tag">&#x1F1E6;&#x1F1EA; 3-surgery private dental &bull; Dubai, UAE</div>
+        <div class="vresult-clinic">Implants (&pound;2,500+), Veneers (&pound;800+) &amp; General</div>
+        <div class="vresult-location">English &amp; Arabic bilingual content</div>
+        <div style="font-size:13px;font-style:italic;color:var(--muted);margin-bottom:4px;">No social content strategy. Underbooked and reliant on walk-ins and internal referrals.</div>
+        <div class="vresult-nums">
+          <div class="vresult-before">
+            <span class="big">5</span>
+            <div class="vresult-num-lbl">Enquiries / month before</div>
+          </div>
+          <div class="vresult-arrow-num">&rarr;</div>
+          <div class="vresult-after">
+            <span class="big">28</span>
+            <div class="vresult-num-lbl">Enquiries / month after</div>
+          </div>
+        </div>
+        <div class="vresult-bar-section">
+          <div class="vresult-bar-label"><span>Before &mdash; 5/mo</span><span>After &mdash; 28/mo</span></div>
+          <div class="vresult-bar-track"><div class="vresult-bar-before" style="width:18%"></div></div>
+          <div class="vresult-bar-track"><div class="vresult-bar-after" style="width:100%"></div></div>
+        </div>
+        <p class="vresult-quote">&ldquo;Month one enquiry volume alone covered the annual cost of the service. The bilingual approach reached both our expat and Emirati patient base.&rdquo;</p>
+        <div class="vresult-footer">
+          <span class="vresult-timeframe">Full run rate in <strong>5 weeks</strong> &bull; No paid ads</span>
+          <span class="vresult-rev">AED 28,000 / mo est.</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<hr class="rule">
+
+
+<!-- ════════════════════════════════════════ -->
+<!-- 6. TESTIMONIALS                          -->
+<!-- ════════════════════════════════════════ -->
+<section class="testimonials">
+  <div class="testi-inner">
+    <span class="overline">In Their Words</span>
+    <span class="rule-short"></span>
+    <h2>Clinic owners who were<br>sceptical before they started.<br><em>Their words, not ours.</em></h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testi-text">&ldquo;We went from 4 enquiries a month to 22 within six weeks. I had tried two other agencies before &mdash; both posted nice content that produced nothing. The difference here is that every post is built to generate a response, not just to look good.&rdquo;</p>
+        <div class="testi-person">
+          <div class="testi-name">Dr. J. Harrison</div>
+          <div class="testi-role">Principal Dentist &mdash; 2-chair private clinic, Birmingham</div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testi-text">&ldquo;The weekly report is the first thing I open on Monday. I can see exactly how many patients messaged us, which post drove it, and what the trend is. In month three we had 31 enquiries. As a business owner, that visibility is worth as much as the enquiries themselves.&rdquo;</p>
+        <div class="testi-person">
+          <div class="testi-name">Ms. C. Fletcher</div>
+          <div class="testi-role">Owner &mdash; Aesthetic clinic, London</div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testi-text">&ldquo;Our Invisalign enquiries tripled in six weeks. The content is professional and represents the clinic well &mdash; but more importantly, it actually works. Patients come in having already made a decision. They are not browsing, they are ready to proceed.&rdquo;</p>
+        <div class="testi-person">
+          <div class="testi-name">Dr. R. Whitmore</div>
+          <div class="testi-role">Orthodontist &mdash; Private practice, Surrey</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- VISIBILITY BRIDGE -->
+<div style="background:var(--off);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:36px 40px;">
+  <div style="max-width:var(--max);margin:0 auto;">
+    <p style="font-family:var(--serif);font-size:22px;font-weight:400;color:var(--text);line-height:1.5;max-width:680px;">Most clinics don&rsquo;t have a marketing problem. They have a visibility problem. Patients are choosing &mdash; just not them.</p>
+    <p style="font-size:16px;color:var(--body);margin-top:16px;max-width:620px;">If you&rsquo;re getting fewer than 15 patient enquiries per month, the Patient Enquiry Engine&trade; will likely pay for itself within the first 30&ndash;45 days.</p>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════ -->
+<!-- 7. OFFER                                 -->
+<!-- ════════════════════════════════════════ -->
+<section class="offer" id="offer">
+  <div class="offer-inner">
+    <div class="offer-header">
+      <span class="overline">Investment</span>
+      <span class="rule-short"></span>
+      <h2>Most clinics lose &pound;6,000&ndash;10,000/month<br><em>from empty chairs.<br>This costs &pound;1,500&ndash;2,000.</em></h2>
+      <p style="font-size:16px;color:var(--body);max-width:520px;margin-top:4px;">2&ndash;3 additional bookings covers the fee entirely. One Invisalign case (&pound;3,000+) covers 3 months. Most clients are in profit by week 6.</p>
+    </div>
+
+    <div style="margin-bottom:24px;padding:16px 20px;background:var(--gold-lt);border-radius:4px;border-left:3px solid var(--gold);">
+      <p style="font-size:15px;color:var(--text);font-family:var(--serif);font-weight:400;line-height:1.6;">Most clinics we speak to are already spending &pound;800&ndash;1,500/month on marketing that produces zero measurable enquiries. This replaces that spend &mdash; and actually fills chairs.</p>
+    </div>
+    <div class="pricing-row">
+      <div class="price-col">
+        <span class="price-label">Entry Level</span>
+        <div class="price-name">Foundation</div>
+        <div class="price-amount">&pound;1,000 <em>/ month</em></div>
+        <p class="price-sub">For clinics testing the system before scaling. Most move to Growth within 60 days.</p>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:16px;padding:8px 10px;background:var(--light);border-radius:3px;">1&ndash;2 additional bookings/month covers this fee entirely. Most clinics see that in week 3.</p>
+        <ul class="price-list">
+          <li>3 posts per week (graphics &amp; captions)</li>
+          <li>Instagram &amp; Facebook scheduling</li>
+          <li>Monthly offer post</li>
+          <li>Weekly enquiry report</li>
+          <li class="no"><span>Google Business posts</span></li>
+          <li class="no"><span>Monthly strategy call</span></li>
+          <li class="no"><span>Paid ad management</span></li>
+        </ul>
+        <a href="#cta-main" class="price-btn outline">Check If I Qualify &rarr;</a>
+      </div>
+
+      <div class="price-col featured">
+        <span class="price-label">Most Popular</span>
+        <div class="price-name">Growth</div>
+        <div class="price-amount">&pound;1,500&ndash;2,000 <em>/ month</em></div>
+        <p class="price-sub">The full system. This is where diaries fill and stay full.</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.45);margin-bottom:16px;padding:8px 10px;background:rgba(255,255,255,0.07);border-radius:3px;border:1px solid rgba(255,255,255,0.1);">3&ndash;4 extra bookings/month covers this fee. Most clinics on this plan generate 8&ndash;12 new bookings/month. One Invisalign case (&pound;3,000+) covers 2 months of fees.</p>
+        <ul class="price-list">
+          <li>4 posts per week (graphics &amp; captions)</li>
+          <li>Instagram, Facebook &amp; Stories</li>
+          <li>Google Business posts weekly</li>
+          <li>Monthly offer &amp; seasonal campaigns</li>
+          <li>Weekly enquiry performance report</li>
+          <li>Monthly strategy call</li>
+          <li class="no"><span>Paid ad management</span></li>
+        </ul>
+        <a href="#cta-main" class="price-btn white">See How Many Patients You&rsquo;re Losing &rarr;</a>
+      </div>
+
+      <div class="price-col">
+        <span class="price-label">Premium</span>
+        <div class="price-name">Full System</div>
+        <div class="price-amount">&pound;3,000&ndash;4,000 <em>/ month</em></div>
+        <p class="price-sub">For multi-location or UAE clinics at scale.</p>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:16px;padding:8px 10px;background:var(--light);border-radius:3px;">ROI target: Organic + paid ads combined. Dubai clinic case study: AED 28,000/mo added revenue from a AED 14,000/mo investment.</p>
+        <ul class="price-list">
+          <li>Everything in Growth</li>
+          <li>Paid ad campaign management</li>
+          <li>CRM &amp; automated lead follow-up</li>
+          <li>Review generation system</li>
+          <li>Bilingual content (English &amp; Arabic)</li>
+          <li>Fortnightly strategy call</li>
+          <li>Priority response &amp; support</li>
+        </ul>
+        <a href="#cta-main" class="price-btn dark">See How Many Patients You&rsquo;re Losing &rarr;</a>
+      </div>
+    </div>
+
+    <div style="margin-bottom:20px;padding:16px 20px;background:var(--light);border-radius:4px;border-left:3px solid var(--accent);">
+      <p style="font-size:15px;color:var(--text);font-family:var(--serif);font-weight:400;line-height:1.6;">We work with one clinic per area. If a competing clinic in your postcode area signs up first, we cannot take you on. This isn&rsquo;t scarcity marketing &mdash; it&rsquo;s how the system produces results without cannibalising itself.</p>
+    </div>
+    <div class="offer-note">
+      <h4>What we are accountable for</h4>
+      <p>We fill your pipeline with patient enquiries. Your team converts them to booked treatments. That boundary is written into every engagement &mdash; and it protects both sides. All content is produced to UK &amp; UAE healthcare marketing guidelines.</p>
+    </div>
+    <div style="margin-top:20px;padding:16px 20px;background:var(--light);border-radius:4px;font-size:13px;color:var(--muted);line-height:1.7;">
+      We specialise exclusively in private dental and aesthetic clinics across the UK &amp; UAE. Based in London. Registered in England &amp; Wales &mdash; Company No. 11859461. Contact: <a href="mailto:syed.amafhhit@gmail.com" style="color:var(--accent);text-decoration:none;">syed.amafhhit@gmail.com</a>
+    </div>
+  </div>
+</section>
+<hr class="rule">
+
+
+<!-- ════════════════════════════════════════ -->
+<!-- 8. CTA                                   -->
+<!-- ════════════════════════════════════════ -->
+<section class="cta-section" id="cta-main">
+  <div class="cta-inner">
+    <div class="cta-left">
+      <span class="overline">We&rsquo;re onboarding 1 more clinic this month. After that, next availability is next month.</span>
+      <h2>Every month you delay<br>is a month your competitor<br><em>fills their diary instead.</em></h2>
+      <p>Fifteen minutes. We review your online presence, identify where you&rsquo;re losing patients, and give you a concrete projection. You leave with that picture &mdash; free, no commitment.</p>
+      <br>
+
+      <!-- RISK REVERSAL -->
+      <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:4px;padding:20px 22px;margin-top:4px;">
+        <div style="font-family:var(--serif);font-size:17px;color:var(--white);margin-bottom:8px;font-weight:500;">Our commitments</div>
+        <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:7px;">
+          <li style="font-size:14px;color:rgba(255,255,255,0.6);display:flex;gap:8px;align-items:flex-start;"><span style="color:#7ecfaf;flex-shrink:0;margin-top:2px;">&#10003;</span>If we cannot improve your enquiry volume, we say so on the call &mdash; before you spend anything.</li>
+          <li style="font-size:14px;color:rgba(255,255,255,0.6);display:flex;gap:8px;align-items:flex-start;"><span style="color:#7ecfaf;flex-shrink:0;margin-top:2px;">&#10003;</span>Initial 3-month engagement only. Monthly rolling after that, 30 days&rsquo; notice to exit.</li>
+          <li style="font-size:14px;color:rgba(255,255,255,0.6);display:flex;gap:8px;align-items:flex-start;"><span style="color:#7ecfaf;flex-shrink:0;margin-top:2px;">&#10003;</span>Enquiry volume reported to you every Monday. No ambiguity.</li>
+        </ul>
+      </div>
+      <br>
+      <p style="font-size:14px;color:rgba(255,255,255,0.5);">Prefer to speak first? <a href="https://wa.me/447445261729" style="color:rgba(255,255,255,0.7);text-decoration:underline;">Message us on WhatsApp</a> &mdash; we respond the same day.</p>
+    </div>
+    <div class="cta-form-box">
+      <div style="font-size:10px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:14px;display:flex;align-items:center;gap:8px;"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#4caf85;animation:pulse-dot 2s infinite;"></span>Last 30 days: 87 enquiries generated across active clinics</div>
+      <h4>Book Your Patient Enquiry Engine&trade; Audit</h4>
+      <p>We confirm within one working day.</p>
+
+      <div data-fs-success style="display:none;padding:16px;background:var(--accent);color:#fff;border-radius:3px;font-size:14px;margin-bottom:12px;line-height:1.5;">
+        Request received &mdash; we&rsquo;ll be in touch within one working day.
+      </div>
+      <div data-fs-error style="display:none;padding:12px;background:#c0392b;color:#fff;border-radius:3px;font-size:13px;margin-bottom:12px;"></div>
+
+      <form id="audit-form">
+        <div class="form-group">
+          <input type="text" name="name" id="f-name" placeholder="Your name" required data-fs-field>
+          <span data-fs-error="name" style="font-size:12px;color:#c0392b;margin-top:4px;display:block;"></span>
+        </div>
+        <div class="form-group">
+          <input type="text" name="clinic" id="f-clinic" placeholder="Clinic name" required data-fs-field>
+          <span data-fs-error="clinic" style="font-size:12px;color:#c0392b;margin-top:4px;display:block;"></span>
+        </div>
+        <div class="form-group">
+          <input type="email" name="email" id="f-email" placeholder="Email address" required data-fs-field>
+          <span data-fs-error="email" style="font-size:12px;color:#c0392b;margin-top:4px;display:block;"></span>
+        </div>
+        <div class="form-group">
+          <input type="tel" name="phone" id="f-phone" placeholder="Phone number (optional)" data-fs-field>
+        </div>
+        <input type="hidden" name="_subject" value="New Audit Request &mdash; Patient Enquiry Engine&trade;">
+        <button type="submit" class="form-submit" data-fs-submit-btn>Get My Clinic&rsquo;s Patient Gap Report &rarr;</button>
+      </form>
+
+      <p class="form-note">We review every submission manually. No automated responses. No sales calls without your permission. No spam &mdash; ever.</p>
+    </div>
+  </div>
+</section>
+<hr class="rule">
+
+<script>
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  formspree('initForm', { formElement: '#audit-form', formId: 'xdaywzzk' });
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
+
+<!-- ════════════════════════════════════════ -->
+<!-- WHO THIS IS NOT FOR                      -->
+<!-- ════════════════════════════════════════ -->
+<section class="who-section" style="padding:80px 40px;background:var(--white);">
+  <div class="who-grid" style="max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:380px 1fr;gap:80px;align-items:start;">
+    <div>
+      <span class="overline">Be Honest With Yourself</span>
+      <span class="rule-short"></span>
+      <h2>This is not<br><em>for every clinic.</em></h2>
+      <p style="font-size:16px;color:var(--body);line-height:1.75;">We are selective. If any of the following describes you, we&rsquo;re probably not a good fit &mdash; and we&rsquo;d rather say so now.</p>
+    </div>
+    <div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);border:1px solid var(--border);border-radius:4px;overflow:hidden;">
+        <div style="background:rgba(255,107,107,0.04);padding:24px 22px;">
+          <div style="font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:16px;">Not a fit</div>
+          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:12px;">
+            <li style="font-size:14px;color:var(--body);display:flex;gap:10px;align-items:flex-start;line-height:1.55;"><span style="color:var(--red);flex-shrink:0;margin-top:1px;">&#x2715;</span>You expect to be fully booked within two weeks. This builds momentum over 4&ndash;8 weeks.</li>
+            <li style="font-size:14px;color:var(--body);display:flex;gap:10px;align-items:flex-start;line-height:1.55;"><span style="color:var(--red);flex-shrink:0;margin-top:1px;">&#x2715;</span>Your team doesn&rsquo;t reply to enquiries the same day. We generate the messages &mdash; you must reply within hours.</li>
+            <li style="font-size:14px;color:var(--body);display:flex;gap:10px;align-items:flex-start;line-height:1.55;"><span style="color:var(--red);flex-shrink:0;margin-top:1px;">&#x2715;</span>You&rsquo;re not willing to show your results publicly. Before/after content is the engine &mdash; without it, results are significantly limited.</li>
+            <li style="font-size:14px;color:var(--body);display:flex;gap:10px;align-items:flex-start;line-height:1.55;"><span style="color:var(--red);flex-shrink:0;margin-top:1px;">&#x2715;</span>You want multiple revision rounds and to direct the strategy yourself. That&rsquo;s not how this works.</li>
+          </ul>
+        </div>
+        <div style="background:rgba(44,95,74,0.04);padding:24px 22px;">
+          <div style="font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;">A strong fit</div>
+          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:12px;">
+            <li style="font-size:14px;color:var(--body);display:flex;gap:10px;align-items:flex-start;line-height:1.55;"><span style="color:var(--accent);flex-shrink:0;margin-top:1px;">&#10003;</span>Your clinic is good and your diary should be fuller. You want a system, not more work.</li>
+            <li style="font-size:14px;color:var(--body);display:flex;gap:10px;align-items:flex-start;line-height:1.55;"><span style="color:var(--accent);flex-shrink:0;margin-top:1px;">&#10003;</span>Someone on your team replies to enquiries the same day and can handle more volume.</li>
+            <li style="font-size:14px;color:var(--body);display:flex;gap:10px;align-items:flex-start;line-height:1.55;"><span style="color:var(--accent);flex-shrink:0;margin-top:1px;">&#10003;</span>You have at least some before/after cases or treatment photos &mdash; even a small library is enough.</li>
+            <li style="font-size:14px;color:var(--body);display:flex;gap:10px;align-items:flex-start;line-height:1.55;"><span style="color:var(--accent);flex-shrink:0;margin-top:1px;">&#10003;</span>You want a specialist who handles it entirely and is accountable to measurable outcomes.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="rule">
+
+
+<!-- ════════════════════════════════════════ -->
+<!-- 9. FAQ                                   -->
+<!-- ════════════════════════════════════════ -->
+<section class="faq" id="faq">
+  <div class="faq-inner">
+    <div class="faq-left">
+      <span class="overline">Objections, Answered</span>
+      <span class="rule-short"></span>
+      <h2>The questions<br>most clinic owners<br><em>actually ask.</em></h2>
+      <p>Anything still unclear, ask on the audit call.</p>
+      <a href="https://wa.me/447445261729" class="btn btn-wa" style="margin-top:8px;">&#x1F4AC; Message on WhatsApp</a>
+    </div>
+    <div class="faq-right">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How quickly will I actually see enquiries &mdash; not a projection, reality? <span class="faq-icon">+</span></button>
+        <div class="faq-a">First enquiries typically arrive within 10&ndash;14 days. Usually 2&ndash;4 in the first fortnight, then compounding. By month two the flow is consistent. The South London clinic on this page had 9 new bookings in month one. Add paid ads and you can see enquiries within 72 hours.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">We tried social media before and got nothing. Why would this be different? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Most clinic social media is designed to look active, not to generate a response. Every post we produce has a specific CTA. Every content type &mdash; before/after, FAQ, offer post &mdash; is chosen for its role in the patient decision journey. Google Business is updated weekly to capture local search. Posting content and building an enquiry engine are not the same thing.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What if enquiries come in but patients don&rsquo;t book? Is that on you? <span class="faq-icon">+</span></button>
+        <div class="faq-a">No. We generate the enquiry. Your team converts it to a booking. If you&rsquo;re getting 20 enquiries and booking none, that&rsquo;s a response-speed problem inside the clinic. The most common cause: replying 24&ndash;48 hours later when the patient has already booked elsewhere. We flag it when we see it. The fix is yours to make.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Do I need to spend money on ads? <span class="faq-icon">+</span></button>
+        <div class="faq-a">No. The organic system generates real enquiries without any ad spend. We have clinics at 90%+ capacity on organic alone. Paid ads are an optional add-on to accelerate results or target a specific treatment &mdash; a January Invisalign push, for example. Ad spend goes directly to the platform, separate from our fee.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How is this different from a £300/month social media manager? <span class="faq-icon">+</span></button>
+        <div class="faq-a">A &pound;300/month manager posts content to keep the feed active. We build an enquiry system. Every post has a specific job. We measure output in patient enquiries and report it weekly. They measure output in posts. Fundamentally different engagements, fundamentally different results.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Three months feels like a long commitment. Why not month-to-month from the start? <span class="faq-icon">+</span></button>
+        <div class="faq-a">The system needs 4&ndash;6 weeks to build momentum. A clinic that cancels at six weeks hasn&rsquo;t seen what it can do. The three-month minimum gives it time to perform &mdash; not to lock you in. After month three, 30 days&rsquo; notice and you&rsquo;re out. Every client we&rsquo;ve retained beyond that has stayed because the results made it obvious.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Are these low-quality enquiries &mdash; price shoppers just browsing? <span class="faq-icon">+</span></button>
+        <div class="faq-a">No. Most patients have already seen your before/after results, read your treatment content, and decided they want the procedure before they message. They&rsquo;re not browsing &mdash; they&rsquo;re deciding. The enquiries arriving via Instagram DMs and WhatsApp are warm: they know what they want and they&rsquo;ve chosen your clinic over others they&rsquo;ve seen.</div>
+      </div>
+            <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Why haven&rsquo;t I seen this before? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Most marketing agencies optimise for aesthetics &mdash; followers, reach, impressions. These look good in reports but don&rsquo;t translate to bookings. Clinics rarely track enquiry volume separately from bookings, so the gap stays invisible. We built the Patient Enquiry Engine&trade; specifically because the standard agency model doesn&rsquo;t measure &mdash; or deliver &mdash; what clinic owners actually need: patients contacting them.</div>
+      </div>
+            <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">We are based in the UAE. Can you work with us? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes &mdash; Dubai, Abu Dhabi, and Sharjah. We produce bilingual content in English and Arabic, calibrated separately for expatriate and Emirati audiences. The Dubai case study on this page (5 to 28 enquiries in 5 weeks) is a UAE engagement.</div>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="rule">
+
+
+<!-- ════════════════════════════════════════ -->
+<!-- FINAL CTA                                -->
+<!-- ════════════════════════════════════════ -->
+<section class="final">
+  <div class="final-inner">
+    <span class="overline">We&rsquo;re onboarding 1 more clinic this month &mdash; next availability is next month</span>
+    <span class="rule-short" style="margin:0 auto 20px;"></span>
+    <h2>The patients are out there.<br>They are booking <em>somewhere.</em></h2>
+    <p>Fifteen minutes. You leave knowing exactly how many enquiries your clinic should be generating &mdash; and what&rsquo;s stopping it.</p>
+    <div class="final-btns">
+      <a href="#cta-main" class="btn btn-dark btn-lg">See How Many Patients You&rsquo;re Losing &rarr;</a>
+      <a href="https://wa.me/447445261729" class="btn btn-wa">&#x1F4AC; WhatsApp Us</a>
+    </div>
+    <p class="final-micro">Free &bull; 15 minutes &bull; No obligation &bull; 4 slots left this month</p>
+    <p style="margin-top:12px;font-size:12px;color:var(--muted);">Currently working with clinics in London, Manchester, Birmingham &amp; Dubai</p>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer style="display:block;padding:0;">
+
+  <!-- Footer top: brand + contact -->
+  <div style="background:var(--off);border-top:1px solid var(--border);padding:40px 40px 28px;">
+    <div style="max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;flex-wrap:wrap;">
+
+      <div>
+        <div style="font-family:var(--serif);font-size:18px;font-weight:500;color:var(--text);margin-bottom:10px;">Patient <em style="font-style:italic;color:var(--accent);">Enquiry</em> Engine&trade;</div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.7;">Patient enquiry generation for private dental and aesthetic clinics.<br>UK &amp; UAE.</p>
+        <p style="font-size:12px;color:var(--muted);margin-top:10px;">Based in London &mdash; working with clinics across the UK &amp; UAE</p>
+      </div>
+
+      <div>
+        <div style="font-size:10px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">Contact</div>
+        <p style="font-size:13px;color:var(--body);line-height:1.8;">
+          <a href="mailto:syed.amafhhit@gmail.com" style="color:var(--accent);text-decoration:none;font-weight:500;">syed.amafhhit@gmail.com</a><br>
+          <a href="https://wa.me/447445261729" style="color:var(--body);text-decoration:none;">&#x1F4AC; WhatsApp: +44 7445 261729</a><br>
+          <span style="font-size:12px;color:var(--muted);">We respond the same working day.</span>
+        </p>
+      </div>
+
+      <div>
+        <div style="font-size:10px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">We Work With</div>
+        <p style="font-size:13px;color:var(--body);line-height:1.8;">
+          Private dental clinics<br>
+          Aesthetic clinics<br>
+          UK &amp; UAE practices
+        </p>
+        <p style="font-size:12px;color:var(--muted);margin-top:10px;">Limited monthly onboarding to maintain results.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer bottom: legal -->
+  <div style="background:var(--light);border-top:1px solid var(--border);padding:16px 40px;">
+    <div style="max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <span style="font-size:11px;color:var(--muted);">Registered in England &amp; Wales &mdash; Company No. 11859461</span>
+      <div style="display:flex;gap:24px;flex-wrap:wrap;">
+        <a href="/privacy" style="font-size:11px;color:var(--muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">Privacy Policy</a>
+        <a href="/terms" style="font-size:11px;color:var(--muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">Terms &amp; Conditions</a>
+        <a href="/cookies" style="font-size:11px;color:var(--muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">Cookie Policy</a>
+        <a href="/contact" style="font-size:11px;color:var(--muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">Contact</a>
+      </div>
+    </div>
+  </div>
+
+</footer>
+
+
+<!-- STICKY MOBILE BAR -->
+<div class="sticky-bar" id="stickyBar">
+  <a href="#cta-main" class="btn btn-dark" style="justify-content:center;">Get My Clinic&rsquo;s Patient Gap Report &rarr;</a>
+  <a href="https://wa.me/447445261729" class="btn btn-wa" style="justify-content:center;">&#x1F4AC; WhatsApp</a>
+</div>
+
+
+<script>
+/* ── EMBEDDED DEMO JS (scoped with d- prefix vars) ── */
+(function(){
+  var dcur=0,dtot=4,dplaying=true,DDUR=7000,dtmrs=[];
+  function DT(f,d){dtmrs.push(setTimeout(f,d));}
+  function dclr(){
+    dtmrs.forEach(clearTimeout);dtmrs=[];
+    var el;
+    el=document.getElementById('dtoasts'); if(el) el.classList.remove('dem-vis');
+    ['dt1','dt2'].forEach(function(id){el=document.getElementById(id);if(el)el.classList.remove('dem-vis');});
+    el=document.getElementById('dbadge');if(el)el.classList.remove('dem-vis');
+    ['db1','db2','db3','db4','db5','db6'].forEach(function(id){el=document.getElementById(id);if(el)el.classList.remove('dem-vis');});
+    el=document.getElementById('dtyp');if(el)el.classList.remove('dem-vis');
+    ['dc0','dc1','dc2','dc3','dc4','dc5','dc6'].forEach(function(id){el=document.getElementById(id);if(el){el.style.transition='none';el.style.height='0';}});
+    ['der1','der2','der3','der4'].forEach(function(id){el=document.getElementById(id);if(el)el.classList.remove('dem-vis');});
+    el=document.getElementById('dke');if(el)el.textContent='0';
+    el=document.getElementById('dkg');if(el)el.textContent='+0%';
+    el=document.getElementById('drnum');if(el)el.textContent='4';
+  }
+  window.dgo=function(n){
+    dclr();dcur=n;
+    document.querySelectorAll('.dem-slide').forEach(function(e,i){e.classList.toggle('dem-on',i===n);});
+    document.querySelectorAll('.dem-screen').forEach(function(e,i){e.classList.toggle('dem-scr-on',i===n);});
+    document.querySelectorAll('.dem-pip').forEach(function(e,i){
+      e.classList.remove('dem-done');
+      var f=e.querySelector('.dem-pf');
+      f.style.transition='none';f.style.width=i<n?'100%':'0%';
+    });
+    var lbl=document.getElementById('dlbl');if(lbl)lbl.textContent=(n+1)+' / '+dtot;
+    if(dplaying){
+      var f=document.getElementById('dpf'+n);
+      if(f)setTimeout(function(){f.style.transition='width '+DDUR+'ms linear';f.style.width='100%';},30);
+      clearTimeout(window._da);window._da=setTimeout(function(){if(dplaying)dnext();},DDUR);
+    }
+    if(n===0)da0();if(n===1)da1();if(n===2)da2();if(n===3)da3();
+  };
+  window.dnext=function(){dgo((dcur+1)%dtot);};
+  window.dprev=function(){dgo((dcur-1+dtot)%dtot);};
+  window.dtp=function(){
+    dplaying=!dplaying;var b=document.getElementById('dppb');
+    if(dplaying){if(b)b.innerHTML='&#9646;&#9646; Pause';dgo(dcur);}
+    else{if(b)b.innerHTML='&#9654; Play';clearTimeout(window._da);var f=document.getElementById('dpf'+dcur);if(f){var w=getComputedStyle(f).width;f.style.transition='none';f.style.width=w;}}
+  };
+  function dshowBadge(){var b=document.getElementById('dbadge');if(!b)return;b.classList.add('dem-vis');DT(function(){b.classList.remove('dem-vis');},2200);}
+  function dcountUp(id,end,dur){var el=document.getElementById(id);if(!el)return;var s=0,st=end/(dur/30);var iv=setInterval(function(){s=Math.min(s+st,end);el.textContent=Math.round(s);if(s>=end)clearInterval(iv);},30);}
+  function dcountPct(id,end,dur){var el=document.getElementById(id);if(!el)return;var s=0,st=end/(dur/30);var iv=setInterval(function(){s=Math.min(s+st,end);el.textContent='+'+Math.round(s)+'%';if(s>=end)clearInterval(iv);},30);}
+  function da0(){
+    DT(function(){
+      var t=document.getElementById('dtoasts');if(t)t.classList.add('dem-vis');
+      DT(function(){var e=document.getElementById('dt1');if(e)e.classList.add('dem-vis');dshowBadge();},200);
+      DT(function(){var e=document.getElementById('dt2');if(e)e.classList.add('dem-vis');dshowBadge();},2700);
+    },1300);
+  }
+  function da1(){
+    var ms=['db1','db2','db3','db4','db5','db6'],ds=[400,1500,2350,3500,4500,5350];
+    var ts=[950,2000,3100],th=[1480,2320,3480];
+    ts.forEach(function(d){DT(function(){var e=document.getElementById('dtyp');if(e)e.classList.add('dem-vis');},d);});
+    th.forEach(function(d){DT(function(){var e=document.getElementById('dtyp');if(e)e.classList.remove('dem-vis');},d);});
+    ms.forEach(function(id,i){DT(function(){var e=document.getElementById(id);if(e)e.classList.add('dem-vis');},ds[i]);});
+  }
+  function da2(){
+    var hs=['26%','36%','48%','76%','100%','58%','30%'];
+    DT(function(){
+      ['dc0','dc1','dc2','dc3','dc4','dc5','dc6'].forEach(function(id,i){
+        DT(function(){var e=document.getElementById(id);if(e){e.style.transition='height 0.75s cubic-bezier(0.34,1.4,0.64,1)';e.style.height=hs[i];}},i*85);
+      });
+    },220);
+    DT(function(){dcountUp('dke',18,1050);},500);
+    DT(function(){dcountPct('dkg',200,900);},800);
+    ['der1','der2','der3','der4'].forEach(function(id,i){DT(function(){var e=document.getElementById(id);if(e)e.classList.add('dem-vis');},1450+i*270);});
+  }
+  function da3(){
+    DT(function(){
+      var el=document.getElementById('drnum');if(!el)return;
+      var s=4,e=22,dur=1800,st=(e-s)/(dur/30);
+      var iv=setInterval(function(){s=Math.min(s+st,e);el.textContent=Math.round(s);if(s>=e)clearInterval(iv);},30);
+    },450);
+  }
+  // Start demo on load
+  window.addEventListener('load',function(){dgo(0);});
+})();
+
+function toggleFaq(btn) {
+  var item = btn.parentElement;
+  var wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(el){ el.classList.remove('open'); });
+  if (!wasOpen) item.classList.add('open');
+}
+
+var stickyBar = document.getElementById('stickyBar');
+function checkBar() {
+  if (window.innerWidth <= 900) {
+    stickyBar.style.display = window.scrollY > 600 ? 'flex' : 'none';
+  } else {
+    stickyBar.style.display = 'none';
+  }
+}
+window.addEventListener('scroll', checkBar);
+window.addEventListener('resize', checkBar);
+checkBar();
+
+// ── NAV: hide behind brand layer, reveal on scroll ──
+var brandLayer = document.getElementById('brand-layer');
+var siteNav = document.querySelector('.nav');
+if (siteNav && brandLayer) {
+  siteNav.classList.add('nav-hidden');
+  function updateNav() {
+    var brandBottom = brandLayer.offsetTop + brandLayer.offsetHeight;
+    if (window.scrollY >= brandBottom - 80) {
+      siteNav.classList.remove('nav-hidden');
+      siteNav.classList.add('visible');
+    } else {
+      siteNav.classList.add('nav-hidden');
+      siteNav.classList.remove('visible');
+    }
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+}
+</script>
+
+</div><!-- /landing-page -->
+
+</body>
+</html>
